@@ -6,7 +6,7 @@
 /* HERO */
 .career-hero {
   position: relative;
-  height: 80vh;
+  height: 60vh;
 }
 
 .career-hero img {
@@ -17,9 +17,17 @@
 }
 
 .career-overlay {
-  position: absolute;
+   position: absolute;
   inset: 0;
-  background: rgba(23, 71, 123, 0.85);
+  background-color: rgba(23, 71, 123, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.career-overlay h1 {
+  color: #e6e6e6;
+  font-size: 64px;
+  letter-spacing: 2px;
 }
 
 /* HEADER */

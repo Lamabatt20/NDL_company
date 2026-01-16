@@ -146,21 +146,41 @@
   color: #17477b;
 }
 
-/* ================= IMAGE ================= */
+/* ================= OVERLAPPED CARD IMAGE ================= */
+
+.zigzag-image-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .zigzag-image {
   width: 100%;
   max-width: 520px;
-  height: 280px;
+  height: 300px;
   object-fit: cover;
-  border-radius: 20px;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.15);
+
+  border-radius: 22px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+
+ 
+  margin-top: -50px;
+  z-index: 2;
+  background: #fff;
+}
+
+
+.zigzag-row.reverse .zigzag-image {
+  margin-top: 0;
+  margin-bottom: -80px;
 }
 
 /* ================= ANIMATION ================= */
 .zigzag-animate {
   opacity: 0;
   transform: translateX(-60px);
-  transition: opacity 0.6s ease, transform 0.8s ease;
+  transition: opacity 0.9s ease, transform 0.8s ease;
 }
 
 .zigzag-row.reverse.zigzag-animate {
@@ -193,9 +213,12 @@
 }
 
 .gallery-item {
-  overflow: hidden;
+  flex: 0 0 320px;
+  height: 220px;
   border-radius: 18px;
+  overflow: hidden;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  background: #000;
 }
 
 .gallery-item img,
@@ -211,6 +234,7 @@
   transform: scale(1.04);
   transition: transform 0.4s ease;
 }
+
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 900px) {
@@ -265,9 +289,10 @@
   }
 
   .zigzag-image {
-    max-width: 100%;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
     height: auto;
-    margin: 30px auto 0;
+    max-width: 100%;
   }
 
   /* HERO CONTENT */

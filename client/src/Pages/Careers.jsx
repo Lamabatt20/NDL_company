@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Career.css";
-import heroImage from "../assets/images/career-employment-job-work-concept.jpg";
+import heroImage from "../assets/images/freepik_assistant_1768560101801.png";
 
 export default function Career() {
   const [openJobs, setOpenJobs] = useState([]);
@@ -101,7 +101,9 @@ export default function Career() {
       {/* HERO */}
       <section className="career-hero">
         <img src={heroImage} alt="Careers" />
-        <div className="career-overlay"></div>
+        <div className="career-overlay">
+          <h1>Join Our Team</h1>
+        </div>
       </section>
 
       {/* HEADER + FILTERS */}

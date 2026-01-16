@@ -119,7 +119,7 @@ export default function ProjectDetails() {
           }
         });
       },
-      { threshold: 0.12 }
+      { threshold: 0.30 }
     );
 
     rows.forEach((r) => observer.observe(r));
