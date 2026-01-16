@@ -175,4 +175,8 @@
   .career-content {
     padding: 50px 20px;
   }
+  .career-overlay h1 {
+    font-size: 42px;
+    text-align: center;
+  }
 }
