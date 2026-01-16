@@ -100,7 +100,7 @@ export default function Footer() {
       </div>
 
       <div className="footer-bottom">
-        © 2025 NDL. All rights reserved.
+        © 2026 NDL. All rights reserved.
       </div>
     </footer>
   );
