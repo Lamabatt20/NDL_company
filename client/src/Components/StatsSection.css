@@ -12,31 +12,6 @@
 
   overflow: hidden;
   z-index: 2;
-
-  clip-path: polygon(
-    0 3%,
-    10% 2%,
-    25% 3%,
-    40% 2%,
-    55% 3%,
-    70% 2%,
-    85% 3%,
-    100% 2%,
-    100% 100%,
-    0 100%
-  );
-}
-
-
-.stats::before {
-  content: "";
-  position: absolute;
-  top: -120px;
-  left: 0;
-  right: 0;
-  height: 120px;
-  background-color: #e6e6e6;
-  z-index: 0;
 }
 
 .stats-title {

@@ -9,6 +9,15 @@ function Home() {
   return (
     <>
       <HeroSection />
+      <div className="hero-about-connector">
+      <div className="connector-circle">
+        <img
+          src={require("../assets/images/logob.png")}
+          alt="Nexus Logo"
+        />
+      </div>
+    </div>
+
       <AboutSection />
       <StatsSection />
       <ProjectsSection/>
