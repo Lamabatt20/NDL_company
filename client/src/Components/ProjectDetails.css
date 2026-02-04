@@ -1,0 +1,312 @@
+/* ================= GENERAL ================= */
+.project-details {
+  font-family: "Times New Roman", serif;
+  background: #e6e6e6;
+  color: #17477b;
+}
+
+/* ================= HERO ================= */
+.project-hero {
+  height: 80vh;
+  position: relative;
+}
+
+.project-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(31, 45, 61, 0.9),
+    rgba(31, 45, 61, 0.4)
+  );
+}
+
+.project-hero-content {
+  position: absolute;
+  bottom: 80px;
+  left: 80px;
+  max-width: 600px;
+  color: #ffffff;
+}
+
+.project-hero-content h1 {
+  font-size: 44px;
+  margin-bottom: 16px;
+}
+
+.project-hero-content p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #e6ebf0;
+}
+
+/* CTA */
+.hero-cta {
+  margin-top: 28px;
+  background: linear-gradient(135deg, #ed985f, #f3b27a);
+  border: none;
+  color: #fff;
+  padding: 14px 36px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+
+/* ================= ZIGZAG ================= */
+.zigzag-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  padding: 100px 80px;
+  background: #e6e6e6;
+  border-bottom: 1px solid #e1e6eb;
+}
+
+.zigzag-row.reverse {
+  direction: rtl;
+}
+
+.zigzag-row.reverse > * {
+  direction: ltr;
+}
+
+/* ================= TEXT COLORS (THEME CONSISTENT) ================= */
+
+.zigzag-title {
+  color: #17477b;
+  font-size: 30px;   
+  font-weight: 600;
+  margin-bottom: 22px;
+}
+
+
+.zigzag-paragraph {
+  color: #17477b;
+  font-size: 16px;   
+  line-height: 1.9;
+  font-weight: 80;
+}
+
+
+
+.zigzag-list li {
+  color: #17477b;
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.zigzag-list li strong {
+  color: #17477b;
+  font-weight: 600;
+}
+
+.zigzag-list p {
+  color: #17477b;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+
+.gallery-title {
+  color: #17477b;
+}
+
+
+/* ================= LIST ================= */
+.zigzag-list {
+  margin-top: 20px;
+  padding-left: 18px;
+}
+
+.zigzag-list li {
+  margin-bottom: 14px;
+}
+
+.zigzag-list li strong {
+  color: #17477b;
+}
+
+.zigzag-list p {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #17477b;
+}
+
+/* ================= OVERLAPPED CARD IMAGE ================= */
+
+.zigzag-image-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.zigzag-image {
+  width: 100%;
+  max-width: 520px;
+  height: 300px;
+  object-fit: cover;
+
+  border-radius: 22px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+
+ 
+  margin-top: -50px;
+  z-index: 2;
+  background: #fff;
+}
+
+
+.zigzag-row.reverse .zigzag-image {
+  margin-top: 0;
+  margin-bottom: -80px;
+}
+
+/* ================= ANIMATION ================= */
+.zigzag-animate {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.9s ease, transform 0.8s ease;
+}
+
+.zigzag-row.reverse.zigzag-animate {
+  transform: translateX(60px);
+}
+
+.zigzag-animate.in-view {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ================= GALLERY ================= */
+.project-gallery {
+  padding: 120px 80px;
+  background: #e6e6e6;
+  margin-top: -100px;
+}
+
+.gallery-title {
+  font-size: 32px;
+  color: #17477b;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+.gallery-item {
+  flex: 0 0 320px;
+  height: 220px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  background: #000;
+}
+
+.gallery-item img,
+.gallery-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-item img:hover,
+.gallery-item video:hover {
+  transform: scale(1.04);
+  transition: transform 0.4s ease;
+}
+
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+
+  /* FIX zigzag layout completely */
+  .zigzag-row,
+  .zigzag-row.reverse {
+    grid-template-columns: 1fr;
+    padding: 70px 20px;
+    direction: ltr !important;
+    text-align: left;
+    overflow: hidden;
+  }
+
+  /* REMOVE all translate animations on mobile */
+  .zigzag-animate,
+  .zigzag-row.reverse.zigzag-animate,
+  .zigzag-animate.in-view {
+    transform: none !important;
+  }
+
+  /* TEXT WRAPPER */
+  .zigzag-text {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  /* TITLES */
+  .zigzag-title {
+    font-size: 24px;
+    line-height: 1.4;
+    margin-bottom: 16px;
+  }
+
+  /* PARAGRAPHS & LISTS */
+  .zigzag-paragraph,
+  .zigzag-list li,
+  .zigzag-list p {
+    font-size: 15px;
+    line-height: 1.6;
+    word-break: break-word;
+  }
+
+  /* IMAGES */
+  .zigzag-image-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .zigzag-image {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    height: auto;
+    max-width: 100%;
+  }
+
+  /* HERO CONTENT */
+  .project-hero-content {
+    left: 20px;
+    right: 20px;
+    bottom: 50px;
+    max-width: 100%;
+  }
+
+  /* GALLERY */
+  .project-gallery {
+    padding: 80px 20px;
+  }
+}
+
+

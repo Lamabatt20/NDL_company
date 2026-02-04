@@ -1,0 +1,92 @@
+.our-clients {
+  background: #e6e6e6;
+  padding: 100px 0;
+  text-align: center;
+  overflow: hidden;
+  margin-top: -150px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.our-clients h2 {
+  font-size: 40px;
+  color: #17477b;
+  margin-bottom: 12px;
+}
+
+.our-clients .subtitle {
+  color: #17477b;
+  font-size: 16px;
+  margin-bottom: 60px;
+}
+
+.our-clients h2::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 4px;
+  background: #ed985f;
+  margin: 20px auto 0;
+  border-radius: 2px;
+}
+
+.clients-slider {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.clients-track {
+  display: flex;
+  width: max-content;
+  animation: scrollClients 25s linear infinite;
+}
+
+
+.client-logo {
+  flex: 0 0 auto;
+  width: 220px;
+  height: 120px;
+  margin: 0 30px;
+  background: #ffffff;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.client-logo img {
+  max-width: 70%;
+  max-height: 70%;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: all 0.3s ease;
+}
+
+.client-logo:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Animation */
+@keyframes scrollClients {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .our-clients h2 {
+    font-size: 30px;
+  }
+
+  .client-logo {
+    width: 180px;
+    height: 100px;
+    margin: 0 20px;
+  }
+}
