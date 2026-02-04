@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model CompanyInfo {
+  id          Int    @id @default(autoincrement())
+  name        String
+  description String
+  vision      String
+  mission     String
+  email       String
+  phone       String
+  address     String
+}
+
+model Service {
+  id          Int    @id @default(autoincrement())
+  title       String
+  description String
+  icon        String?
+}
+
+model Project {
+  id          Int            @id @default(autoincrement())
+  title       String
+  shortDesc   String
+  description String
+
+  isEmbedded   Boolean        @default(false)
+  isMechanical Boolean        @default(false)
+
+  images      ProjectImage[]
+  createdAt   DateTime       @default(now())
+}
+
+model ProjectImage {
+  id        Int     @id @default(autoincrement())
+  imageUrl  String
+  projectId Int
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+}
+
+model Partner {
+  id      Int    @id @default(autoincrement())
+  name    String
+  logoUrl String
+}
+
+model Statistic {
+  id    Int    @id @default(autoincrement())
+  label String
+  value Int
+}
+
+model WorkflowStep {
+  id          Int    @id @default(autoincrement())
+  stepNumber  Int
+  title       String
+  description String
+}
+
+model Career {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  location    String
+  type        String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}

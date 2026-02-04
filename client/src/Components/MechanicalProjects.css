@@ -1,0 +1,119 @@
+.Mechanicalprojects {
+  background-color: #e6e6e6;
+  padding: 180px 80px 160px;
+  text-align: center;
+  margin-top: -200px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+/* 🔴 Title */
+.Mechanicalprojects-title {
+  font-size: 42px;
+  color: #17477b;
+  margin-bottom: 14px;
+  position: relative;
+}
+
+
+.Mechanicalprojects-title::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 4px;
+  background: #ed985f;
+  margin: 20px auto 0;
+  border-radius: 2px;
+}
+
+.Mechanicalprojects-subtitle {
+  font-size: 18px;
+  color: #17477b;
+  margin-bottom: 80px;
+}
+
+/* Grid */
+.Mechanicalprojects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.Mechanicalproject-card {
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+
+.Mechanicalprojects.show .Mechanicalproject-card {
+  animation: fadeUpCard 0.9s ease forwards;
+}
+
+/* Image */
+.Mechanicalproject-image {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.Mechanicalproject-card:hover .Mechanicalproject-image {
+  transform: scale(1.1);
+}
+
+/* Overlay */
+.Mechanicalproject-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(23, 71, 123, 0.9),
+    rgba(23, 71, 123, 0.2)
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 30px;
+  color: #ffffff;
+}
+
+.Mechanicalproject-overlay h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.Mechanicalproject-overlay p {
+  font-size: 15px;
+  opacity: 0.9;
+}
+
+/* Animation */
+@keyframes fadeUpCard {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .Mechanicalprojects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .Mechanicalprojects {
+    padding: 140px 20px;
+  }
+
+  .Mechanicalprojects-grid {
+    grid-template-columns: 1fr;
+  }
+}

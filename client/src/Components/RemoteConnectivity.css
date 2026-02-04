@@ -1,0 +1,132 @@
+.remote-connectivity {
+  background: #e6e6e6;
+  padding: 120px 20px;
+  text-align: center;
+  margin-top: -150px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.remote-connectivity h2 {
+  font-size: 42px;
+  color: #17477b;
+  margin-bottom: 12px;
+}
+
+.remote-connectivity .subtitle {
+  max-width: 620px;
+  margin: 0 auto 60px;
+  font-size: 16px;
+  color: #17477b;
+  line-height: 1.6;
+}
+.remote-connectivity h2::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 4px;
+  background: #ed985f;
+  margin: 20px auto 0;
+  border-radius: 2px;
+}
+
+/* MAP */
+.map-wrapper {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto 50px;
+}
+
+.world-map {
+  width: 100%;
+  opacity: 0.9;
+}
+
+/* LOCATION POINT */
+.loca {
+  position: absolute;
+}
+
+/* Approx Palestine position */
+.loca.palestine {
+  top: 42%;
+  left: 56%;
+}
+
+/* Dot */
+.loca .dot {
+  width: 10px;
+  height: 10px;
+  background:#17477b;
+  border-radius: 50%;
+  position: relative;
+  z-index: 2;
+}
+
+/* Pulse animation */
+.loca .pulse {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(37, 99, 235, 0.35);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+  top: -5px;
+  left: -5px;
+  z-index: 1;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+
+.loca {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+}
+
+.loca-tag {
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 14px;
+  background: #eef2ff;
+  color: #17477b;
+  font-weight: 500;
+  margin-left: 600px;
+  align-items: center;
+}
+
+.loca-tag.active {
+  background: #17477b;
+  color: #ffffff;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .remote-connectivity h2 {
+    font-size: 32px;
+  }
+
+  .loca.palestine {
+    top: 45%;
+    left: 58%;
+  }
+  .loca-tag {
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 14px;
+  background: #eef2ff;
+  color: #17477b;
+  font-weight: 500;
+  margin-left: 100px;
+  align-items: center;
+}
+}
