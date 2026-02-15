@@ -5,33 +5,42 @@
   color: #17477b;
 }
 
+.site-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
 /* ================= HERO ================= */
 .project-hero {
-  height: 80vh;
+  min-height: calc(70vh - 70px);
+  padding: 12vh 0;
   position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
 .project-hero img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 40%;
 }
 
 .project-hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(31, 45, 61, 0.9),
-    rgba(31, 45, 61, 0.4)
-  );
+  background: linear-gradient(90deg, rgba(31, 45, 61, 0.9), rgba(31, 45, 61, 0.4));
+  z-index: 1;
 }
 
 .project-hero-content {
-  position: absolute;
-  bottom: 80px;
-  left: 80px;
-  max-width: 600px;
+  position: relative;
+  z-index: 3;
+  max-width: 900px;
   color: #ffffff;
 }
 
@@ -40,13 +49,6 @@
   margin-bottom: 16px;
 }
 
-.project-hero-content p {
-  font-size: 16px;
-  line-height: 1.7;
-  color: #e6ebf0;
-}
-
-/* CTA */
 .hero-cta {
   margin-top: 28px;
   background: linear-gradient(135deg, #ed985f, #f3b27a);
@@ -65,248 +67,231 @@
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
 }
 
-/* ================= ZIGZAG ================= */
+/* ================= SECTIONS WRAPPER ================= */
+.project-content-wrapper {
+  padding: 80px 0;
+}
+
+/* حاوية البطاقات المنحنية */
+.u-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+/* ================= U-SHAPE CARD (الجديد) ================= */
+.u-process-card {
+  flex: 1 1 320px;
+  max-width: 380px;
+  background: transparent;
+  border: 2px solid #17477b; /* اللون الأخضر المائي من الصورة */
+  border-radius: 20px 20px 250px 250px; /* الشكل المنحني السفلي */
+  padding: 50px 30px 100px 30px;
+  text-align: center;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  margin-bottom: 40px;
+}
+
+.u-process-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08);
+}
+
+.u-card-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 25px auto;
+}
+
+.u-card-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.u-card-title {
+  color: #17477b;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.u-card-paragraph {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #17477b;
+}
+
+.u-card-list {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+}
+
+/* ================= ZIGZAG ROW (كما كان) ================= */
 .zigzag-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  display: flex;
   align-items: center;
-  padding: 100px 80px;
-  background: #e6e6e6;
-  border-bottom: 1px solid #e1e6eb;
+  gap: 40px;
+  width: 100%;
+  margin-bottom: 80px;
+  padding: 40px 0;
 }
 
 .zigzag-row.reverse {
-  direction: rtl;
+  flex-direction: row-reverse;
 }
 
-.zigzag-row.reverse > * {
-  direction: ltr;
+.zigzag-text {
+  flex: 1;
 }
-
-/* ================= TEXT COLORS (THEME CONSISTENT) ================= */
-
-.zigzag-title {
-  color: #17477b;
-  font-size: 30px;   
-  font-weight: 600;
-  margin-bottom: 22px;
-}
-
-
-.zigzag-paragraph {
-  color: #17477b;
-  font-size: 16px;   
-  line-height: 1.9;
-  font-weight: 80;
-}
-
-
-
-.zigzag-list li {
-  color: #17477b;
-  font-size: 17px;
-  font-weight: 400;
-}
-
-.zigzag-list li strong {
-  color: #17477b;
-  font-weight: 600;
-}
-
-.zigzag-list p {
-  color: #17477b;
-  font-size: 16px;
-  font-weight: 400;
-}
-
-
-.gallery-title {
-  color: #17477b;
-}
-
-
-/* ================= LIST ================= */
-.zigzag-list {
-  margin-top: 20px;
-  padding-left: 18px;
-}
-
-.zigzag-list li {
-  margin-bottom: 14px;
-}
-
-.zigzag-list li strong {
-  color: #17477b;
-}
-
-.zigzag-list p {
-  margin-top: 6px;
-  font-size: 14px;
-  color: #17477b;
-}
-
-/* ================= OVERLAPPED CARD IMAGE ================= */
 
 .zigzag-image-wrapper {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  flex: 1;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.20);
 }
 
 .zigzag-image {
   width: 100%;
-  max-width: 520px;
-  height: 300px;
+  height: 350px;
   object-fit: cover;
-
-  border-radius: 22px;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
-
- 
-  margin-top: -50px;
-  z-index: 2;
-  background: #fff;
+  transition: transform 0.6s ease;
 }
 
-
-.zigzag-row.reverse .zigzag-image {
-  margin-top: 0;
-  margin-bottom: -80px;
+.zigzag-title {
+  color: #17477b;
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 20px;
 }
-
-/* ================= ANIMATION ================= */
-.zigzag-animate {
+.zigzag-animate{
   opacity: 0;
-  transform: translateX(-60px);
-  transition: opacity 0.9s ease, transform 0.8s ease;
-}
-
-.zigzag-row.reverse.zigzag-animate {
-  transform: translateX(60px);
+  transform: translateY(50px); /* حركة من الأسفل */
+  transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 1s ease; /* أبطأ وأقوى تأثير */
 }
 
 .zigzag-animate.in-view {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
 }
+/* جميع الصور في Zigzag و U-Card و Gallery */
+.zigzag-image,
+.u-process-card img,
+.gallery-item img,
+.gallery-item video {
+  transition: transform 0.6s ease; /* حركة سلسة */
+  cursor: pointer;
+}
+
+.zigzag-image:hover,
+.u-process-card img:hover,
+.gallery-item img:hover,
+.gallery-item video:hover {
+  transform: scale(1.1); /* تكبير تلقائي */
+}
+/* ======== العناوين الرئيسية ======== */
+.zigzag-title,
+.u-card-title {
+  font-family: "Times New Roman", serif; /* خط قوي وواضح */
+  font-size: 34px; /* أكبر شوي */
+  font-weight: 600;
+  color: #17477b;
+  margin-bottom: 20px;
+  line-height: 1.3;
+}
+
+/* ======== النصوص والأفكار الفرعية ======== */
+.u-card-paragraph,
+.zigzag-paragraph,
+.u-card-list li p,
+.zigzag-list li p,
+.u-card-list li strong,
+.zigzag-list li strong {
+  font-family: "Nunito", sans-serif; /* خط أنعم للفكرات */
+  font-size: 17px;
+  line-height: 1.8;
+  color: #17477b;
+  font-weight: 300; /* للعناوين الفرعية داخل القوائم */
+}
+
+
+
 
 /* ================= GALLERY ================= */
 .project-gallery {
-  padding: 120px 80px;
+  padding: 80px 0;
   background: #e6e6e6;
-  margin-top: -100px;
+  text-align: center;
 }
 
 .gallery-title {
   font-size: 32px;
-  color: #17477b;
-  margin-bottom: 50px;
-  text-align: center;
+  margin-bottom: 10px;
+  margin-top: -100px;
+}
+.gallery-grid.two-items .gallery-item {
+  height: 400px; 
+}
+
+
+.gallery-title::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 4px;
+  background: #ed985f;
+  margin: 20px auto 0;
+  border-radius: 2px;
 }
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
+  margin-top: 50px;
+}
+.gallery-item img,
+.gallery-item video,
+.zigzag-image {
+  transition: transform 0.5s ease;
+  cursor: zoom-in;
+}
+
+.gallery-item:active img,
+.gallery-item:active video,
+.zigzag-image:active {
+  transform: scale(1.2);
 }
 
 .gallery-item {
-  flex: 0 0 320px;
-  height: 220px;
+  height: 300px;
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
-  background: #000;
+  cursor: pointer;
 }
 
-.gallery-item img,
-.gallery-item video {
+.gallery-item img, .gallery-item video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
-
-.gallery-item img:hover,
-.gallery-item video:hover {
-  transform: scale(1.04);
-  transition: transform 0.4s ease;
-}
-
 
 /* ================= RESPONSIVE ================= */
 @media (max-width: 900px) {
-
-  /* FIX zigzag layout completely */
-  .zigzag-row,
-  .zigzag-row.reverse {
-    grid-template-columns: 1fr;
-    padding: 70px 20px;
-    direction: ltr !important;
-    text-align: left;
-    overflow: hidden;
+  .zigzag-row, .zigzag-row.reverse {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .u-process-card {
+    border-radius: 20px 20px 180px 180px;
+    padding-bottom: 70px;
   }
 
-  /* REMOVE all translate animations on mobile */
-  .zigzag-animate,
-  .zigzag-row.reverse.zigzag-animate,
-  .zigzag-animate.in-view {
-    transform: none !important;
-  }
-
-  /* TEXT WRAPPER */
-  .zigzag-text {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    overflow-wrap: break-word;
-    word-break: break-word;
-  }
-
-  /* TITLES */
-  .zigzag-title {
-    font-size: 24px;
-    line-height: 1.4;
-    margin-bottom: 16px;
-  }
-
-  /* PARAGRAPHS & LISTS */
-  .zigzag-paragraph,
-  .zigzag-list li,
-  .zigzag-list p {
-    font-size: 15px;
-    line-height: 1.6;
-    word-break: break-word;
-  }
-
-  /* IMAGES */
-  .zigzag-image-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
-  .zigzag-image {
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    height: auto;
-    max-width: 100%;
-  }
-
-  /* HERO CONTENT */
-  .project-hero-content {
-    left: 20px;
-    right: 20px;
-    bottom: 50px;
-    max-width: 100%;
-  }
-
-  /* GALLERY */
-  .project-gallery {
-    padding: 80px 20px;
+  .project-hero-content h1 {
+    font-size: 32px;
   }
 }
-
-

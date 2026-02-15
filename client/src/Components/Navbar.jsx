@@ -39,16 +39,19 @@ function Navbar() {
             isHome && !scrolled ? "navbar-hero" : "navbar-solid"
           }`}
         >
+        <div className="site-container navbar-inner">
 
         <div className="menu-icon" onClick={() => setMenuOpen(true)}>
           <span></span><span></span><span></span>
         </div>
 
         <div className="navbar-logo">
+          <NavLink to="/">
           <img
             src={isEmbedded || isMechanical ? logoEmbedded : logoDefault}
             alt="Logo"
           />
+          </NavLink>
         </div>
 
         <ul className="navbar-links">
@@ -68,6 +71,8 @@ function Navbar() {
             <option value="en">EN</option>
             <option value="ar">AR</option>
           </select>
+        </div>
+
         </div>
       </nav>
 

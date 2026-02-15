@@ -29,19 +29,19 @@ export default function MechanicalIntro() {
       ref={sectionRef}
       className={`Mechanical-intro ${show ? "show" : ""}`}
     >
-      <h2 className="Mechanical-intro-title">
-        What Is Mechanical Systems Design?
-      </h2>
+      <div className="site-container">
+        <h2 className="Mechanical-intro-title">What Is Mechanical Systems Design?</h2>
 
-      <div className="Mechanical-intro-wrapper">
-        <div className="Mechanical-intro-text">
-          <p>
-           We develop high-quality mechanical designs that translate concepts into reliable physical systems. Our work focuses on structural integrity, manufacturability, and performance optimization for real-world environments.
-          </p>
-        </div>
+        <div className="Mechanical-intro-wrapper">
+          <div className="Mechanical-intro-text">
+            <p>
+              We develop high-quality mechanical designs that translate concepts into reliable physical systems. Our work focuses on structural integrity, manufacturability, and performance optimization for real-world environments.
+            </p>
+          </div>
 
-        <div className="Mechanical-intro-image">
-          <img src={img1} alt="Mechanical Design" />
+          <div className="Mechanical-intro-image">
+            <img src={img1} alt="Mechanical Design" />
+          </div>
         </div>
       </div>
     </section>

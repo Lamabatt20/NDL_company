@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
 
+
 html,
 body {
   margin: 0;
@@ -8,12 +9,13 @@ body {
   max-width: 100%;
 
   overflow-x: hidden;
-  overflow-y: auto;     /* ⬅️ هاي أهم سطر */
+  overflow-y: auto;     
 
   font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 
 img {
   max-width: 100%;
@@ -24,4 +26,19 @@ img {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Global site container to keep consistent horizontal padding/alignment */
+:root {
+  --site-max-width: 1200px;
+  --site-padding-min: 16px;
+  --site-padding-max: 48px;
+}
+
+.site-container {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--site-max-width);
+  margin: 0 auto;
+  padding-inline: clamp(var(--site-padding-min), 4vw, var(--site-padding-max));
 }

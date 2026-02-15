@@ -29,21 +29,21 @@ export default function EmbeddedIntro() {
       ref={sectionRef}
       className={`embedded-intro ${show ? "show" : ""}`}
     >
-      <h2 className="embedded-intro-title">
-        What Is Embedded Systems Design?
-      </h2>
+      <div className="site-container">
+        <h2 className="embedded-intro-title">What Is Embedded Systems Design?</h2>
 
-      <div className="embedded-intro-wrapper">
-        <div className="embedded-intro-text">
-          <p>
-            We develop high-performance embedded systems that seamlessly integrate
-            hardware and software. Our solutions focus on reliability, real-time
-            performance, and scalable architectures across diverse industries.
-          </p>
-        </div>
+        <div className="embedded-intro-wrapper">
+          <div className="embedded-intro-text">
+            <p>
+              We develop high-performance embedded systems that seamlessly integrate
+              hardware and software. Our solutions focus on reliability, real-time
+              performance, and scalable architectures across diverse industries.
+            </p>
+          </div>
 
-        <div className="embedded-intro-image">
-          <img src={img1} alt="Embedded Design" />
+          <div className="embedded-intro-image">
+            <img src={img1} alt="Embedded Design" />
+          </div>
         </div>
       </div>
     </section>

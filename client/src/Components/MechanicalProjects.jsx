@@ -41,12 +41,13 @@ export default function MechanicalProjects() {
       ref={sectionRef}
       className={`Mechanicalprojects ${show ? "show" : ""}`}
     >
-      <h2 className="Mechanicalprojects-title">Our Projects</h2>
-      <p className="Mechanicalprojects-subtitle">
-        Innovative Mechanical systems designed for real-world applications.
-      </p>
+      <div className="site-container">
+        <h2 className="Mechanicalprojects-title">Our Projects</h2>
+        <p className="Mechanicalprojects-subtitle">
+          Innovative Mechanical systems designed for real-world applications.
+        </p>
 
-      <div className="Mechanicalprojects-grid">
+        <div className="Mechanicalprojects-grid">
         {projects.map((project, index) => (
           <div
             key={project.id}
@@ -70,14 +71,15 @@ export default function MechanicalProjects() {
             </div>
           </div>
         ))}
-      </div>
+        </div>
 
-      {selectedProject && (
-        <ProjectModal
-          project={selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
-      )}
+        {selectedProject && (
+          <ProjectModal
+            project={selectedProject}
+            onClose={() => setSelectedProject(null)}
+          />
+        )}
+      </div>
     </section>
   );
 }

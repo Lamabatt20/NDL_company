@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useParams,useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "./ProjectDetails.css";
 import { getProjectById } from "../api";
 
@@ -18,9 +18,7 @@ const parseDescription = (description) => {
   const isSectionTitle = (text) => {
     if (!text.endsWith(":")) return false;
     const words = text.replace(":", "").split(" ");
-    const capitalized = words.filter(
-      (w) => w[0] === w[0]?.toUpperCase()
-    );
+    const capitalized = words.filter((w) => w[0] === w[0]?.toUpperCase());
     return capitalized.length >= Math.ceil(words.length * 0.6);
   };
 
@@ -47,8 +45,7 @@ const parseDescription = (description) => {
         desc: "",
       };
 
-      let listBlock =
-        currentSection.blocks[currentSection.blocks.length - 1];
+      let listBlock = currentSection.blocks[currentSection.blocks.length - 1];
 
       if (!listBlock || listBlock.type !== "list") {
         listBlock = { type: "list", items: [] };
@@ -84,7 +81,6 @@ export default function ProjectDetails() {
 
   useEffect(() => {
     let alive = true;
-
     const fetchProject = async () => {
       try {
         const data = await getProjectById(id);
@@ -94,7 +90,6 @@ export default function ProjectDetails() {
         if (alive) setLoading(false);
       }
     };
-
     fetchProject();
     return () => (alive = false);
   }, [id]);
@@ -107,8 +102,6 @@ export default function ProjectDetails() {
   const visuals = project?.images || [];
 
   useEffect(() => {
-    if (!sections.length) return;
-
     const rows = document.querySelectorAll(".zigzag-animate");
     const observer = new IntersectionObserver(
       (entries) => {
@@ -119,9 +112,8 @@ export default function ProjectDetails() {
           }
         });
       },
-      { threshold: 0.30 }
+      { threshold: 0.3 }
     );
-
     rows.forEach((r) => observer.observe(r));
     return () => observer.disconnect();
   }, [sections.length]);
@@ -137,98 +129,158 @@ export default function ProjectDetails() {
           <img src={`${API_URL}${visuals[0].imageUrl}`} alt="" />
         )}
         <div className="project-hero-overlay" />
-        <div className="project-hero-content">
-          <h1>{project.title}</h1>
-          <p>{project.shortDesc}</p>
-          <button
-            className="hero-cta"
-            onClick={() =>
-              navigate("/get-a-quote", {
-                state: { projectName: project.title },
-              })
-            }
-          >
-            Get a Quote
-          </button>
+        <div className="site-container">
+          <div className="project-hero-content">
+            <h1>{project.title}</h1>
+            <p>{project.shortDesc}</p>
+            <button
+              className="hero-cta"
+              onClick={() =>
+                navigate("/get-a-quote", {
+                  state: { projectName: project.title },
+                })
+              }
+            >
+              Get a Quote
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* ZIGZAG SECTIONS */}
-      {sections.map((section, i) => {
-        const reverse = i % 2 !== 0;
-        const image = visuals[i + 1];
+      {/* SECTIONS */}
+      <section className="project-content-wrapper">
+        <div className="site-container">
+          {/* حاوية تجمع البطاقات التي بدون صور فقط */}
+          <div className="u-cards-container">
+            {sections.map((section, i) => {
+              const image = visuals[i + 1];
+              const reverse = i % 2 !== 0;
 
-        return (
-          <section
-            key={i}
-            className={`zigzag-row zigzag-animate ${
-              reverse ? "reverse" : ""
-            }`}
-          >
-            <div className="zigzag-text">
-              <h2 className="zigzag-title">{section.title}</h2>
+              // إذا لا توجد صورة: استعمل تصميم الـ U-Shape الجديد
+              if (!image) {
+                return (
+                  <div key={i} className="u-process-card">
+                    <div className="u-card-icon">
+                      {/* أيقونة افتراضية تشبه التي في الصورة */}
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#17477b" strokeWidth="1.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <h2 className="u-card-title">{section.title}</h2>
+                    {section.blocks.map((block, j) =>
+                      block.type === "list" ? (
+                        <ul key={j} className="u-card-list">
+                          {block.items.map((item, k) => (
+                            <li key={k}>
+                              <strong>{item.title}</strong>
+                              {item.desc && <p>{item.desc}</p>}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p key={j} className="u-card-paragraph">
+                          {block.value}
+                        </p>
+                      )
+                    )}
+                  </div>
+                );
+              }
 
-              {section.blocks.map((block, j) =>
-                block.type === "list" ? (
-                  <ul key={j} className="zigzag-list">
-                    {block.items.map((item, k) => (
-                      <li key={k}>
-                        <strong>{item.title}</strong>
-                        {item.desc && <p>{item.desc}</p>}
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p key={j} className="zigzag-paragraph">
-                    {block.value}
-                  </p>
-                )
-              )}
-            </div>
+              // إذا توجد صورة: استعمل تصميم الـ Zigzag العادي كما كان
+              return (
+                <div
+                  key={i}
+                  className={`zigzag-row zigzag-animate ${
+                    reverse ? "reverse" : ""
+                  }`}
+                >
+                  <div className="zigzag-text">
+                    <h2 className="zigzag-title">{section.title}</h2>
+                    {section.blocks.map((block, j) =>
+                      block.type === "list" ? (
+                        <ul key={j} className="zigzag-list">
+                          {block.items.map((item, k) => (
+                            <li key={k}>
+                              <strong>{item.title}</strong>
+                              {item.desc && <p>{item.desc}</p>}
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p key={j} className="zigzag-paragraph">
+                          {block.value}
+                        </p>
+                      )
+                    )}
+                  </div>
+                  <div className="zigzag-image-wrapper">
+                  {image.type === "video" || image.videoUrl || image.imageUrl?.endsWith(".mp4") ? (
+                    <video
+                      src={`${API_URL}${image.videoUrl || image.imageUrl}`}
+                      controls
+                      muted
+                      autoPlay={false}
+                      loop
+                      className="zigzag-image"
+                    />
+                  ) : (
+                    <img
+                      src={`${API_URL}${image.imageUrl}`}
+                      alt=""
+                      className="zigzag-image"
+                    />
+                  )}
+                </div>
 
-            {image && (
-              <div className="zigzag-image-wrapper">
-                <img
-                  src={`${API_URL}${image.imageUrl}`}
-                  alt=""
-                  className="zigzag-image"
-                />
-              </div>
-            )}
-          </section>
-        );
-      })}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* GALLERY */}
       {visuals.length > sections.length + 1 && (
         <section className="project-gallery">
-          <h2 className="gallery-title">Our Work</h2>
+          <div className="site-container">
+            <h2 className="gallery-title">Our Work</h2>
+            <p className="gallery-subtitle">
+              Explore a curated selection of completed work that reflects our
+              commitment to quality, precision, and exceptional craftsmanship.
+            </p>
+            <div
+              className={`gallery-grid ${
+                visuals.slice(sections.length + 1).length === 2
+                  ? "two-items"
+                  : ""
+              }`}
+            >
+              {visuals.slice(sections.length + 1).map((media, i) => {
+                const isVideo =
+                  media.type === "video" ||
+                  media.videoUrl ||
+                  media.imageUrl?.endsWith(".mp4");
 
-          <div className="gallery-grid">
-            {visuals.slice(sections.length + 1).map((media, i) => {
-              const isVideo =
-                media.type === "video" ||
-                media.videoUrl ||
-                media.imageUrl?.endsWith(".mp4");
-
-              return (
-                <div key={i} className="gallery-item">
-                  {isVideo ? (
-                    <video
-                      src={`${API_URL}${media.videoUrl || media.imageUrl}`}
-                      controls
-                      muted
-                      controlsList="nofullscreen"
-                    />
-                  ) : (
-                    <img
-                      src={`${API_URL}${media.imageUrl}`}
-                      alt="Project media"
-                    />
-                  )}
-                </div>
-              );
-            })}
+                return (
+                  <div key={i} className="gallery-item gallery-clickable">
+                    {isVideo ? (
+                      <video
+                        src={`${API_URL}${media.videoUrl || media.imageUrl}`}
+                        controls
+                        muted
+                        controlsList="nofullscreen"
+                      />
+                    ) : (
+                      <img
+                        src={`${API_URL}${media.imageUrl}`}
+                        alt="Project media"
+                      />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </section>
       )}

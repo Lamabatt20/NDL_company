@@ -5,24 +5,25 @@ import {
   FiSettings,
   FiLayers,
   FiTrendingUp,
+  FiCheckCircle,
 } from "react-icons/fi";
 import "./StatsSection.css";
 
 const statsData = [
   {
-    value: 200,
+    value: 78,
     suffix: "+",
     label: "Projects Delivered",
     icon: <FiBriefcase />,
   },
   {
-    value: 18,
+    value: 28,
     suffix: "+",
     label: "Clients Worldwide",
     icon: <FiUsers />,
   },
   {
-    value: 45,
+    value: 80,
     suffix: "+",
     label: "Engineering Solutions",
     icon: <FiSettings />,
@@ -34,10 +35,16 @@ const statsData = [
     icon: <FiLayers />,
   },
   {
-    value: 98,
-    suffix: "%",
-    label: "Client Satisfaction",
+    value: 10,
+    suffix: "+",
+    label: "Years in business",
     icon: <FiTrendingUp />,
+  },
+  {
+    value: 30,
+    suffix: "+",
+    label: "Projects completed",
+    icon: <FiCheckCircle />,
   },
 ];
 
@@ -103,17 +110,19 @@ export default function StatsSection() {
 
   return (
     <section className="stats" ref={sectionRef}>
-      <h2 className="stats-title">Achievements</h2>
+      <div className="site-container">
+        <h2 className="stats-title">Achievements</h2>
 
-      <div className="stats-grid">
-        {statsData.map((item, index) => (
-          <StatItem
-            key={index}
-            {...item}
-            visible={visible}
-            delay={index * 120}
-          />
-        ))}
+        <div className="stats-grid">
+          {statsData.map((item, index) => (
+            <StatItem
+              key={index}
+              {...item}
+              visible={visible}
+              delay={index * 120}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -3,17 +3,19 @@
   padding: 100px 0;
   text-align: center;
   overflow: hidden;
-  margin-top: -150px;
+  margin-top: 0;
   font-family: "Times New Roman", Times, serif;
 }
 
 .our-clients h2 {
+  padding: 0;
   font-size: 40px;
   color: #17477b;
   margin-bottom: 12px;
 }
 
 .our-clients .subtitle {
+  padding: 0;
   color: #17477b;
   font-size: 16px;
   margin-bottom: 60px;
@@ -78,10 +80,23 @@
   }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .our-clients h2 {
-    font-size: 30px;
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 992px) {
+  .our-clients {
+    padding: 80px 20px;
+    margin-top: 0;
+  }
+
+  .our-clients h2,
+  .our-clients .subtitle {
+    padding: 0;
+    text-align: center;
+  }
+
+  
+  .our-clients .subtitle {
+    margin-bottom: 40px;
   }
 
   .client-logo {
@@ -90,3 +105,17 @@
     margin: 0 20px;
   }
 }
+
+@media (max-width: 576px) {
+  .our-clients {
+    padding: 60px 15px;
+    margin-top: 0;
+  }
+
+  .client-logo {
+    width: 150px;
+    height: 90px;
+    margin: 0 15px;
+  }
+}
+

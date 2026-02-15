@@ -1,14 +1,42 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./AboutSection.css";
 
 function AboutSection() {
+  const sectionRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const element = sectionRef.current;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (element) {
+      observer.observe(element);
+    }
+
+    return () => {
+      if (element) {
+        observer.unobserve(element);
+      }
+    };
+  }, []);
+
   return (
-    <section className="about-espark">
-      <div className="about-container">
+    <section
+      ref={sectionRef}
+      className={`about-espark ${isVisible ? "show" : ""}`}
+    >
+      <div className="site-container">
+        <div className="about-container">
         <div className="about-text">
-          <h2 className="about-title">
-            Built by Engineers. Proven in the Field
-          </h2>
+          <h2 className="about-title">Who We Are?</h2>
 
           <p>
             At Nexus Design Lab, we deliver end-to-end engineering solutions that
@@ -40,6 +68,7 @@ function AboutSection() {
             loop
             playsInline
           />
+        </div>
         </div>
       </div>
     </section>

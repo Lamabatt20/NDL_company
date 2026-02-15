@@ -12,7 +12,8 @@ import {
 export default function Footer() {
   return (
     <footer className="site-footer">
-      <div className="footer-container">
+      <div className="site-container">
+        <div className="footer-container">
 
         {/* BRAND */}
         <div className="footer-brand">
@@ -97,11 +98,11 @@ export default function Footer() {
 
         </div>
 
-      </div>
-
-      <div className="footer-bottom">
-        © 2026 NDL. All rights reserved.
-      </div>
+        <div className="footer-bottom">
+          © 2026 NDL. All rights reserved.
+        </div>
+        </div>
+        </div>
     </footer>
   );
 }

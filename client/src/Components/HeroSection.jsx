@@ -15,14 +15,16 @@ function HeroSection() {
 
       <div className="hero-overlay"></div>
 
-      <div className="hero-content">
+      <div className="site-container">
+        <div className="hero-content">
         <span className="hero-slogan">
           YOUR PRODUCT, OUR ENGINEERING
         </span>
 
         <h1 className="hero-title">
-          Empowering businesses through Technology
+          Empowering <br /> businesses through <br /> Technology
         </h1>
+
 
        
         <h2 className="hero-subtitle">
@@ -45,6 +47,7 @@ function HeroSection() {
           <span className="arrow">→</span>
         </button>
 
+        </div>
       </div>
     </section>
   );

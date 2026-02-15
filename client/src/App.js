@@ -11,11 +11,15 @@ import Careers from "./Pages/Careers";
 import Contact from "./Pages/Contact";
 import ProjectDetails from "./Components/ProjectDetails";
 import GetQuote from "./Pages/GetQuote";
+import OurServices from "./Components/OurServices";
+import WhyChooseNDL from "./Components/WhyChooseNDL";
 
 function App() {
   return (
     <Router>
-      <Navbar />
+      <div className="site-container">
+        <Navbar />
+      </div>
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -26,6 +30,8 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/projects/:id" element={<ProjectDetails />} />
         <Route path="/get-a-quote" element={<GetQuote />} />
+        <Route path="/services" element={<OurServices />} />
+        <Route path="/why-choose-ndl" element={<WhyChooseNDL />} />
       </Routes>
 
       <Footer />

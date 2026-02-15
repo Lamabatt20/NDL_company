@@ -1,8 +1,7 @@
 .remote-connectivity {
   background: #e6e6e6;
-  padding: 120px 20px;
+  padding: 10vh 5vw;
   text-align: center;
-  margin-top: -150px;
   font-family: "Times New Roman", Times, serif;
 }
 
@@ -13,120 +12,157 @@
 }
 
 .remote-connectivity .subtitle {
-  max-width: 620px;
+  max-width: 650px;
   margin: 0 auto 60px;
   font-size: 16px;
   color: #17477b;
   line-height: 1.6;
 }
+
 .remote-connectivity h2::after {
   content: "";
   display: block;
-  width: 70px;
+  width: 80px;
   height: 4px;
   background: #ed985f;
   margin: 20px auto 0;
   border-radius: 2px;
 }
 
-/* MAP */
+/* الخريطة */
 .map-wrapper {
   position: relative;
   max-width: 1100px;
-  margin: 0 auto 50px;
+  margin: 0 auto;
 }
 
 .world-map {
   width: 100%;
-  opacity: 0.9;
+  opacity: 0.85;
+  display: block;
 }
 
-/* LOCATION POINT */
-.loca {
+/* SVG */
+.connections-svg {
   position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
-/* Approx Palestine position */
-.loca.palestine {
-  top: 42%;
-  left: 56%;
+/* خطوط الاتصال الاحترافية */
+.curve-path {
+  fill: none;
+  stroke: #17477b;
+  stroke-width: 0.20;
+  stroke-linecap: round;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: drawLine 6s ease-in-out infinite;
+  opacity: 0.7;
+  filter: drop-shadow(0 0 6px rgba(23, 71, 123, 0.4));
 }
 
-/* Dot */
-.loca .dot {
-  width: 10px;
-  height: 10px;
-  background:#17477b;
-  border-radius: 50%;
-  position: relative;
-  z-index: 2;
-}
-
-/* Pulse animation */
-.loca .pulse {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background: rgba(37, 99, 235, 0.35);
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-  top: -5px;
-  left: -5px;
-  z-index: 1;
-}
-
-@keyframes pulse {
+@keyframes drawLine {
   0% {
-    transform: scale(0.6);
-    opacity: 1;
+    stroke-dashoffset: 300;
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.8;
+  }
+  70% {
+    stroke-dashoffset: 0;
+    opacity: 0.8;
   }
   100% {
-    transform: scale(2.2);
+    stroke-dashoffset: 0;
     opacity: 0;
   }
 }
 
-
 .loca {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+.loca .dot { width: 10px; height: 10px; background: #17477b; border-radius: 50%; box-shadow: 0 0 0 3px white, 0 0 15px rgba(23, 71, 123, 0.9), 0 0 30px rgba(23, 71, 123, 0.6); }
+
+
+.loca.palestine .dot {
+  width: 16px;
+  height: 16px;
+  background: #ed985f;
+  
 }
 
-.loca-tag {
-  padding: 8px 18px;
-  border-radius: 20px;
-  font-size: 14px;
-  background: #eef2ff;
-  color: #17477b;
-  font-weight: 500;
-  margin-left: 600px;
-  align-items: center;
+
+.pulse {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(237, 152, 95, 0.4);
+  border-radius: 50%;
+  animation: pulseAnim 2.5s infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.loca-tag.active {
-  background: #17477b;
-  color: #ffffff;
+@keyframes pulseAnim {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3.5);
+    opacity: 0;
+  }
 }
 
-/* RESPONSIVE */
+.end-point {
+  opacity: 0;
+  animation: fadePoint 6s ease-in-out infinite;
+}
+
+@keyframes fadePoint {
+  0%, 40% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+  50%, 80% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .remote-connectivity h2 {
-    font-size: 32px;
+  .remote-connectivity {
+    padding: 8vh 5vw;
   }
 
-  .loca.palestine {
-    top: 45%;
-    left: 58%;
+  .curve-path {
+    stroke-width: 0.4;
   }
-  .loca-tag {
-  padding: 8px 18px;
-  border-radius: 20px;
-  font-size: 14px;
-  background: #eef2ff;
-  color: #17477b;
-  font-weight: 500;
-  margin-left: 100px;
-  align-items: center;
 }
+
+
+@keyframes fadeLabel {
+  0%, 40% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(6px);
+  }
+  50%, 80% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+  }
 }

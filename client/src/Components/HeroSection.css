@@ -1,11 +1,12 @@
 .hero {
   position: relative;
-  min-height: calc(100vh - 70px);
-  padding: 180px 80px 120px 190px;
+  min-height: calc(100vh - 70px); 
+  /* horizontal spacing now handled by .site-container */
+  padding: 20vh 0;
   display: flex;
   align-items: flex-start;
   color: #e6e6e6;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .hero-video {
@@ -48,31 +49,30 @@
 .hero-slogan {
   display: inline-block;
   color: #ffffff;
-  font-weight: 600;
+  font-weight: 500; 
   letter-spacing: 1px;
-  margin-bottom: 20px;
   text-transform: uppercase;
   background-color: #ed985f;
-
-  padding: 10px 20px;   
+  padding: 8px 18px; 
   border-radius: 6px;
 }
-
-
 .hero-title {
-  font-size: 44px;
-  font-weight: 700;
+  margin-top: 10px;
+  font-size: 56px; 
+  font-weight: 700; 
   line-height: 1.2;
-  margin-bottom: 30px;
+  margin-bottom: 20px; 
   color: #ffffff;
 }
 
 .hero-subtitle {
   font-size: 18px;
   line-height: 1.6;
-  margin: 35px 0 25px;
+  margin: 20px 0 25px; 
   max-width: 700px;
+  font-weight: 500; 
 }
+
 
 
 .btn {
@@ -139,7 +139,7 @@
 
 @media (max-width: 900px) {
   .hero {
-    padding: 130px 20px 80px;
+    padding: 130px 0 80px;
     text-align: center;
   }
 

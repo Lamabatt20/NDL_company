@@ -41,12 +41,13 @@ export default function EmbeddedProjects() {
       ref={sectionRef}
       className={`Embeddedprojects ${show ? "show" : ""}`}
     >
-      <h2 className="Embeddedprojects-title">Our Projects</h2>
-      <p className="Embeddedprojects-subtitle">
-        Innovative embedded systems designed for real-world applications.
-      </p>
+      <div className="site-container">
+        <h2 className="Embeddedprojects-title">Our Projects</h2>
+        <p className="Embeddedprojects-subtitle">
+          Innovative embedded systems designed for real-world applications.
+        </p>
 
-      <div className="Embeddedprojects-grid">
+        <div className="Embeddedprojects-grid">
         {projects.map((project, index) => (
           <div
             key={project.id}
@@ -70,14 +71,15 @@ export default function EmbeddedProjects() {
             </div>
           </div>
         ))}
-      </div>
+        </div>
 
-      {selectedProject && (
-        <ProjectModal
-          project={selectedProject}
-          onClose={() => setSelectedProject(null)}
-        />
-      )}
+        {selectedProject && (
+          <ProjectModal
+            project={selectedProject}
+            onClose={() => setSelectedProject(null)}
+          />
+        )}
+      </div>
     </section>
   );
 }
