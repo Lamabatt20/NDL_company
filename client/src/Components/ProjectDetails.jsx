@@ -81,6 +81,7 @@ export default function ProjectDetails() {
 
   useEffect(() => {
     let alive = true;
+
     const fetchProject = async () => {
       try {
         const data = await getProjectById(id);
@@ -90,6 +91,7 @@ export default function ProjectDetails() {
         if (alive) setLoading(false);
       }
     };
+
     fetchProject();
     return () => (alive = false);
   }, [id]);
@@ -101,6 +103,7 @@ export default function ProjectDetails() {
 
   const visuals = project?.images || [];
 
+  /* ================= ANIMATION OBSERVER ================= */
   useEffect(() => {
     const rows = document.querySelectorAll(".zigzag-animate");
     const observer = new IntersectionObserver(
@@ -114,6 +117,7 @@ export default function ProjectDetails() {
       },
       { threshold: 0.3 }
     );
+
     rows.forEach((r) => observer.observe(r));
     return () => observer.disconnect();
   }, [sections.length]);
@@ -123,16 +127,19 @@ export default function ProjectDetails() {
 
   return (
     <main className="project-details">
-      {/* HERO */}
+      {/* ================= HERO ================= */}
       <section className="project-hero">
         {visuals[0] && (
           <img src={`${API_URL}${visuals[0].imageUrl}`} alt="" />
         )}
+
         <div className="project-hero-overlay" />
+
         <div className="site-container">
           <div className="project-hero-content">
             <h1>{project.title}</h1>
             <p>{project.shortDesc}</p>
+
             <button
               className="hero-cta"
               onClick={() =>
@@ -147,80 +154,53 @@ export default function ProjectDetails() {
         </div>
       </section>
 
-      {/* SECTIONS */}
+      {/* ================= CONTENT ================= */}
       <section className="project-content-wrapper">
         <div className="site-container">
-          {/* حاوية تجمع البطاقات التي بدون صور فقط */}
-          <div className="u-cards-container">
-            {sections.map((section, i) => {
-              const image = visuals[i + 1];
-              const reverse = i % 2 !== 0;
 
-              // إذا لا توجد صورة: استعمل تصميم الـ U-Shape الجديد
-              if (!image) {
-                return (
-                  <div key={i} className="u-process-card">
-                    <div className="u-card-icon">
-                      {/* أيقونة افتراضية تشبه التي في الصورة */}
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#17477b" strokeWidth="1.5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                    <h2 className="u-card-title">{section.title}</h2>
-                    {section.blocks.map((block, j) =>
-                      block.type === "list" ? (
-                        <ul key={j} className="u-card-list">
-                          {block.items.map((item, k) => (
-                            <li key={k}>
-                              <strong>{item.title}</strong>
-                              {item.desc && <p>{item.desc}</p>}
-                            </li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <p key={j} className="u-card-paragraph">
-                          {block.value}
-                        </p>
-                      )
-                    )}
-                  </div>
-                );
-              }
+          {/* ===== ZIGZAG SECTIONS (اللي عندها صورة) ===== */}
+          {sections.map((section, i) => {
+            const image = visuals[i + 1];
+            const reverse = i % 2 !== 0;
 
-              // إذا توجد صورة: استعمل تصميم الـ Zigzag العادي كما كان
-              return (
-                <div
-                  key={i}
-                  className={`zigzag-row zigzag-animate ${
-                    reverse ? "reverse" : ""
-                  }`}
-                >
-                  <div className="zigzag-text">
-                    <h2 className="zigzag-title">{section.title}</h2>
-                    {section.blocks.map((block, j) =>
-                      block.type === "list" ? (
-                        <ul key={j} className="zigzag-list">
-                          {block.items.map((item, k) => (
-                            <li key={k}>
-                              <strong>{item.title}</strong>
-                              {item.desc && <p>{item.desc}</p>}
-                            </li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <p key={j} className="zigzag-paragraph">
-                          {block.value}
-                        </p>
-                      )
-                    )}
-                  </div>
-                  <div className="zigzag-image-wrapper">
-                  {image.type === "video" || image.videoUrl || image.imageUrl?.endsWith(".mp4") ? (
+            if (!image) return null;
+
+            return (
+              <div
+                key={i}
+                className={`zigzag-row zigzag-animate ${
+                  reverse ? "reverse" : ""
+                }`}
+              >
+                <div className="zigzag-text">
+                  <h2 className="zigzag-title">{section.title}</h2>
+
+                  {section.blocks.map((block, j) =>
+                    block.type === "list" ? (
+                      <ul key={j} className="zigzag-list">
+                        {block.items.map((item, k) => (
+                          <li key={k}>
+                            <strong>{item.title}</strong>
+                            {item.desc && <p>{item.desc}</p>}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p key={j} className="zigzag-paragraph">
+                        {block.value}
+                      </p>
+                    )
+                  )}
+                </div>
+
+                <div className="zigzag-image-wrapper">
+                  {image.type === "video" ||
+                  image.videoUrl ||
+                  image.imageUrl?.endsWith(".mp4") ? (
                     <video
                       src={`${API_URL}${image.videoUrl || image.imageUrl}`}
                       controls
                       muted
-                      autoPlay={false}
                       loop
                       className="zigzag-image"
                     />
@@ -232,15 +212,60 @@ export default function ProjectDetails() {
                     />
                   )}
                 </div>
+              </div>
+            );
+          })}
 
+          {/* ===== U-CARDS (اللي بدون صورة) ===== */}
+          <div className="u-cards-grid">
+            {sections.map((section, i) => {
+              const image = visuals[i + 1];
+              if (image) return null;
+
+              return (
+                <div key={i} className="u-process-card">
+                  <div className="u-card-icon">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#17477b"
+                      strokeWidth="1.5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </div>
+
+                  <h2 className="u-card-title">{section.title}</h2>
+
+                  {section.blocks.map((block, j) =>
+                    block.type === "list" ? (
+                      <ul key={j} className="u-card-list">
+                        {block.items.map((item, k) => (
+                          <li key={k}>
+                            <strong>{item.title}</strong>
+                            {item.desc && <p>{item.desc}</p>}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p key={j} className="u-card-paragraph">
+                        {block.value}
+                      </p>
+                    )
+                  )}
                 </div>
               );
             })}
           </div>
+
         </div>
       </section>
 
-      {/* GALLERY */}
+      {/* ================= GALLERY ================= */}
       {visuals.length > sections.length + 1 && (
         <section className="project-gallery">
           <div className="site-container">
@@ -249,6 +274,7 @@ export default function ProjectDetails() {
               Explore a curated selection of completed work that reflects our
               commitment to quality, precision, and exceptional craftsmanship.
             </p>
+
             <div
               className={`gallery-grid ${
                 visuals.slice(sections.length + 1).length === 2
@@ -263,7 +289,7 @@ export default function ProjectDetails() {
                   media.imageUrl?.endsWith(".mp4");
 
                 return (
-                  <div key={i} className="gallery-item gallery-clickable">
+                  <div key={i} className="gallery-item">
                     {isVideo ? (
                       <video
                         src={`${API_URL}${media.videoUrl || media.imageUrl}`}

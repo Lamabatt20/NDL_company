@@ -1,7 +1,14 @@
 import React from "react";
 import "./EmbeddedHero.css";
 import embeddedpicture from "../assets/images/emimage.png";
-import { FaMicrochip, FaProjectDiagram, FaCode, FaCogs, FaWifi } from "react-icons/fa";
+import { 
+  FaMicrochip, 
+  FaProjectDiagram, 
+  FaCode, 
+  FaCogs, 
+  FaWifi,
+  FaBrain
+} from "react-icons/fa";
 
 export default function EmbeddedHero() {
   return (
@@ -20,6 +27,7 @@ export default function EmbeddedHero() {
 
       {/* SERVICES TABS SECTION */}
       <section className="services-tabs">
+
         <div className="tab">
           <FaMicrochip />
           <span>PCB Schematic Design</span>
@@ -44,6 +52,13 @@ export default function EmbeddedHero() {
           <FaWifi />
           <span>IoT Smart Solutions</span>
         </div>
+
+       
+        <div className="tab">
+          <FaBrain />
+          <span>AI Integration</span>
+        </div>
+
       </section>
     </>
   );

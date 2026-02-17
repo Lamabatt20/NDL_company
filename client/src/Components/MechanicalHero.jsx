@@ -2,8 +2,8 @@ import React from "react";
 import "./MechanicalHero.css";
 import Mechanicalpicture from "../assets/images/bimage.avif";
 
-// أيقونات من react-icons (ممكن تختار أيقونات مناسبة)
-import { FaDraftingCompass, FaCubes, FaBox, FaRobot, FaBuilding } from "react-icons/fa";
+
+import { FaDraftingCompass, FaCubes, FaBox, FaRobot, FaBuilding, FaChair } from "react-icons/fa";
 
 export default function MechanicalHero() {
   const services = [
@@ -11,7 +11,8 @@ export default function MechanicalHero() {
     { title: "Aluminum Structure Design", icon: <FaCubes /> },
     { title: "Product Enclosure Design", icon: <FaBox /> },
     { title: "Robotics Development", icon: <FaRobot /> },
-    { title: "Steel Structure Design", icon: <FaBuilding /> }
+    { title: "Steel Structure Design", icon: <FaBuilding /> },
+    { title: "Wood and Furniture Design", icon: <FaChair /> }
   ];
 
   return (
