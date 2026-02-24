@@ -1,41 +1,83 @@
 import React from "react";
 import "./MechanicalHero.css";
-import Mechanicalpicture from "../assets/images/bimage.avif";
+import {
+  FaDraftingCompass,
+  FaCubes,
+  FaBox,
+  FaRobot,
+  FaBuilding,
+  FaChair
+} from "react-icons/fa";
 
-
-import { FaDraftingCompass, FaCubes, FaBox, FaRobot, FaBuilding, FaChair } from "react-icons/fa";
-
-export default function MechanicalHero() {
-  const services = [
-    { title: "Sheet Metal Design", icon: <FaDraftingCompass /> },
-    { title: "Aluminum Structure Design", icon: <FaCubes /> },
-    { title: "Product Enclosure Design", icon: <FaBox /> },
-    { title: "Robotics Development", icon: <FaRobot /> },
-    { title: "Steel Structure Design", icon: <FaBuilding /> },
-    { title: "Wood and Furniture Design", icon: <FaChair /> }
-  ];
+export default function MechanicalHero({
+  activeService,
+  setActiveService,
+  services
+}) {
+  const service = services[activeService];
 
   return (
     <>
       {/* HERO SECTION */}
       <section
         className="Mechanical-hero"
-        style={{ backgroundImage: `url(${Mechanicalpicture})` }}
+        style={{ backgroundImage: `url(${service.heroImage})` }}
       >
         <div className="Mechanical-hero-overlay"></div>
         <div className="Mechanical-hero-content">
-          <h1>Mechanical Systems Designs</h1>
+          <h1>{service.title}</h1>
         </div>
       </section>
 
-      {/* SERVICES TABS SECTION */}
+      {/* SERVICES TABS */}
       <section className="services-tabs">
-        {services.map((service, index) => (
-          <div key={index} className="tab">
-            {service.icon}
-            <span>{service.title}</span>
-          </div>
-        ))}
+        <div
+          className={`tab ${activeService === "sheet-metal" ? "active" : ""}`}
+          onClick={() => setActiveService("sheet-metal")}
+        >
+          <FaDraftingCompass />
+          <span>Sheet Metal Design</span>
+        </div>
+
+        <div
+          className={`tab ${activeService === "aluminum" ? "active" : ""}`}
+          onClick={() => setActiveService("aluminum")}
+        >
+          <FaCubes />
+          <span>Aluminum Structure Design</span>
+        </div>
+
+        <div
+          className={`tab ${activeService === "enclosure" ? "active" : ""}`}
+          onClick={() => setActiveService("enclosure")}
+        >
+          <FaBox />
+          <span>Product Enclosure Design</span>
+        </div>
+
+        <div
+          className={`tab ${activeService === "robotics" ? "active" : ""}`}
+          onClick={() => setActiveService("robotics")}
+        >
+          <FaRobot />
+          <span>Robotics Development</span>
+        </div>
+
+        <div
+          className={`tab ${activeService === "steel" ? "active" : ""}`}
+          onClick={() => setActiveService("steel")}
+        >
+          <FaBuilding />
+          <span>Steel Structure Design</span>
+        </div>
+
+        <div
+          className={`tab ${activeService === "wood" ? "active" : ""}`}
+          onClick={() => setActiveService("wood")}
+        >
+          <FaChair />
+          <span>Wood and Furniture Design</span>
+        </div>
       </section>
     </>
   );

@@ -17,12 +17,11 @@
 }
 
 .stats-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; /* spread items across the container */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
   gap: 30px 20px;
-  align-items: flex-start;
-  width: 100%; /* fill site-container width so alignment matches hero */
+  width: 100%;
+  justify-items: center;
 }
 
 .stat-item {
@@ -44,7 +43,7 @@
 .stat-icon {
   font-size: 50px; /* كبر حجم الأيقونات */
   color: #ed985f;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
   transition: 0.3s ease;
 }
 
@@ -104,5 +103,16 @@
 
   .stat-icon {
     font-size: 46px;
+  }
+}
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}
+
+@media (max-width: 500px) {
+  .stats-grid {
+    grid-template-columns: 1fr; 
   }
 }

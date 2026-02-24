@@ -68,9 +68,13 @@
 
 /* ================== SERVICES TABS ================== */
 .services-tabs {
+  width: min(1100px, 92%);   /* نفس عرض باقي السكشنات */
+  margin: 0 auto;            /* توسيط */
+  
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   background: #f8fafd;
   border-top: 1px solid #e6edf5;
   border-bottom: 2px solid #17477b;
