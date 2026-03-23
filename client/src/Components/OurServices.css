@@ -143,15 +143,73 @@
   line-height: 1.5;
 }
 
-/* ===== Responsive ===== */
 @media (max-width: 900px) {
-  .services-tabs {
-    flex-direction: column;
-    border-radius: 20px;
+  /* شيل أنيميشن الهيدر على التلفون */
+  .services-header {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 
+  .our-services.visible .services-header {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* خلي التابات أصغر وأنعم */
+  .servicese-tabs {
+    gap: 8px;
+    margin: 28px auto 50px;
+    padding: 6px;
+    max-width: 320px;
+    border-radius: 999px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+  }
+
+  .servicese-tabs button {
+    padding: 8px 0;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 999px;
+  }
+
+  /* الكروت بدون دخول متأخر */
   .service-card {
     opacity: 1;
     transform: none;
+    transition: none;
+  }
+
+  .services-header h2 {
+    font-size: 30px;
+    margin-bottom: 16px;
+  }
+
+  .main-text {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .service-group {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .service-card {
+    height: 280px;
+  }
+
+  .card-overlay {
+    padding: 18px;
+  }
+
+  .card-overlay h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+
+  .card-overlay p {
+    font-size: 13px;
+    line-height: 1.45;
   }
 }

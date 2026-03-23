@@ -115,5 +115,29 @@
 
   .Embeddedprojects-grid {
     grid-template-columns: 1fr;
+    width: 110%;
+    margin-left: -5%;
+    gap: 22px;
+  }
+
+  .Embeddedproject-card {
+    width: 100%;
+    border-radius: 18px;
+  }
+
+  .Embeddedproject-image {
+    height: 280px;
+  }
+
+  .Embeddedproject-overlay {
+    padding: 22px;
+  }
+
+  .Embeddedproject-overlay h3 {
+    font-size: 20px;
+  }
+
+  .Embeddedproject-overlay p {
+    font-size: 14px;
   }
 }

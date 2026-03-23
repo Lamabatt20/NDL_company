@@ -316,5 +316,23 @@
 .navbar-mechanical .navbar-links a.active::after {
   background: #ED985F;
 }
+@media (max-width: 768px) {
+
+  .navbar-inner {
+    position: relative;
+  }
+
+ 
+  .language-selector {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+  }
+
+ 
+
+}
 
 

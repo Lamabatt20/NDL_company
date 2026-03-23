@@ -128,3 +128,22 @@
     border-radius: 14px;
   }
 }
+@media (max-width: 768px) {
+
+  .embedded-intro {
+    padding: 60px 0; /* أخف */
+  }
+
+  /* 👇 هذا أهم جزء */
+  .embedded-intro-video-shell {
+    width: 110%;              /* يكبر عن الكونتينر */
+    margin-left: -5%;         /* يرجعه بالنص */
+    padding: 4px;             /* خفف الإطار */
+    border-radius: 16px;
+  }
+
+  .embedded-intro-video {
+    border-radius: 12px;
+  }
+
+}
