@@ -116,7 +116,6 @@
 }
 
 @media (max-width: 768px) {
-  .navbar { }
 
   .navbar-links {
     display: none;
