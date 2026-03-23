@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "./OurServices.css";
 
 import serviceImg1 from "../assets/images/service1.png";
@@ -16,28 +17,99 @@ import serviceImg12 from "../assets/images/Picture4.png";
 
 export default function OurServices() {
   const sectionRef = useRef(null);
+  const navigate = useNavigate();
+
   const [isVisible, setIsVisible] = useState(false);
   const [activeLab, setActiveLab] = useState("electronics");
 
   const services = [
-    { title: "PCB Schematic Design", description: "Robust and production-ready schematic design built on best engineering practices." },
-    { title: "PCB Layout Design", description: "High-quality multilayer PCB layout optimized for signal integrity and manufacturability." },
-    { title: "Embedded Software Development", description: "Efficient firmware and embedded software tailored for real-time systems." },
-    { title: "Electronic Products Development", description: "End-to-end electronic product development — from concept to testing." },
-    { title: "IoT Smart Solutions", description: "Secure and connected IoT systems integrating sensors and cloud platforms." },
-    { title: "AI Integration", description: "Integration of intelligent algorithms and AI-driven systems into hardware and software platforms." },
-
-    { title: "Sheet Metal Design", description: "Precision sheet-metal solutions optimized for manufacturability and structural integrity." },
-    { title: "Aluminum Structure Design", description: "Lightweight and durable aluminum structures engineered for industrial applications." },
-    { title: "Product Enclosure Design", description: "Professional enclosure development balancing aesthetics, durability, and real-world requirements." },
-    { title: "Robotics Development", description: "Mechanical and electromechanical design for robotic platforms including motion systems." },
-    { title: "Steel Structure Design", description: "Heavy-duty steel structures engineered for strength, stability, and compliance." },
-    { title: "Wood and Furniture Design", description: "Custom wood and furniture design combining engineering, functionality, and refined aesthetics." }
+    {
+      title: "PCB Schematic Design",
+      description:
+        "Robust and production-ready schematic design built on best engineering practices.",
+      path: "/embedded/pcb-schematic"
+    },
+    {
+      title: "PCB Layout Design",
+      description:
+        "High-quality multilayer PCB layout optimized for signal integrity and manufacturability.",
+      path: "/embedded/pcb-layout"
+    },
+    {
+      title: "Embedded Software Development",
+      description:
+        "Efficient firmware and embedded software tailored for real-time systems.",
+      path: "/embedded/embedded-sw"
+    },
+    {
+      title: "Electronic Products Development",
+      description:
+        "End-to-end electronic product development — from concept to testing.",
+      path: "/embedded/product-dev"
+    },
+    {
+      title: "IoT Smart Solutions",
+      description:
+        "Secure and connected IoT systems integrating sensors and cloud platforms.",
+      path: "/embedded/iot"
+    },
+    {
+      title: "AI Integration",
+      description:
+        "Integration of intelligent algorithms and AI-driven systems into hardware and software platforms.",
+      path: "/embedded/ai"
+    },
+    {
+      title: "Sheet Metal Design",
+      description:
+        "Precision sheet-metal solutions optimized for manufacturability and structural integrity.",
+      path: "/mechanical/sheet-metal"
+    },
+    {
+      title: "Aluminum Structure Design",
+      description:
+        "Lightweight and durable aluminum structures engineered for industrial applications.",
+      path: "/mechanical/aluminum"
+    },
+    {
+      title: "Product Enclosure Design",
+      description:
+        "Professional enclosure development balancing aesthetics, durability, and real-world requirements.",
+      path: "/mechanical/enclosure"
+    },
+    {
+      title: "Steel Structure Design",
+      description:
+        "Heavy-duty steel structures engineered for strength, stability, and compliance with industrial and construction standards.",
+      path: "/mechanical/steel"
+    },
+    {
+      title: "Product Design",
+      description:
+        "Comprehensive product design services covering concept development, functionality, usability, and manufacturability — transforming ideas into market-ready, production-ready solutions.",
+      path: "/mechanical/product-design"
+    },
+    {
+      title: "Wood and Furniture Design",
+      description:
+        "Custom wood and furniture design combining engineering, functionality, and refined aesthetics.",
+      path: "/mechanical/wood"
+    }
   ];
 
   const images = [
-    serviceImg1, serviceImg2, serviceImg3, serviceImg4, serviceImg5, serviceImg11,
-    serviceImg6, serviceImg7, serviceImg8, serviceImg9, serviceImg10, serviceImg12
+    serviceImg1,
+    serviceImg2,
+    serviceImg3,
+    serviceImg4,
+    serviceImg5,
+    serviceImg11,
+    serviceImg6,
+    serviceImg7,
+    serviceImg8,
+    serviceImg9,
+    serviceImg10,
+    serviceImg12
   ];
 
   useEffect(() => {
@@ -49,6 +121,7 @@ export default function OurServices() {
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
+
     return () => observer.disconnect();
   }, []);
 
@@ -56,11 +129,20 @@ export default function OurServices() {
     <div className="service-group">
       {services.slice(startIndex, startIndex + 6).map((service, index) => (
         <div
-          key={index}
-          className="service-card show"
+          key={service.title}
+          className="service-card show clickable-card"
           style={{ transitionDelay: `${index * 0.08}s` }}
+          onClick={() => navigate(service.path)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              navigate(service.path);
+            }
+          }}
+          role="button"
+          tabIndex={0}
         >
           <img src={images[startIndex + index]} alt={service.title} />
+
           <div className="card-overlay">
             <h3>{service.title}</h3>
             <p>{service.description}</p>
@@ -71,20 +153,22 @@ export default function OurServices() {
   );
 
   return (
-    <section ref={sectionRef} className={`our-services ${isVisible ? "visible" : ""}`}>
+    <section
+      ref={sectionRef}
+      className={`our-services ${isVisible ? "visible" : ""}`}
+    >
       <div className="site-container">
-
         <div className="services-header">
           <h2>Our Services</h2>
           <p className="main-text">
-            We provide end-to-end engineering solutions covering electronics, embedded systems,
-            mechanical design, and intelligent technologies. From concept to hardware, software,
-            and AI integration, our services help businesses transform ideas into high-performance
+            We provide end-to-end engineering solutions covering electronics,
+            embedded systems, mechanical design, and intelligent technologies.
+            From concept to hardware, software, and AI integration, our
+            services help businesses transform ideas into high-performance
             products built for real-world deployment.
           </p>
         </div>
 
-        {/* Tabs */}
         <div className="servicese-tabs">
           <button
             className={activeLab === "electronics" ? "active" : ""}
@@ -101,12 +185,10 @@ export default function OurServices() {
           </button>
         </div>
 
-        {/* Cards */}
         <div className="services-grid">
           {activeLab === "electronics" && renderCards(0)}
           {activeLab === "mechanical" && renderCards(6)}
         </div>
-
       </div>
     </section>
   );

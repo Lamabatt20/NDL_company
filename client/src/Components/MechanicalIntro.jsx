@@ -1,49 +1,36 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./MechanicalIntro.css";
-import img1 from "../assets/images/images.png";
+import React from "react";
+import MechanicalHomeIntro from "./MechanicalHomeIntro";
 
-export default function MechanicalIntro() {
-  const sectionRef = useRef(null);
-  const [show, setShow] = useState(false);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShow(true);
-          observer.disconnect(); 
-        }
-      },
-      { threshold: 0.6 } 
-    );
+import SheetMetalIntro from "./SheetMetalIntro";
+import AluminumIntro from "./AluminumIntro";
+import EnclosureIntro from "./EnclosureIntro"; 
+import SteelIntro from "./SteelIntro";
+import ProductDesign from "./ProductDesignIntro";
+import WoodIntro from "./WoodIntro";
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+export default function MechanicalIntro({ activeService }) {
+  switch (activeService) {
+    case "sheet-metal":
+     return <SheetMetalIntro />;
 
-    return () => observer.disconnect();
-  }, []);
+    case "aluminum":
+     return <AluminumIntro />;
 
-  return (
-    <section
-      ref={sectionRef}
-      className={`Mechanical-intro ${show ? "show" : ""}`}
-    >
-      <div className="site-container">
-        <h2 className="Mechanical-intro-title">What Is Mechanical Systems Design?</h2>
+    case "enclosure":
+     return <EnclosureIntro />;
 
-        <div className="Mechanical-intro-wrapper">
-          <div className="Mechanical-intro-text">
-            <p>
-              We develop high-quality mechanical designs that translate concepts into reliable physical systems. Our work focuses on structural integrity, manufacturability, and performance optimization for real-world environments.
-            </p>
-          </div>
+    case "steel":
+     return <SteelIntro />;
 
-          <div className="Mechanical-intro-image">
-            <img src={img1} alt="Mechanical Design" />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+    case "product-design":
+     return <ProductDesign />;
+
+    case "wood":
+     return <WoodIntro />;
+
+    case "home":
+    default:
+      return <MechanicalHomeIntro />;
+  }
 }

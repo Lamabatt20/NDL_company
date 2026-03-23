@@ -75,6 +75,14 @@
 .servicese-tabs button:hover:not(.active) {
   background: rgba(23, 71, 123, 0.06);
 }
+.clickable-card {
+  cursor: pointer;
+}
+
+.clickable-card:focus {
+  outline: 2px solid #17477b;
+  outline-offset: 4px;
+}
 
 /* ===== Grid ===== */
 .services-grid {

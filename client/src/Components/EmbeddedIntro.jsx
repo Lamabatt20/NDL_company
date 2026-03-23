@@ -1,51 +1,35 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./EmbeddedIntro.css";
-import img1 from "../assets/images/images.png";
+import React from "react";
+import HomeIntro from "./HomeIntro";
+import PcbSchematicIntro from "./PcbSchematicIntro";
 
-export default function EmbeddedIntro() {
-  const sectionRef = useRef(null);
-  const [show, setShow] = useState(false);
+import PcbLayoutIntro from "./PcbLayoutIntro";
+import EmbeddedSwIntro from "./EmbeddedSwIntro";
+import ProductDevIntro from "./ProductDevIntro";
+import IotIntro from "./IotIntro";
+import AiIntro from "./AiIntro";
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShow(true);
-          observer.disconnect(); 
-        }
-      },
-      { threshold: 0.6 } 
-    );
+export default function EmbeddedIntro({ activeService }) {
+  switch (activeService) {
+    case "pcb-schematic":
+      return <PcbSchematicIntro />;
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+     case "pcb-layout":
+      return <PcbLayoutIntro />;
 
-    return () => observer.disconnect();
-  }, []);
+    case "embedded-sw":
+      return <EmbeddedSwIntro />;
 
-  return (
-    <section
-      ref={sectionRef}
-      className={`embedded-intro ${show ? "show" : ""}`}
-    >
-      <div className="site-container">
-        <h2 className="embedded-intro-title">What Is Embedded Systems Design?</h2>
+    case "product-dev":
+      return <ProductDevIntro />;
 
-        <div className="embedded-intro-wrapper">
-          <div className="embedded-intro-text">
-            <p>
-              We develop high-performance embedded systems that seamlessly integrate
-              hardware and software. Our solutions focus on reliability, real-time
-              performance, and scalable architectures across diverse industries.
-            </p>
-          </div>
+    case "iot":
+      return <IotIntro />;
 
-          <div className="embedded-intro-image">
-            <img src={img1} alt="Embedded Design" />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+    case "ai":
+      return <AiIntro />;
+
+    case "home":
+    default:
+      return <HomeIntro />;
+  }
 }

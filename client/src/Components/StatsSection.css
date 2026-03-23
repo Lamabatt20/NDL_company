@@ -4,7 +4,7 @@
   color: #ffffff;
   font-family: "Times New Roman", Times, serif;
   margin-top: -140px;
-  padding: 60px 0 100px; /* horizontal alignment handled by .site-container */
+  padding: 60px 0 100px;
   overflow: hidden;
   z-index: 2;
 }
@@ -12,13 +12,13 @@
 .stats-title {
   font-size: 36px;
   font-weight: 700;
-  margin-bottom: 50px; 
+  margin-bottom: 50px;
   text-align: center;
 }
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px 20px;
   width: 100%;
   justify-items: center;
@@ -30,9 +30,12 @@
   transform: translateY(30px);
   transition: 0.6s ease;
   padding: 10px;
-  flex: 1 1 0; 
   min-width: 120px;
   max-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px; /* أهم سطر */
 }
 
 .stat-item.show {
@@ -41,9 +44,10 @@
 }
 
 .stat-icon {
-  font-size: 50px; 
+  font-size: 50px;
   color: #ed985f;
-  margin-bottom: 10px;
+  margin-bottom: 0; /* كان 10px */
+  line-height: 1;
   transition: 0.3s ease;
 }
 
@@ -53,15 +57,18 @@
 }
 
 .stat-number {
-  font-size: 42px; /* زود حجم الرقم */
+  font-size: 42px;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin: 0; /* مهم */
+  line-height: 1.1;
 }
 
 .stat-label {
   font-size: 15px;
   color: #f7b980;
   letter-spacing: 0.4px;
+  margin: 0; /* مهم */
+  line-height: 1.3;
 }
 
 .stat-item:hover {
@@ -75,19 +82,14 @@
   }
 }
 
-@media (min-width: 1200px) {
-  .stats-grid {
-    flex-wrap: nowrap; /* keep all items in a single row on wide screens */
-  }
-}
-
 @media (max-width: 900px) {
   .stats {
     margin-top: -100px;
-    padding: 80px 0 80px; /* remove extra horizontal padding on small screens */
+    padding: 80px 0 80px;
   }
 
   .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
     justify-content: center;
     gap: 18px 12px;
   }
@@ -105,14 +107,9 @@
     font-size: 46px;
   }
 }
-@media (max-width: 900px) {
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr); 
-  }
-}
 
 @media (max-width: 500px) {
   .stats-grid {
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr;
   }
 }

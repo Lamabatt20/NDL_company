@@ -1,0 +1,360 @@
+.embedded-service-page {
+  padding: 90px 0;
+  background: #ffffff;
+}
+
+.site-container {
+  width: 90%;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+/* Main Header */
+.service-main-header {
+  text-align: center;
+  margin-bottom: 70px;
+}
+.service-highlight-image img{
+  width:100%;
+  max-width:420px;
+  animation: floatTech 4s ease-in-out infinite;
+}
+
+@keyframes floatTech{
+  0%{
+    transform: translateY(0px);
+  }
+  50%{
+    transform: translateY(-15px);
+  }
+  100%{
+    transform: translateY(0px);
+  }
+}
+
+.service-label {
+  display: inline-block;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: #eef4ff;
+  color: #17477b;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.service-main-header h2 {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #17477b;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.service-main-header h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #17477b;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+.service-main-header p {
+  max-width: 900px;
+  margin: 0 auto 14px;
+  font-size: 1.03rem;
+  line-height: 1.9;
+  color: #17477b;
+}
+
+.service-main-image {
+  margin-top: 35px;
+}
+
+.service-main-image img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  display: block;
+  border-radius: 24px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Intro Block */
+.service-intro-block {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 70px;
+}
+
+.service-intro-block h4 {
+  font-size: 1.9rem;
+  color: #17477b;
+  margin-bottom: 14px;
+}
+
+.service-intro-block p {
+  font-size: 1.02rem;
+  line-height: 1.9;
+  color: #17477b;
+  margin: 0;
+}
+
+/* Sections */
+.service-section {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+.service-section.reverse .service-section-text {
+  order: 2;
+}
+
+.service-section.reverse .service-section-image {
+  order: 1;
+}
+
+.service-section-text h4 {
+  font-size: 1.7rem;
+  color: #17477b;
+  margin-bottom: 18px;
+  line-height: 1.3;
+}
+
+.service-section-text p {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: #17477b;
+  margin-bottom: 14px;
+}
+
+.service-section-text ul {
+  margin: 20px 0 0;
+  padding-left: 20px;
+}
+
+.service-section-text li {
+  font-size: 0.99rem;
+  line-height: 1.8;
+  color: #17477b;
+  margin-bottom: 10px;
+}
+
+.service-section-image img {
+  width: 100%;
+  display: block;
+  border-radius: 22px;
+  object-fit: cover;
+  min-height: 360px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.1);
+}
+
+/* Why Choose Us */
+.service-highlight-box {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 42px;
+  align-items: center;
+  background: linear-gradient(135deg, #f8fbff 0%, #eef4ff 100%);
+  border-radius: 28px;
+  padding: 42px;
+  margin: 30px 0 80px;
+}
+
+.service-highlight-content h4 {
+  font-size: 1.8rem;
+  color: #17477b;
+  margin-bottom: 16px;
+}
+
+.service-highlight-content p {
+  font-size: 1rem;
+  line-height: 1.9;
+  color: #17477b;
+  margin-bottom: 18px;
+}
+
+.service-highlight-content ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.service-highlight-content li {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #17477b;
+  margin-bottom: 10px;
+}
+
+.service-highlight-image img {
+  width: 100%;
+  display: block;
+  border-radius: 22px;
+  min-height: 320px;
+  object-fit: cover;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+
+/* CTA */
+.service-cta {
+  text-align: center;
+  padding: 55px 30px;
+  border-radius: 28px;
+  background: #17477b;
+  color: #ffffff;
+}
+
+.service-cta h4 {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+.service-cta p {
+  max-width: 860px;
+  margin: 0 auto 14px;
+  font-size: 1rem;
+  line-height: 1.9;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.service-cta-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+
+.primary-btn,
+.secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 210px;
+  padding: 14px 24px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 0.97rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.primary-btn {
+  background: #ffffff;
+  color: #17477b;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(255, 255, 255, 0.16);
+}
+
+.secondary-btn {
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+  background: transparent;
+}
+
+.secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .service-section,
+  .service-highlight-box {
+    grid-template-columns: 1fr;
+  }
+
+  .service-section.reverse .service-section-text,
+  .service-section.reverse .service-section-image {
+    order: unset;
+  }
+
+  .service-section-image img,
+  .service-highlight-image img {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .embedded-service-page {
+    padding: 70px 0;
+  }
+
+  .site-container {
+    width: 92%;
+  }
+
+  .service-main-header h2 {
+    font-size: 2rem;
+  }
+
+  .service-main-header h3 {
+    font-size: 1.05rem;
+  }
+
+  .service-intro-block h4,
+  .service-section-text h4,
+  .service-highlight-content h4,
+  .service-cta h4 {
+    font-size: 1.45rem;
+  }
+
+  .service-section {
+    gap: 28px;
+    margin-bottom: 60px;
+  }
+
+  .service-highlight-box {
+    padding: 28px;
+    margin-bottom: 60px;
+  }
+
+  .service-cta {
+    padding: 40px 20px;
+  }
+
+  .primary-btn,
+  .secondary-btn {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .service-main-header h2 {
+    font-size: 1.7rem;
+  }
+
+  .service-main-header h3 {
+    font-size: 0.98rem;
+  }
+
+  .service-main-header p,
+  .service-intro-block p,
+  .service-section-text p,
+  .service-section-text li,
+  .service-highlight-content p,
+  .service-highlight-content li,
+  .service-cta p {
+    font-size: 0.95rem;
+  }
+
+  .service-main-image img,
+  .service-section-image img,
+  .service-highlight-image img {
+    border-radius: 18px;
+  }
+
+  .service-highlight-box,
+  .service-cta {
+    border-radius: 22px;
+  }
+}

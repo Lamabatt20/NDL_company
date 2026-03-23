@@ -14,7 +14,7 @@ export default function EmbeddedHero({
   setActiveService,
   services
 }) {
-  const service = services[activeService];
+  const service = services[activeService] || services.home;
 
   return (
     <>

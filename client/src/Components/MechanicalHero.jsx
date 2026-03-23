@@ -1,12 +1,12 @@
 import React from "react";
 import "./MechanicalHero.css";
 import {
-  FaDraftingCompass,
-  FaCubes,
-  FaBox,
-  FaRobot,
-  FaBuilding,
-  FaChair
+  FaTools,        // sheet metal
+  FaCubes,        // aluminum
+  FaBoxOpen,      // enclosure
+  FaIndustry,     // steel
+  FaDraftingCompass, // product design
+  FaChair         // wood
 } from "react-icons/fa";
 
 export default function MechanicalHero({
@@ -14,7 +14,7 @@ export default function MechanicalHero({
   setActiveService,
   services
 }) {
-  const service = services[activeService];
+  const service = services[activeService] || services.home;
 
   return (
     <>
@@ -31,11 +31,12 @@ export default function MechanicalHero({
 
       {/* SERVICES TABS */}
       <section className="services-tabs">
+
         <div
           className={`tab ${activeService === "sheet-metal" ? "active" : ""}`}
           onClick={() => setActiveService("sheet-metal")}
         >
-          <FaDraftingCompass />
+          <FaTools />
           <span>Sheet Metal Design</span>
         </div>
 
@@ -51,24 +52,24 @@ export default function MechanicalHero({
           className={`tab ${activeService === "enclosure" ? "active" : ""}`}
           onClick={() => setActiveService("enclosure")}
         >
-          <FaBox />
+          <FaBoxOpen />
           <span>Product Enclosure Design</span>
-        </div>
-
-        <div
-          className={`tab ${activeService === "robotics" ? "active" : ""}`}
-          onClick={() => setActiveService("robotics")}
-        >
-          <FaRobot />
-          <span>Robotics Development</span>
         </div>
 
         <div
           className={`tab ${activeService === "steel" ? "active" : ""}`}
           onClick={() => setActiveService("steel")}
         >
-          <FaBuilding />
+          <FaIndustry />
           <span>Steel Structure Design</span>
+        </div>
+
+        <div
+          className={`tab ${activeService === "product-design" ? "active" : ""}`}
+          onClick={() => setActiveService("product-design")}
+        >
+          <FaDraftingCompass />
+          <span>Product Design</span>
         </div>
 
         <div
@@ -78,6 +79,7 @@ export default function MechanicalHero({
           <FaChair />
           <span>Wood and Furniture Design</span>
         </div>
+
       </section>
     </>
   );
