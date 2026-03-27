@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import MechanicalHero from "../Components/MechanicalHero";
 import MechanicalIntro from "../Components/MechanicalIntro";
 import MechanicalProjects from "../Components/MechanicalProjects";
@@ -14,7 +14,6 @@ import woodHero from "../assets/images/Picture4.png";
 
 export default function Mechanical() {
   const { service } = useParams();
-  const navigate = useNavigate();
 
   const services = useMemo(
     () => ({
@@ -60,29 +59,20 @@ export default function Mechanical() {
     }
   }, [service, services]);
 
-  const handleSetActiveService = (nextService) => {
-    setActiveService(nextService);
-
-    if (nextService === "home") {
-      navigate("/mechanical");
-    } else {
-      navigate(`/mechanical/${nextService}`);
-    }
-  };
+  
 
   return (
     <>
       <MechanicalHero
         activeService={activeService}
-        setActiveService={handleSetActiveService}
         services={services}
       />
 
       <MechanicalIntro activeService={activeService} />
 
-      {activeService === "home" && (
-        <MechanicalProjects activeService={activeService} />
-      )}
+      
+      <MechanicalProjects activeService={activeService} />
+      
     </>
   );
 }

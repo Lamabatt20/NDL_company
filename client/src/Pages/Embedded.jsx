@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import EmbeddedHero from "../Components/EmbeddedHero";
 import EmbeddedIntro from "../Components/EmbeddedIntro";
 import EmbeddedProjects from "../Components/EmbeddedProjects";
@@ -14,7 +14,6 @@ import aiHero from "../assets/images/Picture1.png";
 
 export default function Embedded() {
   const { service } = useParams();
-  const navigate = useNavigate();
 
   const services = useMemo(
     () => ({
@@ -60,29 +59,17 @@ export default function Embedded() {
     }
   }, [service, services]);
 
-  const handleSetActiveService = (nextService) => {
-    setActiveService(nextService);
-
-    if (nextService === "home") {
-      navigate("/embedded");
-    } else {
-      navigate(`/embedded/${nextService}`);
-    }
-  };
-
   return (
     <>
       <EmbeddedHero
         activeService={activeService}
-        setActiveService={handleSetActiveService}
         services={services}
       />
-
       <EmbeddedIntro activeService={activeService} />
 
-      {activeService === "home" && (
-        <EmbeddedProjects activeService={activeService} />
-      )}
+      
+      <EmbeddedProjects activeService={activeService} />
+      
     </>
   );
 }
