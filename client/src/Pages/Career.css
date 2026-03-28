@@ -6,7 +6,7 @@
 /* HERO */
 .career-hero {
   position: relative;
-  height: 60vh;
+  height: 90vh;
 }
 
 .career-hero img {
@@ -19,7 +19,6 @@
 .career-overlay {
    position: absolute;
   inset: 0;
-  background-color: rgba(23, 71, 123, 0.85);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -171,6 +170,10 @@
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
+  .career-hero {
+  position: relative;
+  height: 60vh;
+}
   .career-header,
   .career-content {
     padding: 50px 20px;

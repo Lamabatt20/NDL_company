@@ -6,7 +6,7 @@
 /* HERO */
 .contact-hero {
   position: relative;
-  height: 60vh;
+  height: 90vh;
   overflow: hidden;
 }
 
@@ -19,7 +19,6 @@
 .contact-hero-overlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(23, 71, 123, 0.85);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -240,6 +239,10 @@
 
 
 @media (max-width: 900px) {
+  .contact-hero {
+  position: relative;
+  height: 60vh;
+}
 
 
   html, body {

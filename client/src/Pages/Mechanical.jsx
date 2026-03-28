@@ -16,38 +16,52 @@ export default function Mechanical() {
   const { service } = useParams();
 
   const services = useMemo(
-    () => ({
-      home: {
-        title: "Mechanical Systems Designs",
-        heroImage: mainHero
-      },
-      "sheet-metal": {
-        title: "Sheet Metal Design",
-        heroImage: sheetHero
-      },
-      aluminum: {
-        title: "Aluminum Structure Design",
-        heroImage: aluminumHero
-      },
-      enclosure: {
-        title: "Product Enclosure Design",
-        heroImage: enclosureHero
-      },
-      steel: {
-        title: "Steel Structure Design",
-        heroImage: roboticsHero
-      },
-      "product-design": {
-        title: "Product Design",
-        heroImage: steelHero
-      },
-      wood: {
-        title: "Wood and Furniture Design",
-        heroImage: woodHero
-      }
-    }),
-    []
-  );
+  () => ({
+    home: {
+      title: "Mechanical Systems Designs",
+      heading: "Advanced Mechanical Engineering",
+      description: "We deliver innovative mechanical designs that combine strength, efficiency, and precision",
+      heroImage: mainHero
+    },
+    "sheet-metal": {
+      title: "Sheet Metal Design",
+      heading: "Precision Sheet Metal",
+      description: "High-quality sheet metal designs optimized for durability and manufacturability",
+      heroImage: sheetHero
+    },
+    aluminum: {
+      title: "Aluminum Structure Design",
+      heading: "Lightweight & Strong Structures",
+      description: "We design aluminum structures that balance strength, weight, and cost efficiency",
+      heroImage: aluminumHero
+    },
+    enclosure: {
+      title: "Product Enclosure Design",
+      heading: "Smart Enclosure Design",
+      description: "Functional and aesthetic enclosures designed to protect and enhance your products",
+      heroImage: enclosureHero
+    },
+    steel: {
+      title: "Steel Structure Design",
+      heading: "Robust Steel Engineering",
+      description: "Durable steel structures engineered for maximum strength and reliability",
+      heroImage: roboticsHero
+    },
+    "product-design": {
+      title: "Product Design",
+      heading: "Innovative Product Design",
+      description: "We design products that combine usability, aesthetics, and engineering excellence",
+      heroImage: steelHero
+    },
+    wood: {
+      title: "Wood and Furniture Design",
+      heading: "Creative Wood Designs",
+      description: "Elegant and functional furniture and wood designs tailored to modern needs",
+      heroImage: woodHero
+    }
+  }),
+  []
+);
 
   const [activeService, setActiveService] = useState("home");
 

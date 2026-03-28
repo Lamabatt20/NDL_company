@@ -12,7 +12,8 @@ export default function EmbeddedHero({ activeService, services }) {
       <div className="embedded-hero-overlay"></div>
 
       <div className="embedded-hero-content">
-        <h1>{service.title}</h1>
+        <h1>{services[activeService].heading}</h1>
+        <p>{services[activeService].description}</p>
       </div>
     </section>
   );

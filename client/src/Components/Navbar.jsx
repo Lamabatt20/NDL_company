@@ -32,6 +32,7 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [language, setLanguage] = useState("en");
   const [scrolled, setScrolled] = useState(false);
+  const [openMobileSection, setOpenMobileSection] = useState(null);
 
   const isHome = location.pathname === "/";
   const isEmbeddedPage = location.pathname.startsWith("/embedded");
@@ -45,6 +46,11 @@ function Navbar() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    setMenuOpen(false);
+    setOpenMobileSection(null);
+  }, [location.pathname]);
 
   const getNavbarConfig = () => {
     if (isEmbeddedPage) return "navbar navbar-embedded";
@@ -142,6 +148,22 @@ function Navbar() {
     </div>
   );
 
+  const toggleMobileSection = (section) => {
+    setOpenMobileSection((prev) => (prev === section ? null : section));
+  };
+
+  const renderMobileServiceCards = (items) =>
+    items.map((service) => (
+      <li key={service.title}>
+        <NavLink to={service.path} onClick={() => setMenuOpen(false)}>
+          <div className="sidebar-service-card">
+            <img src={service.image} alt={service.title} />
+            <span>{service.title}</span>
+          </div>
+        </NavLink>
+      </li>
+    ));
+
   return (
     <>
       <nav
@@ -150,11 +172,22 @@ function Navbar() {
         }`}
       >
         <div className="site-container navbar-inner">
-          <div className="menu-icon" onClick={() => setMenuOpen(true)}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+          {!menuOpen ? (
+            <div className="menu-icon" onClick={() => setMenuOpen(true)}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          ) : (
+            <button
+              className="nav-close-btn"
+              onClick={() => setMenuOpen(false)}
+              aria-label="Close menu"
+              type="button"
+            >
+              ×
+            </button>
+          )}
 
           <div className="navbar-logo">
             <NavLink to="/">
@@ -248,11 +281,7 @@ function Navbar() {
       />
 
       <aside className={`sidebar ${menuOpen ? "open" : ""}`}>
-        <span className="close-btn" onClick={() => setMenuOpen(false)}>
-          ×
-        </span>
-
-        <ul>
+        <ul className="sidebar-links">
           <li>
             <NavLink to="/" onClick={() => setMenuOpen(false)}>
               Home
@@ -265,16 +294,44 @@ function Navbar() {
             </NavLink>
           </li>
 
-          <li>
-            <NavLink to="/mechanical" onClick={() => setMenuOpen(false)}>
-              Mechanical Designs
-            </NavLink>
+          <li className="sidebar-group">
+            <div
+              className="sidebar-group-title"
+              onClick={() => toggleMobileSection("mechanical")}
+            >
+              <span>Mechanical Designs</span>
+              <FaChevronDown
+                className={openMobileSection === "mechanical" ? "rotate" : ""}
+              />
+            </div>
+
+            <ul
+              className={`sidebar-submenu sidebar-cards ${
+                openMobileSection === "mechanical" ? "open" : ""
+              }`}
+            >
+              {renderMobileServiceCards(mechanicalServices)}
+            </ul>
           </li>
 
-          <li>
-            <NavLink to="/embedded" onClick={() => setMenuOpen(false)}>
-              Embedded Designs
-            </NavLink>
+          <li className="sidebar-group">
+            <div
+              className="sidebar-group-title"
+              onClick={() => toggleMobileSection("embedded")}
+            >
+              <span>Embedded Designs</span>
+              <FaChevronDown
+                className={openMobileSection === "embedded" ? "rotate" : ""}
+              />
+            </div>
+
+            <ul
+              className={`sidebar-submenu sidebar-cards ${
+                openMobileSection === "embedded" ? "open" : ""
+              }`}
+            >
+              {renderMobileServiceCards(embeddedServices)}
+            </ul>
           </li>
 
           <li>
