@@ -46,29 +46,29 @@
 .servicese-tabs {
   display: flex;
   justify-content: center;
-  gap: 14px;                 /* أقل */
-  margin: 40px auto 90px;    /* مسافة أوضح عن الكروت */
-  padding: 8px;              /* أنعم */
+  gap: 14px;                
+  margin: 40px auto 90px;    
+  padding: 8px;              
   background: #ffffff;
-  border-radius: 999px;      /* كبسولة ناعمة */
-  max-width: 460px;          /* أصغر */
+  border-radius: 999px;      
+  max-width: 460px;         
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
 }
 .servicese-tabs button {
   flex: 1;
-  padding: 10px 0;        /* أصغر */
+  padding: 10px 0;      
   border-radius: 999px;
   border: none;
   background: transparent;
   color: #17477b;
-  font-size: 14px;        /* أصغر */
+  font-size: 14px;     
   font-weight: 600;
   cursor: pointer;
   transition: all 0.25s ease;
 }
 
 .servicese-tabs button.active {
-  background: #f2a167;   /* أهدى من البرتقالي */
+  background: #f2a167;  
   color: #ffffff;
   box-shadow: 0 4px 12px rgba(242, 161, 103, 0.35);
 }
@@ -86,7 +86,7 @@
 
 /* ===== Grid ===== */
 .services-grid {
-  margin-top: 10px; /* تنفّس */
+  margin-top: 10px; 
   display: flex;
   justify-content: center;
 }
@@ -144,7 +144,7 @@
 }
 
 @media (max-width: 900px) {
-  /* شيل أنيميشن الهيدر على التلفون */
+  
   .services-header {
     opacity: 1 !important;
     transform: none !important;
@@ -156,7 +156,7 @@
     transform: none !important;
   }
 
-  /* خلي التابات أصغر وأنعم */
+
   .servicese-tabs {
     gap: 8px;
     margin: 28px auto 50px;
@@ -173,7 +173,7 @@
     border-radius: 999px;
   }
 
-  /* الكروت بدون دخول متأخر */
+
   .service-card {
     opacity: 1;
     transform: none;

@@ -1,6 +1,6 @@
 .projects {
   background-color: #e6e6e6;
-  padding: 40px 0 120px; /* horizontal alignment handled by .site-container */
+  padding: 40px 0 120px; 
   text-align: center;
   margin-top: 0;
   font-family: "Times New Roman", Times, serif;
@@ -87,7 +87,7 @@
 
 @media (max-width: 600px) {
   .projects {
-    padding: 100px 0; /* keep vertical spacing on small screens */
+    padding: 100px 0; 
   }
 
   .projects-grid {

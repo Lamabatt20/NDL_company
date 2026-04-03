@@ -23,7 +23,7 @@ export default function ProjectModal({ project, onClose }) {
           </div>
         )}
 
-        {/* SHORT DESCRIPTION ONLY */}
+       
         <p className="modal-short-desc">
           {project.shortDesc}
         </p>

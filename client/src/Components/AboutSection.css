@@ -33,7 +33,7 @@
   font-size: 60px;
   font-weight: 700; /* Bold */
   line-height: 1.05;
-  color: #ffffff; /* أبيض */
+  color: #ffffff; 
   letter-spacing: -0.5px;
   margin-bottom: 12px;
 }
@@ -56,7 +56,7 @@
 .hero-about-connector {
   position: relative;
   height: 140px;
-  background-color: #17477b; /* نفس الخلفية */
+  background-color: #17477b; 
   z-index: 5;
 }
 
@@ -66,7 +66,7 @@
   right: 140px;
   width: 260px;
   height: 260px;
-  background-color: #17477b; /* نفس الخلفية */
+  background-color: #17477b; 
   border-radius: 50%;
   border: 3px solid #17477b;
   display: flex;

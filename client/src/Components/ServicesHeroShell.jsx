@@ -18,7 +18,7 @@ export default function ServicesHeroShell({ heroTitle, heroImage, services }) {
 
   return (
     <>
-      {/* HERO (ثابت) */}
+     
       <section className="sh-hero" style={{ backgroundImage: `url(${heroImage})` }}>
         <div className="sh-hero-overlay" />
         <div className="sh-hero-content">
@@ -41,14 +41,12 @@ export default function ServicesHeroShell({ heroTitle, heroImage, services }) {
         ))}
       </section>
 
-      {/* CONTENT PLACEHOLDER (بدون معلومات) */}
       <section className="sh-content" ref={contentRef}>
         <div className="sh-content-head">
           <h2>{activeService?.title}</h2>
           <p>سيتم إضافة محتوى هذه الخدمة لاحقًا…</p>
         </div>
 
-        {/* سكاشن فارغة كـ placeholder */}
         <div className="sh-card">Section 1 (Placeholder)</div>
         <div className="sh-card">Section 2 (Placeholder)</div>
         <div className="sh-card">Section 3 (Placeholder)</div>

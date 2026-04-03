@@ -4,7 +4,7 @@ import mapImage from "../assets/images/world-map-light.jpg";
 
 export default function RemoteConnectivity() {
 
-  // مركز الاتصال — فلسطين 🇵🇸
+
   const center = { x: 56.5, y: 52 };
 
   const locations = [

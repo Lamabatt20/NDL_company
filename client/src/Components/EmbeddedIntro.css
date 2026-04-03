@@ -131,14 +131,14 @@
 @media (max-width: 768px) {
 
   .embedded-intro {
-    padding: 60px 0; /* أخف */
+    padding: 60px 0;
   }
 
-  /* 👇 هذا أهم جزء */
+  
   .embedded-intro-video-shell {
-    width: 110%;              /* يكبر عن الكونتينر */
-    margin-left: -5%;         /* يرجعه بالنص */
-    padding: 4px;             /* خفف الإطار */
+    width: 110%;              
+    margin-left: -5%;         
+    padding: 4px;             
     border-radius: 16px;
   }
 

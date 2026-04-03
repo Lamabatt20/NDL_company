@@ -7,7 +7,7 @@ export default function Career() {
   const [showModal, setShowModal] = useState(false);
   const [selectedJob, setSelectedJob] = useState("");
 
-  // 🔍 filters state
+  //filters state
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
   const [type, setType] = useState("All");
@@ -70,7 +70,7 @@ export default function Career() {
     },
   ];
 
-  // 🔁 toggle open / close per job
+  //toggle open / close per job
   const toggleJob = (id) => {
     setOpenJobs((prev) =>
       prev.includes(id)
@@ -79,7 +79,7 @@ export default function Career() {
     );
   };
 
-  // 🎯 filtering logic
+  //filtering logic
   const filteredJobs = jobs.filter((job) => {
     const matchSearch = job.title
       .toLowerCase()

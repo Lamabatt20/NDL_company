@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import "./Navbar.css";
@@ -28,11 +28,13 @@ import woodImg from "../assets/images/Picture4.png";
 function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
+  const desktopDropdownRef = useRef(null);
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [language, setLanguage] = useState("en");
   const [scrolled, setScrolled] = useState(false);
   const [openMobileSection, setOpenMobileSection] = useState(null);
+  const [openDropdown, setOpenDropdown] = useState(null);
 
   const isHome = location.pathname === "/";
   const isEmbeddedPage = location.pathname.startsWith("/embedded");
@@ -50,7 +52,24 @@ function Navbar() {
   useEffect(() => {
     setMenuOpen(false);
     setOpenMobileSection(null);
+    setOpenDropdown(null);
   }, [location.pathname]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        desktopDropdownRef.current &&
+        !desktopDropdownRef.current.contains(event.target)
+      ) {
+        setOpenDropdown(null);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const getNavbarConfig = () => {
     if (isEmbeddedPage) return "navbar navbar-embedded";
@@ -124,17 +143,25 @@ function Navbar() {
     },
   ];
 
-  const renderDropdown = (items) => (
-    <div className="mega-dropdown">
+  const toggleDesktopDropdown = (section) => {
+    setOpenDropdown((prev) => (prev === section ? null : section));
+  };
+
+  const renderDropdown = (items, section) => (
+    <div className={`mega-dropdown ${openDropdown === section ? "open" : ""}`}>
       <div className="mega-grid">
         {items.map((item) => (
           <div
             key={item.title}
             className="mega-card"
-            onClick={() => navigate(item.path)}
+            onClick={() => {
+              navigate(item.path);
+              setOpenDropdown(null);
+            }}
             onKeyDown={(e) => {
               if (e.key === "Enter" || e.key === " ") {
                 navigate(item.path);
+                setOpenDropdown(null);
               }
             }}
             role="button"
@@ -198,7 +225,7 @@ function Navbar() {
             </NavLink>
           </div>
 
-          <ul className="navbar-links">
+          <ul className="navbar-links" ref={desktopDropdownRef}>
             <li>
               <NavLink to="/" end>
                 Home
@@ -212,43 +239,77 @@ function Navbar() {
             <li className="nav-dropdown-item">
               <div
                 className={`nav-dropdown-trigger ${
-                  isMechanicalPage ? "active-trigger" : ""
+                  isMechanicalPage || openDropdown === "mechanical"
+                    ? "active-trigger"
+                    : ""
                 }`}
-                onClick={() => navigate("/mechanical")}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    navigate("/mechanical");
-                  }
-                }}
               >
-                <span>Mechanical Designs</span>
-                <FaChevronDown />
+                <span
+                  className="nav-dropdown-title"
+                  onClick={() => {
+                    navigate("/mechanical");
+                    setOpenDropdown(null);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      navigate("/mechanical");
+                      setOpenDropdown(null);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                >
+                  Mechanical Designs
+                </span>
+
+                <FaChevronDown
+                  className={openDropdown === "mechanical" ? "rotate" : ""}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleDesktopDropdown("mechanical");
+                  }}
+                />
               </div>
 
-              {renderDropdown(mechanicalServices)}
+              {renderDropdown(mechanicalServices, "mechanical")}
             </li>
 
             <li className="nav-dropdown-item">
               <div
                 className={`nav-dropdown-trigger ${
-                  isEmbeddedPage ? "active-trigger" : ""
+                  isEmbeddedPage || openDropdown === "embedded"
+                    ? "active-trigger"
+                    : ""
                 }`}
-                onClick={() => navigate("/embedded")}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    navigate("/embedded");
-                  }
-                }}
               >
-                <span>Embedded Designs</span>
-                <FaChevronDown />
+                <span
+                  className="nav-dropdown-title"
+                  onClick={() => {
+                    navigate("/embedded");
+                    setOpenDropdown(null);
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      navigate("/embedded");
+                      setOpenDropdown(null);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                >
+                  Embedded Designs
+                </span>
+
+                <FaChevronDown
+                  className={openDropdown === "embedded" ? "rotate" : ""}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleDesktopDropdown("embedded");
+                  }}
+                />
               </div>
 
-              {renderDropdown(embeddedServices)}
+              {renderDropdown(embeddedServices, "embedded")}
             </li>
 
             <li>

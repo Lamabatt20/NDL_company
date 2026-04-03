@@ -1,15 +1,14 @@
 .site-footer {
   background: #17477b;
   color: #ffffff;
-  /* horizontal spacing handled by .site-container */
+  
   padding: 70px 0 20px;
   font-family: "Times New Roman", serif;
 }
 
-/* Make footer full-bleed across the viewport (covers white gutters) */
 .site-footer {
   width: 100vw;
-  /* align to viewport edges regardless of centered page container */
+ 
   position: relative;
   left: 50%;
   right: 50%;
@@ -132,7 +131,7 @@
   color: #cfd8e3;
 }
 
-/* Make the bottom row span the full footer grid so copyright sits centered */
+
 .footer-container .footer-bottom {
   grid-column: 1 / -1;
 }

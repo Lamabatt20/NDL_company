@@ -158,7 +158,7 @@ export default function ProjectDetails() {
       <section className="project-content-wrapper">
         <div className="site-container">
 
-          {/* ===== ZIGZAG SECTIONS (اللي عندها صورة) ===== */}
+         
           {sections.map((section, i) => {
             const image = visuals[i + 1];
             const reverse = i % 2 !== 0;
@@ -216,7 +216,7 @@ export default function ProjectDetails() {
             );
           })}
 
-          {/* ===== U-CARDS (اللي بدون صورة) ===== */}
+          
           <div className="u-cards-grid">
             {sections.map((section, i) => {
               const image = visuals[i + 1];

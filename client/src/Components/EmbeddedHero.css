@@ -41,7 +41,7 @@
   text-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
 }
 
-/* الحافة من تحت */
+
 .embedded-hero::after {
   content: "";
   position: absolute;

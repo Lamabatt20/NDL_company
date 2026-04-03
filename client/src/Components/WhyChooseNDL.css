@@ -1,5 +1,5 @@
 .why-choose-ndl {
-  padding: 60px 0 140px; /* horizontal alignment handled by .site-container */
+  padding: 60px 0 140px;
   background-color: #e6e6e6;
   font-family: 'Open Sans', sans-serif;
 }
@@ -24,22 +24,22 @@
 }
 .why-choose-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 أعمدة ثابتة */
+  grid-template-columns: repeat(3, 1fr); 
   gap: 30px;
   width: 100%;
 }
 
-/* Responsive: شاشة متوسطة */
+
 @media (max-width: 1200px) {
   .why-choose-grid {
-    grid-template-columns: repeat(2, 1fr); /* عمودين */
+    grid-template-columns: repeat(2, 1fr); 
   }
 }
 
-/* Responsive: شاشة صغيرة */
+
 @media (max-width: 768px) {
   .why-choose-grid {
-    grid-template-columns: 1fr; /* عمود واحد */
+    grid-template-columns: 1fr;
   }
 }
 
