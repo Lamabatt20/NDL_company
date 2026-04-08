@@ -407,6 +407,35 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
+.navbar-embedded.navbar-hero {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.navbar-embedded.navbar-hero .navbar-links li a {
+  color: #ffffff;
+}
+
+.navbar-embedded.navbar-hero .navbar-links li a:hover {
+  color: #ed985f;
+}
+
+.navbar-embedded.navbar-hero .language-selector {
+  border-color: #ffffff;
+}
+
+.navbar-embedded.navbar-hero .language-selector select {
+  color: #ffffff;
+}
+
+.navbar-embedded.navbar-hero .menu-icon span {
+  background: #ffffff;
+}
+
+.navbar-embedded.navbar-hero .nav-dropdown-trigger {
+  color: #ffffff;
+}
+
 .navbar.navbar-embedded a.contact-btn {
   background-color: #eba77a;
   color: #ffffff;
@@ -452,6 +481,35 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
+.navbar-mechanical.navbar-hero {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.navbar-mechanical.navbar-hero .navbar-links li a {
+  color: #ffffff;
+}
+
+.navbar-mechanical.navbar-hero .navbar-links li a:hover {
+  color: #ed985f;
+}
+
+.navbar-mechanical.navbar-hero .language-selector {
+  border-color: #ffffff;
+}
+
+.navbar-mechanical.navbar-hero .language-selector select {
+  color: #ffffff;
+}
+
+.navbar-mechanical.navbar-hero .menu-icon span {
+  background: #ffffff;
+}
+
+.navbar-mechanical.navbar-hero .nav-dropdown-trigger {
+  color: #ffffff;
+}
+
 .navbar.navbar-mechanical a.contact-btn {
   background-color: #eba77a;
   color: #ffffff;
@@ -489,6 +547,41 @@
 
 .navbar-mechanical .nav-dropdown-trigger.active-trigger {
   color: #ed985f;
+}
+
+/* ===== Careers & Contact Navbar (Hero Pages) ===== */
+.navbar-default.navbar-hero {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.navbar-default.navbar-hero .navbar-links li a {
+  color: #ffffff;
+}
+
+.navbar-default.navbar-hero .navbar-links li a:hover {
+  color: #ed985f;
+}
+
+.navbar-default.navbar-hero .language-selector {
+  border-color: #ffffff;
+}
+
+.navbar-default.navbar-hero .language-selector select {
+  color: #ffffff;
+}
+
+.navbar-default.navbar-hero .menu-icon span {
+  background: #ffffff;
+}
+
+.navbar-default.navbar-hero .nav-dropdown-trigger {
+  color: #ffffff;
+}
+
+.navbar-default.navbar-hero a.contact-btn {
+  background-color: #ed985f;
+  color: #ffffff;
 }
 
 /* ===== Active Links ===== */

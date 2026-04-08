@@ -143,13 +143,23 @@ app.post("/projects", upload.array("images", 30), async (req, res) => {
   }
 });
 
-/* ================= ADD IMAGE ================= */
 app.post("/projects/:id/images", upload.single("image"), async (req, res) => {
   try {
     const projectId = Number(req.params.id);
 
-    if (!req.file) {
-      return res.status(400).json({ error: "No image uploaded" });
+   
+    const imageUrl = req.file
+      ? `/uploads/${req.file.filename}`
+      : req.body.image;
+
+   
+    if (!imageUrl) {
+      return res.status(400).json({ error: "No image provided" });
+    }
+
+    
+    if (!req.file && !imageUrl.startsWith("http")) {
+      return res.status(400).json({ error: "Invalid image URL" });
     }
 
     const project = await prisma.project.findUnique({
@@ -162,19 +172,23 @@ app.post("/projects/:id/images", upload.single("image"), async (req, res) => {
 
     const image = await prisma.projectImage.create({
       data: {
-        imageUrl: `/uploads/${req.file.filename}`,
+        imageUrl: imageUrl,
         projectId,
       },
     });
 
-    res.status(201).json(image);
+    res.status(201).json({
+      message: "Image added successfully",
+      data: image,
+    });
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Failed to upload image" });
   }
 });
 
-/* ================= SINGLE PROJECT (آخر Route) ================= */
+
 app.get("/projects/:id", async (req, res) => {
   try {
     const projectId = Number(req.params.id);

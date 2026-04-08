@@ -39,6 +39,10 @@ function Navbar() {
   const isHome = location.pathname === "/";
   const isEmbeddedPage = location.pathname.startsWith("/embedded");
   const isMechanicalPage = location.pathname.startsWith("/mechanical");
+  const isCareersPage = location.pathname === "/careers";
+  const isContactPage = location.pathname === "/contact" || location.pathname === "/get-quote";
+  const isAboutPage = location.pathname === "/about";
+  const hasHeroPage = isHome || isEmbeddedPage || isMechanicalPage || isCareersPage || isContactPage || isAboutPage;
 
   useEffect(() => {
     const onScroll = () => {
@@ -195,7 +199,7 @@ function Navbar() {
     <>
       <nav
         className={`${getNavbarConfig()} ${
-          isHome && !scrolled ? "navbar-hero" : "navbar-solid"
+          hasHeroPage && !scrolled ? "navbar-hero" : "navbar-solid"
         }`}
       >
         <div className="site-container navbar-inner">
@@ -219,7 +223,7 @@ function Navbar() {
           <div className="navbar-logo">
             <NavLink to="/">
               <img
-                src={isEmbeddedPage || isMechanicalPage ? logoEmbedded : logoDefault}
+                src={hasHeroPage && !scrolled ? logoDefault : (isEmbeddedPage || isMechanicalPage ? logoEmbedded : logoDefault)}
                 alt="Logo"
               />
             </NavLink>
@@ -325,7 +329,7 @@ function Navbar() {
 
           <div className="language-selector">
             <img
-              src={isEmbeddedPage || isMechanicalPage ? globeBlue : globeIcon}
+              src={hasHeroPage && !scrolled ? globeIcon : (isEmbeddedPage || isMechanicalPage ? globeBlue : globeIcon)}
               alt="Lang"
             />
             <select value={language} onChange={(e) => setLanguage(e.target.value)}>

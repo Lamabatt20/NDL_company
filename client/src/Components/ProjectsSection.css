@@ -1,6 +1,6 @@
 .projects {
   background-color: #e6e6e6;
-  padding: 40px 0 120px; 
+  padding: 35px 0 45px; 
   text-align: center;
   margin-top: 0;
   font-family: "Times New Roman", Times, serif;
@@ -92,6 +92,7 @@
 
   .projects-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 

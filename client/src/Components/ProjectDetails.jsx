@@ -5,6 +5,25 @@ import { getProjectById } from "../api";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
+/* ================= HELPERS ================= */
+const getMediaUrl = (url) => {
+  if (!url) return "";
+  return url.startsWith("http") ? url : `${API_URL}${url}`;
+};
+
+const isVideoFile = (media) => {
+  const url = media?.videoUrl || media?.imageUrl || "";
+  return (
+    media?.type === "video" ||
+    !!media?.videoUrl ||
+    url.includes("/video/upload/") ||
+    url.toLowerCase().includes(".mp4") ||
+    url.toLowerCase().includes(".webm") ||
+    url.toLowerCase().includes(".ogg") ||
+    url.toLowerCase().includes(".mov")
+  );
+};
+
 /* ================= PARSER ================= */
 const parseDescription = (description) => {
   if (!description) return [];
@@ -87,13 +106,17 @@ export default function ProjectDetails() {
         const data = await getProjectById(id);
         if (!alive) return;
         setProject(data);
+      } catch (error) {
+        console.error("Failed to fetch project:", error);
       } finally {
         if (alive) setLoading(false);
       }
     };
 
     fetchProject();
-    return () => (alive = false);
+    return () => {
+      alive = false;
+    };
   }, [id]);
 
   const sections = useMemo(
@@ -106,19 +129,21 @@ export default function ProjectDetails() {
   /* ================= ANIMATION OBSERVER ================= */
   useEffect(() => {
     const rows = document.querySelectorAll(".zigzag-animate");
+
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("in-view");
-            observer.unobserve(e.target);
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target);
           }
         });
       },
       { threshold: 0.3 }
     );
 
-    rows.forEach((r) => observer.observe(r));
+    rows.forEach((row) => observer.observe(row));
+
     return () => observer.disconnect();
   }, [sections.length]);
 
@@ -129,9 +154,24 @@ export default function ProjectDetails() {
     <main className="project-details">
       {/* ================= HERO ================= */}
       <section className="project-hero">
-        {visuals[0] && (
-          <img src={`${API_URL}${visuals[0].imageUrl}`} alt="" />
-        )}
+        {visuals[0] &&
+          (isVideoFile(visuals[0]) ? (
+            <video
+              className="project-hero-media"
+              autoPlay
+              muted
+              loop
+              playsInline
+            >
+              <source
+                src={getMediaUrl(visuals[0].videoUrl || visuals[0].imageUrl)}
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
+          ) : (
+            <img src={getMediaUrl(visuals[0].imageUrl)} alt="" />
+          ))}
 
         <div className="project-hero-overlay" />
 
@@ -157,8 +197,6 @@ export default function ProjectDetails() {
       {/* ================= CONTENT ================= */}
       <section className="project-content-wrapper">
         <div className="site-container">
-
-         
           {sections.map((section, i) => {
             const image = visuals[i + 1];
             const reverse = i % 2 !== 0;
@@ -194,19 +232,23 @@ export default function ProjectDetails() {
                 </div>
 
                 <div className="zigzag-image-wrapper">
-                  {image.type === "video" ||
-                  image.videoUrl ||
-                  image.imageUrl?.endsWith(".mp4") ? (
+                  {isVideoFile(image) ? (
                     <video
-                      src={`${API_URL}${image.videoUrl || image.imageUrl}`}
                       controls
                       muted
                       loop
+                      playsInline
                       className="zigzag-image"
-                    />
+                    >
+                      <source
+                        src={getMediaUrl(image.videoUrl || image.imageUrl)}
+                        type="video/mp4"
+                      />
+                      Your browser does not support the video tag.
+                    </video>
                   ) : (
                     <img
-                      src={`${API_URL}${image.imageUrl}`}
+                      src={getMediaUrl(image.imageUrl)}
                       alt=""
                       className="zigzag-image"
                     />
@@ -216,7 +258,6 @@ export default function ProjectDetails() {
             );
           })}
 
-          
           <div className="u-cards-grid">
             {sections.map((section, i) => {
               const image = visuals[i + 1];
@@ -261,7 +302,6 @@ export default function ProjectDetails() {
               );
             })}
           </div>
-
         </div>
       </section>
 
@@ -283,23 +323,26 @@ export default function ProjectDetails() {
               }`}
             >
               {visuals.slice(sections.length + 1).map((media, i) => {
-                const isVideo =
-                  media.type === "video" ||
-                  media.videoUrl ||
-                  media.imageUrl?.endsWith(".mp4");
+                const isVideo = isVideoFile(media);
 
                 return (
                   <div key={i} className="gallery-item">
                     {isVideo ? (
                       <video
-                        src={`${API_URL}${media.videoUrl || media.imageUrl}`}
                         controls
                         muted
+                        playsInline
                         controlsList="nofullscreen"
-                      />
+                      >
+                        <source
+                          src={getMediaUrl(media.videoUrl || media.imageUrl)}
+                          type="video/mp4"
+                        />
+                        Your browser does not support the video tag.
+                      </video>
                     ) : (
                       <img
-                        src={`${API_URL}${media.imageUrl}`}
+                        src={getMediaUrl(media.imageUrl)}
                         alt="Project media"
                       />
                     )}
