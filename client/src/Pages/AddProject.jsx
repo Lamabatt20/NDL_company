@@ -83,20 +83,42 @@ export default function AddProject() {
   };
 
   const handleImageChange = (e) => {
-    const files = Array.from(e.target.files || []);
-    setImageFiles(files);
+  const files = Array.from(e.target.files || []);
+  if (!files.length) return;
 
-    const previewFiles = files.map((file) => ({
-      imageUrl: URL.createObjectURL(file),
-      type: file.type.startsWith("video/") ? "video" : "image",
-      name: file.name,
-    }));
+  const previewFiles = files.map((file) => ({
+    imageUrl: URL.createObjectURL(file),
+    type: file.type.startsWith("video/") ? "video" : "image",
+    name: file.name,
+  }));
 
-    setFormData((prev) => ({
+  setImageFiles((prev) => [...prev, ...files]);
+
+  setFormData((prev) => ({
+    ...prev,
+    images: [...prev.images, ...previewFiles],
+  }));
+
+  e.target.value = "";
+};
+
+const handleRemoveFile = (indexToRemove) => {
+  setImageFiles((prev) => prev.filter((_, index) => index !== indexToRemove));
+
+  setFormData((prev) => {
+    const updatedImages = prev.images.filter((_, index) => index !== indexToRemove);
+
+    const removedItem = prev.images[indexToRemove];
+    if (removedItem?.imageUrl?.startsWith("blob:")) {
+      URL.revokeObjectURL(removedItem.imageUrl);
+    }
+
+    return {
       ...prev,
-      images: previewFiles,
-    }));
-  };
+      images: updatedImages,
+    };
+  });
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -166,18 +188,36 @@ export default function AddProject() {
               ×
             </button>
 
-            {/* Hero = أول صورة أو أول فيديو */}
-            {formData.images.length > 0 && (
-              <div className="modal-hero">
-                {formData.images[0].type === "video" ? (
-                  <video autoPlay muted loop playsInline controls>
-                    <source src={formData.images[0].imageUrl} type="video/mp4" />
-                  </video>
-                ) : (
-                  <img src={formData.images[0].imageUrl} alt={formData.title} />
-                )}
-              </div>
-            )}
+           {formData.images.length > 0 && (
+             <div className="image-preview">
+              <h4>Selected Files ({formData.images.length})</h4>
+              <div className="preview-grid">
+             {formData.images.map((img, index) => (
+              <div key={index} className="preview-item">
+              {img.type === "video" ? (
+               <video muted controls>
+              <source src={img.imageUrl} />
+            </video>
+          ) : (
+            <img src={img.imageUrl} alt={`Preview ${index + 1}`} />
+          )}
+
+          <span className="preview-label">
+            {index === 0 ? "Hero Media" : `Media ${index + 1}`}
+          </span>
+
+          <button
+            type="button"
+            className="remove-preview-btn"
+            onClick={() => handleRemoveFile(index)}
+          >
+            ×
+          </button>
+        </div>
+      ))}
+    </div>
+    </div>
+)}
 
             {/* Header */}
             <div className="modal-header">
