@@ -19,7 +19,6 @@ export default function AddProject() {
   });
   const [imageFiles, setImageFiles] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [previewMode, setPreviewMode] = useState(false);
 
   const authenticate = (pass) => {
     if (pass === "admin123") {
@@ -198,88 +197,6 @@ export default function AddProject() {
     );
   }
 
-  if (previewMode) {
-    return (
-      <div className="add-project-page">
-        <div className="preview-header">
-          <h1>Preview Mode</h1>
-          <button
-            className="btn-secondary"
-            onClick={() => setPreviewMode(false)}
-          >
-            Back to Edit
-          </button>
-        </div>
-
-        <div className="modal-backdrop">
-          <div className="modal-content full-modal">
-            <button
-              className="modal-close"
-              onClick={() => setPreviewMode(false)}
-            >
-              ×
-            </button>
-
-            {formData.images.length > 0 && (
-              <div className="modal-hero">
-                {formData.images[0].type === "video" ? (
-                  <video autoPlay muted loop playsInline controls>
-                    <source src={formData.images[0].imageUrl} />
-                  </video>
-                ) : (
-                  <img src={formData.images[0].imageUrl} alt={formData.title} />
-                )}
-              </div>
-            )}
-
-            <div className="modal-header">
-              <div className="modal-header-content">
-                <h2>{formData.title || "Project Title"}</h2>
-                {formData.shortDesc && <p>{formData.shortDesc}</p>}
-              </div>
-              <button className="get-quote-btn">Get a Quote</button>
-            </div>
-
-            <div className="modal-zigzag">
-              <div className="zig-row">
-                <div className="zig-card no-media">
-                  <div className="zig-text">
-                    <h3>Project Overview</h3>
-                    <div className="zig-text-content">
-                      <p>
-                        {formData.description ||
-                          "Project description will appear here."}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {formData.images.length > 1 && (
-              <div className="modal-gallery-wrap">
-                <h3 className="gallery-title">Project Images</h3>
-                <div className="modal-gallery">
-                  {formData.images.slice(1).map((img, i) => (
-                    <div key={i} className="gallery-item">
-                      {img.type === "video" ? (
-                        <video controls muted playsInline>
-                          <source src={img.imageUrl} />
-                        </video>
-                      ) : (
-                        <img src={img.imageUrl} alt={`Preview ${i + 2}`} />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="add-project-page">
       <div className="site-container">
@@ -290,14 +207,6 @@ export default function AddProject() {
               Create a new project with multiple images. The first uploaded file
               will be the hero.
             </p>
-            <button
-              className="btn-secondary"
-              onClick={() => setPreviewMode(true)}
-              disabled={!formData.title}
-              type="button"
-            >
-              Preview Project
-            </button>
           </div>
 
           <form onSubmit={handleSubmit} className="add-project-form">
