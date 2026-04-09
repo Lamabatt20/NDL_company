@@ -34,24 +34,33 @@ const parseDescription = (description) => {
 
   const isRealHeading = (text) => {
     const t = text.trim();
+    const lower = t.toLowerCase();
+
     if (!t) return false;
 
-    // عنوان إذا انتهى بـ :
-    if (t.endsWith(":")) return true;
-
-    // إذا طويل → مش عنوان
-    if (t.length > 45) return false;
-
-    // إذا فيه جملة أو including → مش عنوان
+    // هاي جمل شرح، حتى لو بتنتهي بـ :
     if (
-      t.includes(".") ||
-      t.includes(",") ||
-      t.toLowerCase().includes("including")
+      lower.includes("including:") ||
+      lower.includes("includes:") ||
+      lower.includes("such as:")
     ) {
       return false;
     }
 
-    return true;
+    // عنوان قصير منتهي بـ :
+    if (t.endsWith(":") && t.length <= 45) return true;
+
+    // عنوان قصير بدون نقطة أو فاصلة
+    if (
+      t.length <= 45 &&
+      !t.includes(".") &&
+      !t.includes(",") &&
+      !t.includes(";")
+    ) {
+      return true;
+    }
+
+    return false;
   };
 
   lines.forEach((line) => {
@@ -104,6 +113,7 @@ function MediaViewer({ media, onClose }) {
               src={getMediaUrl(media.videoUrl || media.imageUrl)}
               type="video/mp4"
             />
+            Your browser does not support the video tag.
           </video>
         ) : (
           <img
@@ -181,6 +191,7 @@ export default function ProjectModal({ project, onClose }) {
                     )}
                     type="video/mp4"
                   />
+                  Your browser does not support the video tag.
                 </video>
               ) : (
                 <img
@@ -255,6 +266,7 @@ export default function ProjectModal({ project, onClose }) {
                               )}
                               type="video/mp4"
                             />
+                            Your browser does not support the video tag.
                           </video>
                         ) : (
                           <img
@@ -288,6 +300,7 @@ export default function ProjectModal({ project, onClose }) {
                           src={getMediaUrl(m.videoUrl || m.imageUrl)}
                           type="video/mp4"
                         />
+                        Your browser does not support the video tag.
                       </video>
                     ) : (
                       <img
