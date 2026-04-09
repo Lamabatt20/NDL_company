@@ -71,20 +71,26 @@
 }
 
 /* ================= HERO ================= */
+
 .modal-hero {
   width: 100%;
-  height: 250px;
+  height: 320px;
   overflow: hidden;
   cursor: pointer;
   border-radius: 22px 22px 0 0;
+  background: #d9d9d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-hero img,
 .modal-hero video {
   width: 100%;
   height: 100%;
-  object-fit: cover;
   display: block;
+  object-fit: cover;
+  object-position: center center;
 }
 
 /* ================= HEADER ================= */
