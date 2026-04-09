@@ -32,19 +32,45 @@ const parseDescription = (description) => {
 
   let current = { title: "", content: [] };
 
+  const isHeadingLine = (text) => {
+    const lower = text.toLowerCase();
+    return (
+      text.endsWith(":") ||
+      lower.includes("including:") ||
+      lower.includes("includes:") ||
+      lower.includes("such as:")
+    );
+  };
+
   lines.forEach((line) => {
     const t = line.trim();
     if (!t) return;
 
-    if (t.endsWith(":")) {
-      if (current.title || current.content.length) sections.push(current);
-      current = { title: t.replace(":", ""), content: [] };
+    if (isHeadingLine(t)) {
+      if (current.title || current.content.length) {
+        sections.push(current);
+      }
+      current = {
+        title: t.replace(/:$/, ""),
+        content: [],
+      };
+    } else if (t.startsWith("-")) {
+      current.content.push({
+        type: "bullet",
+        text: t.replace(/^-+\s*/, ""),
+      });
     } else {
-      current.content.push(t);
+      current.content.push({
+        type: "paragraph",
+        text: t,
+      });
     }
   });
 
-  if (current.title || current.content.length) sections.push(current);
+  if (current.title || current.content.length) {
+    sections.push(current);
+  }
+
   return sections;
 };
 
@@ -128,7 +154,6 @@ export default function ProjectModal({ project, onClose }) {
             ×
           </button>
 
-          {/* ================= HERO ================= */}
           {visuals[0] && (
             <div
               className="modal-hero"
@@ -153,7 +178,6 @@ export default function ProjectModal({ project, onClose }) {
             </div>
           )}
 
-          {/* ================= TITLE ================= */}
           <div className="modal-header">
             <div className="modal-header-content">
               <h2>{project.title}</h2>
@@ -164,12 +188,16 @@ export default function ProjectModal({ project, onClose }) {
             </button>
           </div>
 
-          {/* ================= ZIGZAG ================= */}
           <div className="modal-zigzag">
             {sections.map((sec, i) => {
               const media = visuals[i + 1];
               const reverse = i % 2 !== 0;
               const hasMedia = !!media;
+
+              const bullets = sec.content.filter((item) => item.type === "bullet");
+              const paragraphs = sec.content.filter(
+                (item) => item.type === "paragraph"
+              );
 
               return (
                 <div
@@ -179,10 +207,19 @@ export default function ProjectModal({ project, onClose }) {
                   <div className={`zig-card ${!hasMedia ? "no-media" : ""}`}>
                     <div className="zig-text">
                       {sec.title && <h3>{sec.title}</h3>}
+
                       <div className="zig-text-content">
-                        {sec.content.map((c, j) => (
-                          <p key={j}>{c}</p>
+                        {paragraphs.map((item, j) => (
+                          <p key={j}>{item.text}</p>
                         ))}
+
+                        {bullets.length > 0 && (
+                          <ul className="zig-bullets">
+                            {bullets.map((item, j) => (
+                              <li key={j}>{item.text}</li>
+                            ))}
+                          </ul>
+                        )}
                       </div>
                     </div>
 
@@ -213,7 +250,6 @@ export default function ProjectModal({ project, onClose }) {
             })}
           </div>
 
-          {/* ================= GALLERY ================= */}
           {galleryItems.length > 0 && (
             <div className="modal-gallery-wrap">
               <h3 className="gallery-title">More Media</h3>
