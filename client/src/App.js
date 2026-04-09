@@ -9,7 +9,6 @@ import Mechanical from "./Pages/Mechanical";
 import Embedded from "./Pages/Embedded";
 import Careers from "./Pages/Careers";
 import Contact from "./Pages/Contact";
-import ProjectDetails from "./Components/ProjectDetails";
 import GetQuote from "./Pages/GetQuote";
 import OurServices from "./Components/OurServices";
 import WhyChooseNDL from "./Components/WhyChooseNDL";
@@ -33,7 +32,6 @@ function App() {
 
         <Route path="/careers" element={<Careers />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/projects/:id" element={<ProjectDetails />} />
         <Route path="/get-a-quote" element={<GetQuote />} />
         <Route path="/services" element={<OurServices />} />
         <Route path="/why-choose-ndl" element={<WhyChooseNDL />} />

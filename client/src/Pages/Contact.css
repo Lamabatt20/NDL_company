@@ -3,6 +3,28 @@
   font-family: "Times New Roman", serif;
 }
 
+/* Icon headings */
+.contact-page h1,
+.contact-page h2,
+.contact-page h3 {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.contact-page h1::before,
+.contact-page h2::before,
+.contact-page h3::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  flex-shrink: 0;
+  background-color: currentColor;
+  mask: url("../assets/icons/IMG_4911.png") no-repeat center / contain;
+  -webkit-mask: url("../assets/icons/IMG_4911.png") no-repeat center / contain;
+}
+
 /* HERO */
 .contact-hero {
   position: relative;

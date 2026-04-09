@@ -22,20 +22,51 @@
 }
 
 .about-text p {
-  font-weight: 500;
-  font-size: 17px;
+  font-weight: 300;
+  font-size: 15px;
   line-height: 1.9;
   color: #ffffff;
   margin-bottom: 20px;
 }
 
 .about-title {
+  display: flex;
+  align-items: center;
+  margin-left: -30px;
+  gap: 14px;
   font-size: 60px;
-  font-weight: 700; /* Bold */
+  font-weight: 700;
   line-height: 1.05;
-  color: #ffffff; 
+  color: #ffffff;
   letter-spacing: -0.5px;
   margin-bottom: 12px;
+}
+
+.title-icon-wrap {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #27c46b, #159957);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 18px rgba(21, 153, 87, 0.35);
+  transform: scale(0.85);
+  opacity: 0;
+  transition: all 0.45s ease;
+}
+
+.title-icon-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
+}
+
+.about-espark.show .title-icon-wrap {
+  transform: scale(1);
+  opacity: 1;
 }
 
 .about-video {
@@ -118,10 +149,21 @@
   }
 
   .about-title {
-    font-size: 34px;
-    max-width: 100%;
-    margin-bottom: 24px;
-  }
+  font-size: 34px;
+  gap: 10px;
+  margin-left: -10px;
+}
+
+.title-icon-wrap {
+  width: 50px;
+  height: 50px;
+  min-width: 50px;
+}
+
+.title-icon-img {
+  width: 30px;
+  height: 30px;
+}
 
   .about-video video {
     max-width: 100%;

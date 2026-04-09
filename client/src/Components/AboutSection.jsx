@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./AboutSection.css";
+import checkIcon from "../assets/icons/IMG_4911.png";
 
 function AboutSection() {
   const sectionRef = useRef(null);
@@ -36,8 +37,10 @@ function AboutSection() {
       <div className="site-container">
         <div className="about-container">
         <div className="about-text">
-          <h2 className="about-title">Who We Are?</h2>
-
+          <h2 className="about-title">
+          <img src={checkIcon} alt="icon" className="title-icon-img" />
+          Who We Are?
+        </h2>
           <p>
             At Nexus Design Lab, we deliver end-to-end engineering solutions that
             turn ideas into scalable products.

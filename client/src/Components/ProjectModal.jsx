@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import checkIcon from "../assets/icons/IMG_4911.png";
 import "./ProjectModal.css";
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -245,7 +246,14 @@ export default function ProjectModal({ project, onClose }) {
                         {bullets.length > 0 && (
                           <ul className="zig-bullets">
                             {bullets.map((item, j) => (
-                              <li key={j}>{item.text}</li>
+                              <li key={j}>
+                                <img
+                                  className="bullet-icon"
+                                  src={checkIcon}
+                                  alt="Check"
+                                />
+                                <span>{item.text}</span>
+                              </li>
                             ))}
                           </ul>
                         )}

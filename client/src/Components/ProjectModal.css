@@ -280,12 +280,31 @@
 }
 .zig-bullets {
   margin: 16px 0 0;
-  padding-left: 22px;
+  padding: 0;
+  list-style: none;
 }
 
 .zig-bullets li {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
   margin-bottom: 10px;
-  line-height: 1.8;
+  line-height: 1.6;
+  font-family: "Open Sans", sans-serif;
+  font-size: 13px;
+}
+
+.bullet-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  margin-top: 3px;
+  flex-shrink: 0;
+  filter: invert(27%) sepia(45%) saturate(6400%) hue-rotate(201deg) brightness(96%) contrast(92%);
+}
+
+.zig-bullets li span {
+  color: #17477b;
 }
 
 video {
@@ -516,6 +535,19 @@ video {
   .zig-media {
     min-height: 240px;
     height: auto;
+  }
+
+  .zig-bullets {
+    margin: 12px 0 0;
+  }
+
+  .zig-bullets li {
+    gap: 6px;
+  }
+
+  .bullet-icon {
+    width: 16px;
+    height: 16px;
   }
 
   .zig-text {

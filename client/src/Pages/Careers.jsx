@@ -174,21 +174,21 @@ export default function Career() {
                 <h4>Required Skills</h4>
                 <ul>
                   {job.details.skills.map((item, i) => (
-                    <li key={i}>- {item}</li>
+                    <li key={i}>{item}</li>
                   ))}
                 </ul>
 
                 <h4>We Offer</h4>
                 <ul>
                   {job.details.offer.map((item, i) => (
-                    <li key={i}>- {item}</li>
+                    <li key={i}>{item}</li>
                   ))}
                 </ul>
 
                 <h4>Responsibilities</h4>
                 <ul>
                   {job.details.responsibilities.map((item, i) => (
-                    <li key={i}>- {item}</li>
+                    <li key={i}>{item}</li>
                   ))}
                 </ul>
 
