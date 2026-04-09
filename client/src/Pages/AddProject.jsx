@@ -37,13 +37,28 @@ export default function AddProject() {
     }
   }, [isAuthenticated, password]);
 
+  useEffect(() => {
+    return () => {
+      formData.images.forEach((file) => {
+        if (file.imageUrl?.startsWith("blob:")) {
+          URL.revokeObjectURL(file.imageUrl);
+        }
+      });
+    };
+  }, [formData.images]);
+
   if (!isAuthenticated) {
     return (
       <div className="auth-container">
         <div className="auth-form">
           <h2>Admin Login</h2>
           <p>Automatically signing you in with the saved password.</p>
-          <form onSubmit={(e) => { e.preventDefault(); authenticate(password); }}>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              authenticate(password);
+            }}
+          >
             <input
               type="password"
               value={password}
@@ -61,30 +76,36 @@ export default function AddProject() {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
   const handleImageChange = (e) => {
-    const files = Array.from(e.target.files);
+    const files = Array.from(e.target.files || []);
     setImageFiles(files);
 
-    // Create preview URLs
-    const imageUrls = files.map(file => ({
+    const previewFiles = files.map((file) => ({
       imageUrl: URL.createObjectURL(file),
-      type: file.type.startsWith("video/") ? "video" : "image"
+      type: file.type.startsWith("video/") ? "video" : "image",
+      name: file.name,
     }));
 
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      images: imageUrls
+      images: previewFiles,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (imageFiles.length === 0) {
+      alert("Please upload at least one image or video.");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -95,7 +116,7 @@ export default function AddProject() {
       submitData.append("isEmbedded", formData.isEmbedded.toString());
       submitData.append("isMechanical", formData.isMechanical.toString());
 
-      imageFiles.forEach(file => {
+      imageFiles.forEach((file) => {
         submitData.append("images", file);
       });
 
@@ -120,9 +141,9 @@ export default function AddProject() {
 
   const addSection = () => {
     const newSection = "\n\nNew Section:\n- Point 1\n- Point 2\n- Point 3";
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      description: prev.description + newSection
+      description: prev.description + newSection,
     }));
   };
 
@@ -145,11 +166,11 @@ export default function AddProject() {
               ×
             </button>
 
-            {/* Hero */}
-            {formData.images[0] && (
+            {/* Hero = أول صورة أو أول فيديو */}
+            {formData.images.length > 0 && (
               <div className="modal-hero">
                 {formData.images[0].type === "video" ? (
-                  <video autoPlay muted loop playsInline>
+                  <video autoPlay muted loop playsInline controls>
                     <source src={formData.images[0].imageUrl} type="video/mp4" />
                   </video>
                 ) : (
@@ -174,14 +195,16 @@ export default function AddProject() {
                   <div className="zig-text">
                     <h3>Project Overview</h3>
                     <div className="zig-text-content">
-                      <p>{formData.description.split("\n")[0] || "Project description will appear here."}</p>
+                      <p>
+                        {formData.description || "Project description will appear here."}
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Gallery */}
+            {/* Gallery = باقي الصور بعد أول صورة */}
             {formData.images.length > 1 && (
               <div className="modal-gallery-wrap">
                 <h3 className="gallery-title">Project Images</h3>
@@ -189,11 +212,11 @@ export default function AddProject() {
                   {formData.images.slice(1).map((img, i) => (
                     <div key={i} className="gallery-item">
                       {img.type === "video" ? (
-                        <video muted playsInline>
+                        <video controls muted playsInline>
                           <source src={img.imageUrl} type="video/mp4" />
                         </video>
                       ) : (
-                        <img src={img.imageUrl} alt={`Preview ${i + 1}`} />
+                        <img src={img.imageUrl} alt={`Preview ${i + 2}`} />
                       )}
                     </div>
                   ))}
@@ -212,7 +235,7 @@ export default function AddProject() {
         <div className="add-project-container">
           <div className="form-header">
             <h1>Add New Project</h1>
-            <p>Create a new project with the same format as the project modal.</p>
+            <p>Create a new project with multiple images. The first uploaded file will be the hero.</p>
             <button
               className="btn-secondary"
               onClick={() => setPreviewMode(true)}
@@ -291,7 +314,7 @@ export default function AddProject() {
                   onChange={handleInputChange}
                   required
                   rows="15"
-                  placeholder="Project Overview:
+                  placeholder={`Project Overview:
 
 - Key feature 1
 - Key feature 2
@@ -300,7 +323,7 @@ export default function AddProject() {
 Technical Details:
 
 - Specification 1
-- Specification 2"
+- Specification 2`}
                 />
               </div>
 
@@ -312,7 +335,7 @@ Technical Details:
             <div className="form-section">
               <h3>Project Images & Media</h3>
               <p className="form-help">
-                Upload images and videos. The first image will be the hero image.
+                You can upload multiple images/videos. The first uploaded file will be used as the hero image.
               </p>
 
               <div className="form-group">
@@ -334,14 +357,19 @@ Technical Details:
                     {formData.images.map((img, index) => (
                       <div key={index} className="preview-item">
                         {img.type === "video" ? (
-                          <video muted>
+                          <video muted controls>
                             <source src={img.imageUrl} />
                           </video>
                         ) : (
                           <img src={img.imageUrl} alt={`Preview ${index + 1}`} />
                         )}
+
                         <span className="preview-label">
-                          {index === 0 ? "Hero Image" : `Image ${index + 1}`}
+                          {index === 0
+                            ? "Hero Media"
+                            : img.type === "video"
+                            ? `Video ${index + 1}`
+                            : `Image ${index + 1}`}
                         </span>
                       </div>
                     ))}
