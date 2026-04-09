@@ -32,24 +32,37 @@ const parseDescription = (description) => {
 
   let current = { title: "", content: [] };
 
-  const isHeadingLine = (text) => {
-    const lower = text.toLowerCase();
-    return (
-      text.endsWith(":") ||
-      lower.includes("including:") ||
-      lower.includes("includes:") ||
-      lower.includes("such as:")
-    );
+  const isRealHeading = (text) => {
+    const t = text.trim();
+    if (!t) return false;
+
+    // عنوان إذا انتهى بـ :
+    if (t.endsWith(":")) return true;
+
+    // إذا طويل → مش عنوان
+    if (t.length > 45) return false;
+
+    // إذا فيه جملة أو including → مش عنوان
+    if (
+      t.includes(".") ||
+      t.includes(",") ||
+      t.toLowerCase().includes("including")
+    ) {
+      return false;
+    }
+
+    return true;
   };
 
   lines.forEach((line) => {
     const t = line.trim();
     if (!t) return;
 
-    if (isHeadingLine(t)) {
+    if (isRealHeading(t)) {
       if (current.title || current.content.length) {
         sections.push(current);
       }
+
       current = {
         title: t.replace(/:$/, ""),
         content: [],
@@ -91,7 +104,6 @@ function MediaViewer({ media, onClose }) {
               src={getMediaUrl(media.videoUrl || media.imageUrl)}
               type="video/mp4"
             />
-            Your browser does not support the video tag.
           </video>
         ) : (
           <img
@@ -105,6 +117,7 @@ function MediaViewer({ media, onClose }) {
   );
 }
 
+/* ================= MAIN COMPONENT ================= */
 export default function ProjectModal({ project, onClose }) {
   const [selectedMedia, setSelectedMedia] = useState(null);
   const navigate = useNavigate();
@@ -154,6 +167,7 @@ export default function ProjectModal({ project, onClose }) {
             ×
           </button>
 
+          {/* HERO */}
           {visuals[0] && (
             <div
               className="modal-hero"
@@ -167,7 +181,6 @@ export default function ProjectModal({ project, onClose }) {
                     )}
                     type="video/mp4"
                   />
-                  Your browser does not support the video tag.
                 </video>
               ) : (
                 <img
@@ -178,23 +191,29 @@ export default function ProjectModal({ project, onClose }) {
             </div>
           )}
 
+          {/* HEADER */}
           <div className="modal-header">
             <div className="modal-header-content">
               <h2>{project.title}</h2>
               {project.shortDesc && <p>{project.shortDesc}</p>}
             </div>
+
             <button className="get-quote-btn" onClick={handleGetQuote}>
               Get a Quote
             </button>
           </div>
 
+          {/* CONTENT */}
           <div className="modal-zigzag">
             {sections.map((sec, i) => {
               const media = visuals[i + 1];
               const reverse = i % 2 !== 0;
               const hasMedia = !!media;
 
-              const bullets = sec.content.filter((item) => item.type === "bullet");
+              const bullets = sec.content.filter(
+                (item) => item.type === "bullet"
+              );
+
               const paragraphs = sec.content.filter(
                 (item) => item.type === "paragraph"
               );
@@ -231,10 +250,11 @@ export default function ProjectModal({ project, onClose }) {
                         {isVideoFile(media) ? (
                           <video muted playsInline controls preload="metadata">
                             <source
-                              src={getMediaUrl(media.videoUrl || media.imageUrl)}
+                              src={getMediaUrl(
+                                media.videoUrl || media.imageUrl
+                              )}
                               type="video/mp4"
                             />
-                            Your browser does not support the video tag.
                           </video>
                         ) : (
                           <img
@@ -250,6 +270,7 @@ export default function ProjectModal({ project, onClose }) {
             })}
           </div>
 
+          {/* GALLERY */}
           {galleryItems.length > 0 && (
             <div className="modal-gallery-wrap">
               <h3 className="gallery-title">More Media</h3>
@@ -267,7 +288,6 @@ export default function ProjectModal({ project, onClose }) {
                           src={getMediaUrl(m.videoUrl || m.imageUrl)}
                           type="video/mp4"
                         />
-                        Your browser does not support the video tag.
                       </video>
                     ) : (
                       <img
