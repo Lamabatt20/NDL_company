@@ -10,6 +10,7 @@ import Embedded from "./Pages/Embedded";
 import Careers from "./Pages/Careers";
 import Contact from "./Pages/Contact";
 import GetQuote from "./Pages/GetQuote";
+import AddProject from "./Pages/AddProject";
 import OurServices from "./Components/OurServices";
 import WhyChooseNDL from "./Components/WhyChooseNDL";
 
@@ -23,6 +24,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/add-project" element={<AddProject />} />
 
         <Route path="/mechanical" element={<Mechanical />} />
         <Route path="/mechanical/:service" element={<Mechanical />} />

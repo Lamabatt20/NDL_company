@@ -1,0 +1,492 @@
+/* ================= Global Fix ================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ================= Authentication Styles ================= */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #17477b 0%, #1a5a8a 100%);
+  padding: 20px;
+}
+
+.auth-form {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.auth-form h2 {
+  color: #17477b;
+  margin-bottom: 10px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.auth-form p {
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.auth-form input {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  padding: 15px;
+  border: 2px solid #e1e8ed;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: #17477b;
+  box-shadow: 0 0 0 3px rgba(23, 71, 123, 0.1);
+}
+
+.auth-form button {
+  background: linear-gradient(135deg, #17477b 0%, #1a5a8a 100%);
+  color: #ffffff;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  width: 100%;
+}
+
+.auth-form button:hover {
+  transform: translateY(-2px);
+}
+
+.auth-form .error {
+  color: #e74c3c;
+  margin-top: 15px;
+  font-weight: 500;
+}
+
+/* ================= Main Form Styles ================= */
+.add-project-page {
+  background: #f2f7fb;
+  min-height: 100vh;
+  padding: 110px 20px 40px; /* مهم: عشان يبعد عن الناف */
+}
+
+.add-project-container {
+  width: min(1200px, 100%);
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(23, 71, 123, 0.12);
+  overflow: hidden;
+}
+
+.form-header {
+  background: linear-gradient(135deg, #17477b 0%, #1a5a8a 100%);
+  color: #ffffff;
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.form-header h1 {
+  margin: 0 0 10px;
+  font-size: clamp(2rem, 4vw, 3.3rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.form-header p {
+  margin: 0 0 20px;
+  font-size: 1.05rem;
+  opacity: 0.95;
+  line-height: 1.6;
+}
+
+.form-header .btn-secondary {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.form-header .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.add-project-form {
+  padding: 36px;
+}
+
+.form-section {
+  margin-bottom: 36px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.form-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.form-section h3 {
+  color: #17477b;
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin: 0 0 22px;
+}
+
+.form-help {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  color: #17477b;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  padding: 15px 16px;
+  border: 2px solid #e6e6e6;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-family: inherit;
+  background: #fff;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #17477b;
+  box-shadow: 0 0 0 3px rgba(23, 71, 123, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+.category-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.category-options label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  color: #17477b;
+}
+
+.category-options input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.category-note {
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
+  margin-top: 10px;
+}
+
+.image-preview {
+  margin-top: 20px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #e6e6e6;
+}
+
+.image-preview h4 {
+  margin: 0 0 16px;
+  color: #17477b;
+  font-size: 1.1rem;
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.preview-item {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid #e6e6e6;
+  background: #fff;
+}
+
+.preview-item img,
+.preview-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.preview-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: #ffffff;
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 1px solid #e6e6e6;
+}
+
+.btn-primary,
+.btn-secondary {
+  padding: 14px 28px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 150px;
+}
+
+.btn-primary {
+  background: #17477b;
+  color: #ffffff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #0f3560;
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  background: #f8f9fa;
+  color: #17477b;
+  border: 2px solid #17477b;
+}
+
+.btn-secondary:hover {
+  background: #17477b;
+  color: #ffffff;
+}
+
+/* ================= Preview Mode ================= */
+.preview-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: #17477b;
+  color: #ffffff;
+  gap: 16px;
+}
+
+.preview-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.preview-header .btn-secondary {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.preview-header .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ================= Tablet ================= */
+@media (max-width: 768px) {
+  .add-project-page {
+    padding: 95px 12px 24px;
+  }
+
+  .add-project-container {
+    width: 100%;
+    border-radius: 14px;
+  }
+
+  .form-header {
+    padding: 24px 16px;
+  }
+
+  .form-header h1 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+
+  .form-header p {
+    font-size: 0.95rem;
+    margin-bottom: 16px;
+  }
+
+  .form-header .btn-secondary {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .add-project-form {
+    padding: 22px 16px;
+  }
+
+  .form-section {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+  }
+
+  .form-section h3 {
+    font-size: 1.35rem;
+    margin-bottom: 16px;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 13px 14px;
+    font-size: 0.95rem;
+  }
+
+  .preview-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    min-width: 100%;
+  }
+
+  .preview-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+  }
+
+  .preview-header .btn-secondary {
+    width: 100%;
+  }
+}
+
+/* ================= Mobile ================= */
+@media (max-width: 480px) {
+  .add-project-page {
+    padding: 88px 8px 18px;
+  }
+
+  .add-project-container {
+    border-radius: 12px;
+  }
+
+  .form-header {
+    padding: 20px 12px;
+  }
+
+  .form-header h1 {
+    font-size: 1.55rem;
+  }
+
+  .form-header p {
+    font-size: 0.86rem;
+    margin-bottom: 14px;
+  }
+
+  .add-project-form {
+    padding: 16px 12px;
+  }
+
+  .form-section h3 {
+    font-size: 1.12rem;
+  }
+
+  .form-group label {
+    font-size: 0.92rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    padding: 12px;
+    font-size: 0.92rem;
+  }
+
+  .preview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-header {
+    padding: 12px;
+  }
+
+  .preview-header h1 {
+    font-size: 1.1rem;
+  }
+}
