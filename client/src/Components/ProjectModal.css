@@ -272,6 +272,15 @@
 .zig-media:hover video {
   transform: scale(1.03);
 }
+.zig-bullets {
+  margin: 14px 0 0;
+  padding-left: 20px;
+}
+
+.zig-bullets li {
+  margin-bottom: 8px;
+  line-height: 1.7;
+}
 
 video {
   font-family: Arial, sans-serif;
