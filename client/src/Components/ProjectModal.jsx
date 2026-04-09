@@ -38,7 +38,6 @@ const parseDescription = (description) => {
 
     if (!t) return false;
 
-    // هاي جمل شرح، حتى لو بتنتهي بـ :
     if (
       lower.includes("including:") ||
       lower.includes("includes:") ||
@@ -47,10 +46,10 @@ const parseDescription = (description) => {
       return false;
     }
 
-    // عنوان قصير منتهي بـ :
+
     if (t.endsWith(":") && t.length <= 45) return true;
 
-    // عنوان قصير بدون نقطة أو فاصلة
+    
     if (
       t.length <= 45 &&
       !t.includes(".") &&
