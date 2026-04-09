@@ -185,9 +185,7 @@
 .zig-card.no-media:hover {
   box-shadow: 0 6px 28px rgba(23, 71, 123, 0.15);
   transform: translateY(-2px);
-}
-
-/* إذا لم تكن هناك صورة، تطبيق تنسيق مختلف */
+  }
 .zig-card:has(> .zig-text:only-child) {
   grid-template-columns: 1fr;
   background: linear-gradient(135deg, #f0f4f8 0%, #e8eef7 100%);
