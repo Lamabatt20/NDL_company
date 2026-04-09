@@ -47,6 +47,130 @@ export default function AddProject() {
     };
   }, [formData.images]);
 
+  const handleInputChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
+
+    const previewFiles = files.map((file) => ({
+      imageUrl: URL.createObjectURL(file),
+      type: file.type.startsWith("video/") ? "video" : "image",
+      name: file.name,
+    }));
+
+    setImageFiles((prev) => [...prev, ...files]);
+
+    setFormData((prev) => ({
+      ...prev,
+      images: [...prev.images, ...previewFiles],
+    }));
+
+    e.target.value = "";
+  };
+
+  const handleRemoveFile = (indexToRemove) => {
+    setImageFiles((prev) =>
+      prev.filter((_, index) => index !== indexToRemove)
+    );
+
+    setFormData((prev) => {
+      const removedItem = prev.images[indexToRemove];
+      if (removedItem?.imageUrl?.startsWith("blob:")) {
+        URL.revokeObjectURL(removedItem.imageUrl);
+      }
+
+      return {
+        ...prev,
+        images: prev.images.filter((_, index) => index !== indexToRemove),
+      };
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!formData.title.trim()) {
+      alert("Please enter the project title.");
+      return;
+    }
+
+    if (!formData.description.trim()) {
+      alert("Please enter the project description.");
+      return;
+    }
+
+    if (imageFiles.length === 0) {
+      alert("Please upload at least one image or video.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const submitData = new FormData();
+      submitData.append("title", formData.title);
+      submitData.append("shortDesc", formData.shortDesc);
+      submitData.append("description", formData.description);
+      submitData.append("isEmbedded", formData.isEmbedded.toString());
+      submitData.append("isMechanical", formData.isMechanical.toString());
+
+      imageFiles.forEach((file) => {
+        submitData.append("images", file);
+      });
+
+      const response = await fetch(`${API_URL}/projects`, {
+        method: "POST",
+        body: submitData,
+      });
+
+      if (!response.ok) {
+        let errorMessage = "Failed to add project";
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData?.message || errorMessage;
+        } catch {
+          const errorText = await response.text();
+          if (errorText) errorMessage = errorText;
+        }
+        throw new Error(errorMessage);
+      }
+
+      alert("Project added successfully!");
+
+      setFormData({
+        title: "",
+        shortDesc: "",
+        description: "",
+        isEmbedded: false,
+        isMechanical: false,
+        images: [],
+      });
+      setImageFiles([]);
+
+      navigate("/");
+    } catch (error) {
+      console.error("Error:", error);
+      alert(error.message || "Failed to add project. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const addSection = () => {
+    const newSection = "\n\nNew Section:\n- Point 1\n- Point 2\n- Point 3";
+    setFormData((prev) => ({
+      ...prev,
+      description: prev.description + newSection,
+    }));
+  };
+
   if (!isAuthenticated) {
     return (
       <div className="auth-container">
@@ -74,101 +198,6 @@ export default function AddProject() {
     );
   }
 
-  const handleInputChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const handleImageChange = (e) => {
-  const files = Array.from(e.target.files || []);
-  if (!files.length) return;
-
-  const previewFiles = files.map((file) => ({
-    imageUrl: URL.createObjectURL(file),
-    type: file.type.startsWith("video/") ? "video" : "image",
-    name: file.name,
-  }));
-
-  setImageFiles((prev) => [...prev, ...files]);
-
-  setFormData((prev) => ({
-    ...prev,
-    images: [...prev.images, ...previewFiles],
-  }));
-
-  e.target.value = "";
-};
-
-const handleRemoveFile = (indexToRemove) => {
-  setImageFiles((prev) => prev.filter((_, index) => index !== indexToRemove));
-
-  setFormData((prev) => {
-    const updatedImages = prev.images.filter((_, index) => index !== indexToRemove);
-
-    const removedItem = prev.images[indexToRemove];
-    if (removedItem?.imageUrl?.startsWith("blob:")) {
-      URL.revokeObjectURL(removedItem.imageUrl);
-    }
-
-    return {
-      ...prev,
-      images: updatedImages,
-    };
-  });
-};
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (imageFiles.length === 0) {
-      alert("Please upload at least one image or video.");
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const submitData = new FormData();
-      submitData.append("title", formData.title);
-      submitData.append("shortDesc", formData.shortDesc);
-      submitData.append("description", formData.description);
-      submitData.append("isEmbedded", formData.isEmbedded.toString());
-      submitData.append("isMechanical", formData.isMechanical.toString());
-
-      imageFiles.forEach((file) => {
-        submitData.append("images", file);
-      });
-
-      const response = await fetch(`${API_URL}/projects`, {
-        method: "POST",
-        body: submitData,
-      });
-
-      if (response.ok) {
-        alert("Project added successfully!");
-        navigate("/");
-      } else {
-        throw new Error("Failed to add project");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Failed to add project. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const addSection = () => {
-    const newSection = "\n\nNew Section:\n- Point 1\n- Point 2\n- Point 3";
-    setFormData((prev) => ({
-      ...prev,
-      description: prev.description + newSection,
-    }));
-  };
-
   if (previewMode) {
     return (
       <div className="add-project-page">
@@ -184,51 +213,33 @@ const handleRemoveFile = (indexToRemove) => {
 
         <div className="modal-backdrop">
           <div className="modal-content full-modal">
-            <button className="modal-close" onClick={() => setPreviewMode(false)}>
+            <button
+              className="modal-close"
+              onClick={() => setPreviewMode(false)}
+            >
               ×
             </button>
 
-           {formData.images.length > 0 && (
-             <div className="image-preview">
-              <h4>Selected Files ({formData.images.length})</h4>
-              <div className="preview-grid">
-             {formData.images.map((img, index) => (
-              <div key={index} className="preview-item">
-              {img.type === "video" ? (
-               <video muted controls>
-              <source src={img.imageUrl} />
-            </video>
-          ) : (
-            <img src={img.imageUrl} alt={`Preview ${index + 1}`} />
-          )}
+            {formData.images.length > 0 && (
+              <div className="modal-hero">
+                {formData.images[0].type === "video" ? (
+                  <video autoPlay muted loop playsInline controls>
+                    <source src={formData.images[0].imageUrl} />
+                  </video>
+                ) : (
+                  <img src={formData.images[0].imageUrl} alt={formData.title} />
+                )}
+              </div>
+            )}
 
-          <span className="preview-label">
-            {index === 0 ? "Hero Media" : `Media ${index + 1}`}
-          </span>
-
-          <button
-            type="button"
-            className="remove-preview-btn"
-            onClick={() => handleRemoveFile(index)}
-          >
-            ×
-          </button>
-        </div>
-      ))}
-    </div>
-    </div>
-)}
-
-            {/* Header */}
             <div className="modal-header">
               <div className="modal-header-content">
-                <h2>{formData.title}</h2>
+                <h2>{formData.title || "Project Title"}</h2>
                 {formData.shortDesc && <p>{formData.shortDesc}</p>}
               </div>
               <button className="get-quote-btn">Get a Quote</button>
             </div>
 
-            {/* Content */}
             <div className="modal-zigzag">
               <div className="zig-row">
                 <div className="zig-card no-media">
@@ -236,7 +247,8 @@ const handleRemoveFile = (indexToRemove) => {
                     <h3>Project Overview</h3>
                     <div className="zig-text-content">
                       <p>
-                        {formData.description || "Project description will appear here."}
+                        {formData.description ||
+                          "Project description will appear here."}
                       </p>
                     </div>
                   </div>
@@ -244,7 +256,6 @@ const handleRemoveFile = (indexToRemove) => {
               </div>
             </div>
 
-            {/* Gallery = باقي الصور بعد أول صورة */}
             {formData.images.length > 1 && (
               <div className="modal-gallery-wrap">
                 <h3 className="gallery-title">Project Images</h3>
@@ -253,7 +264,7 @@ const handleRemoveFile = (indexToRemove) => {
                     <div key={i} className="gallery-item">
                       {img.type === "video" ? (
                         <video controls muted playsInline>
-                          <source src={img.imageUrl} type="video/mp4" />
+                          <source src={img.imageUrl} />
                         </video>
                       ) : (
                         <img src={img.imageUrl} alt={`Preview ${i + 2}`} />
@@ -275,11 +286,15 @@ const handleRemoveFile = (indexToRemove) => {
         <div className="add-project-container">
           <div className="form-header">
             <h1>Add New Project</h1>
-            <p>Create a new project with multiple images. The first uploaded file will be the hero.</p>
+            <p>
+              Create a new project with multiple images. The first uploaded file
+              will be the hero.
+            </p>
             <button
               className="btn-secondary"
               onClick={() => setPreviewMode(true)}
               disabled={!formData.title}
+              type="button"
             >
               Preview Project
             </button>
@@ -296,7 +311,6 @@ const handleRemoveFile = (indexToRemove) => {
                   name="title"
                   value={formData.title}
                   onChange={handleInputChange}
-                  required
                   placeholder="Enter project title"
                 />
               </div>
@@ -343,7 +357,8 @@ const handleRemoveFile = (indexToRemove) => {
             <div className="form-section">
               <h3>Project Description</h3>
               <p className="form-help">
-                Write your description with sections. Use headings ending with ":" and bullet points with "-".
+                Write your description with sections. Use headings ending with
+                ":" and bullet points with "-".
               </p>
 
               <div className="form-group">
@@ -352,7 +367,6 @@ const handleRemoveFile = (indexToRemove) => {
                   name="description"
                   value={formData.description}
                   onChange={handleInputChange}
-                  required
                   rows="15"
                   placeholder={`Project Overview:
 
@@ -367,7 +381,11 @@ Technical Details:
                 />
               </div>
 
-              <button type="button" className="btn-secondary" onClick={addSection}>
+              <button
+                type="button"
+                className="btn-secondary"
+                onClick={addSection}
+              >
                 Add Section Template
               </button>
             </div>
@@ -375,7 +393,8 @@ Technical Details:
             <div className="form-section">
               <h3>Project Images & Media</h3>
               <p className="form-help">
-                You can upload multiple images/videos. The first uploaded file will be used as the hero image.
+                You can upload multiple images/videos. The first uploaded file
+                will be used as the hero image.
               </p>
 
               <div className="form-group">
@@ -385,7 +404,6 @@ Technical Details:
                   multiple
                   accept="image/*,video/*"
                   onChange={handleImageChange}
-                  required
                 />
                 <small>Supported formats: JPG, PNG, MP4, WebM</small>
               </div>
@@ -411,6 +429,14 @@ Technical Details:
                             ? `Video ${index + 1}`
                             : `Image ${index + 1}`}
                         </span>
+
+                        <button
+                          type="button"
+                          className="remove-preview-btn"
+                          onClick={() => handleRemoveFile(index)}
+                        >
+                          ×
+                        </button>
                       </div>
                     ))}
                   </div>
