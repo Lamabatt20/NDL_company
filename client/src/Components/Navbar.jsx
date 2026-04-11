@@ -40,7 +40,7 @@ function Navbar() {
   const isEmbeddedPage = location.pathname.startsWith("/embedded");
   const isMechanicalPage = location.pathname.startsWith("/mechanical");
   const isCareersPage = location.pathname === "/careers";
-  const isContactPage = location.pathname === "/contact" || location.pathname === "/get-quote";
+  const isContactPage = location.pathname === "/contact" || location.pathname === "/get-a-quote";
   const isAboutPage = location.pathname === "/about";
   const hasHeroPage = isHome || isEmbeddedPage || isMechanicalPage || isCareersPage || isContactPage || isAboutPage;
 

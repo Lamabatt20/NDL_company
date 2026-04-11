@@ -1,19 +1,20 @@
 import React from "react";
-import "./EmbeddedHero.css";
+import "./MechanicalHero.css";
 
-export default function EmbeddedHero({ activeService, services }) {
+export default function MechanicalHero({ activeService, services }) {
   const service = services[activeService] || services.home;
 
   return (
     <section
-      className="embedded-hero"
+      className="mechanical-hero"
       style={{ backgroundImage: `url(${service.heroImage})` }}
     >
-      <div className="embedded-hero-overlay"></div>
+      <div className="mechanical-hero-overlay"></div>
 
-      <div className="embedded-hero-content">
-        <h1>{services[activeService].heading}</h1>
-        <p>{services[activeService].description}</p>
+      <div className="mechanical-hero-content">
+        <span className="mechanical-hero-label">Mechanical Designs</span>
+        <h1>{service.heading}</h1>
+        <p>{service.description}</p>
       </div>
     </section>
   );

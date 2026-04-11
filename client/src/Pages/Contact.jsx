@@ -1,6 +1,6 @@
 import React from "react";
 import "./Contact.css";
-import heroImage from "../assets/images/6852140_28535.jpg";
+import heroImage from "../assets/images/co.png";
 import {
   FaLinkedinIn,
   FaFacebookF,
@@ -14,10 +14,43 @@ export default function Contact() {
   return (
     <div className="contact-page">
       {/* HERO */}
-      <section className="contact-hero">
-        <img src={heroImage} alt="Contact Us" />
-        <div className="contact-hero-overlay">
-          <h1>Contact Us</h1>
+      <section className="contact-hero-new">
+        <div className="hero-shape hero-shape-1"></div>
+        <div className="hero-shape hero-shape-2"></div>
+
+        <div className="contact-hero-container">
+          
+          {/* LEFT TEXT */}
+          <div className="contact-hero-text">
+            <span className="contact-label">CONTACT NDL</span>
+
+            <h1>
+              Let’s <span>Connect</span>
+              <br />
+              And Build Something Great
+            </h1>
+
+            <p>
+              Whether you have a question, project idea, or collaboration opportunity,
+              our team is ready to help you turn your vision into reality.
+            </p>
+
+            <button
+              onClick={() =>
+                window.scrollTo({ top: 600, behavior: "smooth" })
+              }
+            >
+              Get in Touch
+            </button>
+          </div>
+
+          {/* RIGHT IMAGE */}
+          <div className="contact-hero-image">
+            <div className="contact-hero-image-wrap">
+              <img src={heroImage} alt="Contact Illustration" />
+            </div>
+          </div>
+
         </div>
       </section>
 

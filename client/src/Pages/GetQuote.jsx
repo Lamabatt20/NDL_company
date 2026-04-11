@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import "./Contact.css";
-import heroImage from "../assets/images/6852140_28535.jpg";
+import heroImage from "../assets/images/co.png";
 import {
   FaLinkedinIn,
   FaFacebookF,
@@ -17,11 +17,41 @@ export default function GetQuote() {
 
   return (
     <div className="contact-page">
-      {/* HERO */}
-      <section className="contact-hero">
-        <img src={heroImage} alt="Get a Quote" />
-        <div className="contact-hero-overlay">
-          <h1>Get a Quote</h1>
+            {/* HERO */}
+      <section className="contact-hero-new">
+        <div className="hero-shape hero-shape-1"></div>
+        <div className="hero-shape hero-shape-2"></div>
+
+        <div className="contact-hero-container">
+          <div className="contact-hero-text">
+            <span className="contact-label">GET A QUOTE</span>
+
+            <h1>
+              Request a <span>Quote</span>
+              <br />
+              For Your Next Project
+            </h1>
+
+            <p>
+              Share your project requirements with us and receive a tailored
+              quotation based on your needs, scope, and technical goals.
+            </p>
+
+            <button
+              type="button"
+              onClick={() =>
+                window.scrollTo({ top: 700, behavior: "smooth" })
+              }
+            >
+              Start Your Request
+            </button>
+          </div>
+
+          <div className="contact-hero-image">
+            <div className="contact-hero-image-wrap">
+              <img src={heroImage} alt="Get a Quote Illustration" />
+            </div>
+          </div>
         </div>
       </section>
 

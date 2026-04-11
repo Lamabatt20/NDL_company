@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Career.css";
-import heroImage from "../assets/images/freepik_assistant_1768560101801.png";
+import heroImage from "../assets/images/career.png";
 
 export default function Career() {
   const [openJobs, setOpenJobs] = useState([]);
@@ -99,10 +99,41 @@ export default function Career() {
   return (
     <div className="career-page">
       {/* HERO */}
-      <section className="career-hero">
-        <img src={heroImage} alt="Careers" />
-        <div className="career-overlay">
-          <h1>Join Our Team</h1>
+      <section className="career-hero-new">
+        <div className="career-shape career-shape-1"></div>
+        <div className="career-shape career-shape-2"></div>
+
+        <div className="career-hero-container">
+          <div className="career-hero-text">
+            <span className="career-label">CAREERS AT NDL</span>
+
+            <h1>
+              Join Our <span>Team</span>
+              <br />
+              And Grow With Innovation
+            </h1>
+
+            <p>
+              Explore exciting opportunities to work on impactful engineering
+              solutions across embedded systems, mechanical design, and smart
+              technologies.
+            </p>
+
+            <button
+              type="button"
+              onClick={() =>
+                window.scrollTo({ top: 700, behavior: "smooth" })
+              }
+            >
+              Explore Open Roles
+            </button>
+          </div>
+
+          <div className="career-hero-image">
+            <div className="career-hero-image-wrap">
+              <img src={heroImage} alt="Careers Illustration" />
+            </div>
+          </div>
         </div>
       </section>
 

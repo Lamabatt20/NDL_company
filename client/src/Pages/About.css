@@ -154,7 +154,7 @@
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 2px;
-  color: #17477b !important;
+  color: #ed985f !important;
   text-transform: uppercase;
 }
 
@@ -193,8 +193,8 @@
 .aboutsd-btn {
   padding: 15px 30px;
   border: none;
-  background: #17477b;
-  color: #ffffff !important;
+  background: #ffffff;
+  color: #17477b;
   border-radius: 999px;
   cursor: pointer;
   font-size: 15px;
