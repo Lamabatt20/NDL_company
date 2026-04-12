@@ -1,5 +1,6 @@
 import React from "react";
 import "./EmbeddedServiceIntro.css";
+import { useLanguage } from "../context/LanguageContext";
 
 import img1 from "../assets/images/layout1.png";
 import img2 from "../assets/images/layout2.png";
@@ -11,112 +12,193 @@ import img7 from "../assets/images/layout7.png";
 
 export default function PcbLayoutIntro() {
 
+  const { language } = useLanguage();
+  const isAR = language === "ar";
+
   const sections = [
     {
-      title: "Multilayer & High-Density PCB Design",
-      text: [
-        "We design complex multilayer boards optimized for performance and compact form factors.",
-        "Our layouts are optimized for efficiency, durability, and long-term scalability."
-      ],
-      bullets: [
-        "2 to high-layer-count PCBs",
-        "High-density component placement",
-        "Controlled impedance routing",
-        "Fine-pitch and BGA packages",
-        "HDI embedded systems"
-      ],
+      title: isAR
+        ? "تصميم PCB متعدد الطبقات وعالي الكثافة"
+        : "Multilayer & High-Density PCB Design",
+      text: isAR
+        ? [
+            "نقوم بتصميم لوحات متعددة الطبقات معقدة محسّنة للأداء والحجم.",
+            "يتم تحسين التصميم لتحقيق الكفاءة والمتانة وقابلية التوسع."
+          ]
+        : [
+            "We design complex multilayer boards optimized for performance and compact form factors.",
+            "Our layouts are optimized for efficiency, durability, and long-term scalability."
+          ],
+      bullets: isAR
+        ? [
+            "لوحات من طبقتين إلى متعددة الطبقات",
+            "توزيع مكونات عالي الكثافة",
+            "توجيه بإمبيدانس مضبوط",
+            "حزم BGA و fine-pitch",
+            "أنظمة HDI"
+          ]
+        : [
+            "2 to high-layer-count PCBs",
+            "High-density component placement",
+            "Controlled impedance routing",
+            "Fine-pitch and BGA packages",
+            "HDI embedded systems"
+          ],
       image: img2
     },
 
     {
-      title: "Signal Integrity Optimization",
-      text: [
-        "We implement advanced routing practices to ensure stable performance in high-speed digital systems."
-      ],
-      bullets: [
-        "Differential pair routing",
-        "Impedance control",
-        "Length matching",
-        "Noise reduction",
-        "Crosstalk mitigation"
-      ],
+      title: isAR
+        ? "تحسين تكامل الإشارة"
+        : "Signal Integrity Optimization",
+      text: isAR
+        ? [
+            "نطبق تقنيات توجيه متقدمة لضمان أداء مستقر في الأنظمة عالية السرعة."
+          ]
+        : [
+            "We implement advanced routing practices to ensure stable performance in high-speed digital systems."
+          ],
+      bullets: isAR
+        ? [
+            "توجيه أزواج تفاضلية",
+            "تحكم بالإمبيدانس",
+            "مطابقة الأطوال",
+            "تقليل الضوضاء",
+            "تقليل التداخل"
+          ]
+        : [
+            "Differential pair routing",
+            "Impedance control",
+            "Length matching",
+            "Noise reduction",
+            "Crosstalk mitigation"
+          ],
       image: img3
     },
 
     {
-      title: "Power Distribution & Thermal Management",
-      text: [
-        "Reliable power architecture is critical to electronic system stability."
-      ],
-      bullets: [
-        "Optimized power planes",
-        "Thermal relief strategies",
-        "Wide copper pours",
-        "EMI reduction techniques"
-      ],
+      title: isAR
+        ? "توزيع الطاقة وإدارة الحرارة"
+        : "Power Distribution & Thermal Management",
+      text: isAR
+        ? [
+            "تصميم الطاقة الموثوق ضروري لاستقرار النظام."
+          ]
+        : [
+            "Reliable power architecture is critical to electronic system stability."
+          ],
+      bullets: isAR
+        ? [
+            "طبقات طاقة محسّنة",
+            "استراتيجيات تبديد الحرارة",
+            "مساحات نحاس واسعة",
+            "تقنيات تقليل EMI"
+          ]
+        : [
+            "Optimized power planes",
+            "Thermal relief strategies",
+            "Wide copper pours",
+            "EMI reduction techniques"
+          ],
       image: img4
     },
 
     {
-      title: "Manufacturing & Compliance Ready",
-      text: [
-        "Layouts are developed with full consideration of production readiness."
-      ],
-      bullets: [
-        "Design for Manufacturability (DFM)",
-        "Design for Assembly (DFA)",
-        "Design for Testing (DFT)",
-        "EMC/EMI compliance"
-      ],
+      title: isAR
+        ? "جاهزية التصنيع والتوافق"
+        : "Manufacturing & Compliance Ready",
+      text: isAR
+        ? [
+            "نأخذ جاهزية الإنتاج بعين الاعتبار أثناء التصميم."
+          ]
+        : [
+            "Layouts are developed with full consideration of production readiness."
+          ],
+      bullets: isAR
+        ? [
+            "تصميم للتصنيع DFM",
+            "تصميم للتجميع DFA",
+            "تصميم للاختبار DFT",
+            "توافق EMC/EMI"
+          ]
+        : [
+            "Design for Manufacturability (DFM)",
+            "Design for Assembly (DFA)",
+            "Design for Testing (DFT)",
+            "EMC/EMI compliance"
+          ],
       image: img5
     },
 
     {
-      title: "Engineering Workflow & Collaboration",
-      text: [
-        "Our layout engineers collaborate with hardware, firmware, and mechanical teams."
-      ],
-      bullets: [
-        "Rapid prototyping",
-        "Design revisions",
-        "Component verification",
-        "Production documentation"
-      ],
+      title: isAR
+        ? "سير العمل الهندسي والتعاون"
+        : "Engineering Workflow & Collaboration",
+      text: isAR
+        ? [
+            "يتعاون مهندسو التصميم مع فرق العتاد والبرمجيات والميكانيك."
+          ]
+        : [
+            "Our layout engineers collaborate with hardware, firmware, and mechanical teams."
+          ],
+      bullets: isAR
+        ? [
+            "نماذج أولية سريعة",
+            "تعديلات التصميم",
+            "تحقق من المكونات",
+            "توثيق الإنتاج"
+          ]
+        : [
+            "Rapid prototyping",
+            "Design revisions",
+            "Component verification",
+            "Production documentation"
+          ],
       image: img6
     }
-
   ];
 
-  const whyChooseUs = [
-    "Dedicated PCB layout specialists",
-    "Experience in complex embedded systems",
-    "Strong signal integrity expertise",
-    "Production-ready engineering workflow",
-    "Long-term engineering support"
-  ];
+  const whyChooseUs = isAR
+    ? [
+        "متخصصون في تصميم PCB",
+        "خبرة في الأنظمة المدمجة",
+        "خبرة قوية في الإشارة",
+        "جاهزية للإنتاج",
+        "دعم طويل الأمد"
+      ]
+    : [
+        "Dedicated PCB layout specialists",
+        "Experience in complex embedded systems",
+        "Strong signal integrity expertise",
+        "Production-ready engineering workflow",
+        "Long-term engineering support"
+      ];
 
   return (
-    <section className="embedded-service-page">
+    <section className="embedded-service-page" dir={isAR ? "rtl" : "ltr"}>
 
       <div className="site-container">
 
-        {/* Header */}
         <div className="service-main-header">
 
           <span className="service-label">
-            Electronics Design Service
+            {isAR ? "خدمة تصميم الإلكترونيات" : "Electronics Design Service"}
           </span>
 
-          <h2>PCB Layout Design</h2>
+          <h2>
+            {isAR ? "تصميم PCB" : "PCB Layout Design"}
+          </h2>
 
           <h3>
-            Precision Layout Engineering for High-Performance Electronics
+            {isAR
+              ? "تصميم دقيق لإلكترونيات عالية الأداء"
+              : "Precision Layout Engineering for High-Performance Electronics"}
           </h3>
 
           <p>
-            Our engineering team transforms validated schematics into optimized,
-            production-ready PCB layouts tailored for industrial, automotive,
-            and embedded applications.
+            {isAR
+              ? "نحوّل المخططات إلى تصميم PCB جاهز للإنتاج."
+              : "Our engineering team transforms validated schematics into optimized, production-ready PCB layouts tailored for industrial, automotive, and embedded applications."}
           </p>
 
           <div className="service-main-image">
@@ -125,17 +207,16 @@ export default function PcbLayoutIntro() {
 
         </div>
 
-        {/* Intro */}
         <div className="service-intro-block">
-          <h4>Advanced Layout Capabilities</h4>
+          <h4>
+            {isAR ? "قدرات تصميم متقدمة" : "Advanced Layout Capabilities"}
+          </h4>
           <p>
-            We deliver precision PCB layouts combining electrical performance,
-            compact design strategy, and manufacturing readiness.
+            {isAR
+              ? "نقدّم تصاميم PCB دقيقة تجمع الأداء والتصنيع."
+              : "We deliver precision PCB layouts combining electrical performance, compact design strategy, and manufacturing readiness."}
           </p>
         </div>
-
-
-        {/* Sections */}
 
         {sections.map((section, index) => (
 
@@ -168,18 +249,16 @@ export default function PcbLayoutIntro() {
 
         ))}
 
-
-        {/* Why Section */}
-
         <div className="service-highlight-box">
 
           <div className="service-highlight-content">
 
-            <h4>Why Nexus Design Lab?</h4>
+            <h4>{isAR ? "لماذا Nexus Design Lab؟" : "Why Nexus Design Lab?"}</h4>
 
             <p>
-              We don't just place components — we engineer layouts that ensure
-              performance, reliability, and manufacturability.
+              {isAR
+                ? "نصمم PCB يضمن الأداء والموثوقية."
+                : "We don't just place components — we engineer layouts that ensure performance, reliability, and manufacturability."}
             </p>
 
             <ul>
@@ -196,27 +275,31 @@ export default function PcbLayoutIntro() {
 
         </div>
 
-
-        {/* CTA */}
-
         <div className="service-cta">
 
-          <h4>Ready to Bring Your PCB Design to Production?</h4>
+          <h4>
+            {isAR
+              ? "جاهز لإنتاج تصميم PCB؟"
+              : "Ready to Bring Your PCB Design to Production?"}
+          </h4>
 
           <p>
-            Let our engineering team develop a precision-optimized layout that
-            ensures performance and reliability.
+            {isAR
+              ? "دعنا نصمم لك PCB احترافي."
+              : "Let our engineering team develop a precision-optimized layout that ensures performance and reliability."}
           </p>
 
           <div className="service-cta-buttons">
+
             <button type="button" className="primary-btn">
-                Request Consultation
+              {isAR ? "طلب استشارة" : "Request Consultation"}
             </button>
 
             <button type="button" className="secondary-btn">
-                Discuss Your Project
+              {isAR ? "ناقش مشروعك" : "Discuss Your Project"}
             </button>
-            </div>
+
+          </div>
 
         </div>
 

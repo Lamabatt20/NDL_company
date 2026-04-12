@@ -1,5 +1,6 @@
 import React from "react";
 import "./EmbeddedServiceIntro.css";
+import { useLanguage } from "../context/LanguageContext";
 
 import ppp1 from "../assets/images/ppp1.jpg";
 import ppp2 from "../assets/images/ppp2.webp";
@@ -9,144 +10,228 @@ import ppp5 from "../assets/images/ppp5.webp";
 import ppp6 from "../assets/images/ppp6.png";
 
 export default function IotIntro() {
+  const { language } = useLanguage();
+  const isAR = language === "ar";
+
   const sections = [
     {
-      title: "Smart Device Development",
-      text: [
-        "We design intelligent edge devices that operate reliably in real-world environments.",
-        "Each device is engineered for long-term deployment with strong focus on efficiency and durability."
-      ],
-      bullets: [
-        "Custom PCB and embedded system design",
-        "Sensor integration and data acquisition",
-        "Low-power and battery-operated systems",
-        "Industrial-grade enclosures",
-        "Secure firmware and device management"
-      ],
+      title: isAR ? "تطوير الأجهزة الذكية" : "Smart Device Development",
+      text: isAR
+        ? [
+            "نقوم بتصميم أجهزة طرفية ذكية تعمل بشكل موثوق في البيئات الواقعية.",
+            "يتم تصميم كل جهاز للاستخدام طويل الأمد مع التركيز على الكفاءة والمتانة."
+          ]
+        : [
+            "We design intelligent edge devices that operate reliably in real-world environments.",
+            "Each device is engineered for long-term deployment with strong focus on efficiency and durability."
+          ],
+      bullets: isAR
+        ? [
+            "تصميم PCB وأنظمة مدمجة مخصصة",
+            "دمج الحساسات وجمع البيانات",
+            "أنظمة منخفضة الطاقة تعمل بالبطارية",
+            "أغلفة صناعية",
+            "برمجيات آمنة وإدارة الأجهزة"
+          ]
+        : [
+            "Custom PCB and embedded system design",
+            "Sensor integration and data acquisition",
+            "Low-power and battery-operated systems",
+            "Industrial-grade enclosures",
+            "Secure firmware and device management"
+          ],
       image: ppp2
     },
+
     {
-      title: "Connectivity & Communication",
-      text: [
-        "Reliable communication is the foundation of any IoT ecosystem.",
-        "We integrate both short-range and long-range communication technologies."
-      ],
-      bullets: [
-        "Wi-Fi and Ethernet connectivity",
-        "GSM / LTE / NB-IoT modules",
-        "LoRa communication systems",
-        "CAN and RS-485 protocols",
-        "GPS tracking systems"
-      ],
+      title: isAR ? "الاتصال والتواصل" : "Connectivity & Communication",
+      text: isAR
+        ? [
+            "الاتصال الموثوق هو أساس أي نظام IoT.",
+            "نقوم بدمج تقنيات اتصال قصيرة وطويلة المدى."
+          ]
+        : [
+            "Reliable communication is the foundation of any IoT ecosystem.",
+            "We integrate both short-range and long-range communication technologies."
+          ],
+      bullets: isAR
+        ? [
+            "اتصال Wi-Fi و Ethernet",
+            "وحدات GSM / LTE / NB-IoT",
+            "أنظمة LoRa",
+            "بروتوكولات CAN و RS-485",
+            "أنظمة GPS"
+          ]
+        : [
+            "Wi-Fi and Ethernet connectivity",
+            "GSM / LTE / NB-IoT modules",
+            "LoRa communication systems",
+            "CAN and RS-485 protocols",
+            "GPS tracking systems"
+          ],
       image: ppp3
     },
+
     {
-      title: "Cloud & Data Integration",
-      text: [
-        "We connect field devices to cloud platforms to enable real-time monitoring and analytics.",
-        "Our solutions transform raw data into actionable insights."
-      ],
-      bullets: [
-        "Secure data transmission",
-        "Real-time dashboards",
-        "Remote firmware updates",
-        "Data logging and analytics",
-        "API integration with enterprise systems"
-      ],
+      title: isAR ? "تكامل السحابة والبيانات" : "Cloud & Data Integration",
+      text: isAR
+        ? [
+            "نربط الأجهزة بالسحابة لتمكين المراقبة والتحليل.",
+            "نحوّل البيانات إلى معلومات قابلة للاستخدام."
+          ]
+        : [
+            "We connect field devices to cloud platforms to enable real-time monitoring and analytics.",
+            "Our solutions transform raw data into actionable insights."
+          ],
+      bullets: isAR
+        ? [
+            "نقل بيانات آمن",
+            "لوحات تحكم فورية",
+            "تحديثات عن بعد",
+            "تحليل البيانات",
+            "تكامل API"
+          ]
+        : [
+            "Secure data transmission",
+            "Real-time dashboards",
+            "Remote firmware updates",
+            "Data logging and analytics",
+            "API integration with enterprise systems"
+          ],
       image: ppp4
     },
+
     {
-      title: "Automation & Intelligent Control",
-      text: [
-        "We go beyond monitoring by building intelligent systems capable of autonomous decision-making.",
-        "Our systems are designed to improve efficiency and reduce manual intervention."
-      ],
-      bullets: [
-        "Automated control logic",
-        "Alert and notification systems",
-        "Predictive maintenance",
-        "AI-enhanced processing",
-        "Remote system management"
-      ],
+      title: isAR ? "الأتمتة والتحكم الذكي" : "Automation & Intelligent Control",
+      text: isAR
+        ? [
+            "نقوم ببناء أنظمة قادرة على اتخاذ القرار.",
+            "نهدف لتحسين الكفاءة وتقليل التدخل اليدوي."
+          ]
+        : [
+            "We go beyond monitoring by building intelligent systems capable of autonomous decision-making.",
+            "Our systems are designed to improve efficiency and reduce manual intervention."
+          ],
+      bullets: isAR
+        ? [
+            "منطق تحكم تلقائي",
+            "أنظمة تنبيه",
+            "صيانة تنبؤية",
+            "معالجة AI",
+            "إدارة عن بعد"
+          ]
+        : [
+            "Automated control logic",
+            "Alert and notification systems",
+            "Predictive maintenance",
+            "AI-enhanced processing",
+            "Remote system management"
+          ],
       image: ppp5
     },
+
     {
-      title: "Security, Scalability & Reliability",
-      text: [
-        "All IoT systems are designed with strong emphasis on security, scalability, and long-term reliability.",
-        "We build solutions that can grow with your business and operate safely in industrial environments."
-      ],
-      bullets: [
-        "Cybersecurity best practices",
-        "Scalable architecture",
-        "Device lifecycle management",
-        "Industrial reliability standards",
-        "Efficient power management"
-      ],
+      title: isAR
+        ? "الأمان وقابلية التوسع والموثوقية"
+        : "Security, Scalability & Reliability",
+      text: isAR
+        ? [
+            "نصمم الأنظمة مع التركيز على الأمان والتوسع.",
+            "نطور حلول تنمو مع عملك."
+          ]
+        : [
+            "All IoT systems are designed with strong emphasis on security, scalability, and long-term reliability.",
+            "We build solutions that can grow with your business and operate safely in industrial environments."
+          ],
+      bullets: isAR
+        ? [
+            "أمن سيبراني",
+            "بنية قابلة للتوسع",
+            "إدارة الأجهزة",
+            "معايير صناعية",
+            "إدارة الطاقة"
+          ]
+        : [
+            "Cybersecurity best practices",
+            "Scalable architecture",
+            "Device lifecycle management",
+            "Industrial reliability standards",
+            "Efficient power management"
+          ],
       image: ppp6
     }
   ];
 
-  const whyChooseUs = [
-    "Full-stack IoT development capability",
-    "Integrated hardware and firmware expertise",
-    "Experience in industrial systems",
-    "Secure and scalable architecture",
-    "Long-term technical partnership"
-  ];
+  const whyChooseUs = isAR
+    ? [
+        "تطوير IoT متكامل",
+        "خبرة بالعتاد والبرمجيات",
+        "خبرة صناعية",
+        "أنظمة آمنة وقابلة للتوسع",
+        "شراكة طويلة الأمد"
+      ]
+    : [
+        "Full-stack IoT development capability",
+        "Integrated hardware and firmware expertise",
+        "Experience in industrial systems",
+        "Secure and scalable architecture",
+        "Long-term technical partnership"
+      ];
 
   return (
-    <section className="embedded-service-page">
+    <section className="embedded-service-page" dir={isAR ? "rtl" : "ltr"}>
       <div className="site-container">
 
-        {/* HEADER */}
         <div className="service-main-header">
 
           <span className="service-label">
-            IoT Engineering Service
+            {isAR ? "خدمة IoT" : "IoT Engineering Service"}
           </span>
 
-          <h2>IoT Smart Solutions</h2>
+          <h2>
+            {isAR ? "حلول IoT الذكية" : "IoT Smart Solutions"}
+          </h2>
 
           <h3>
-            Intelligent Connected Systems Built for the Real World
+            {isAR
+              ? "أنظمة ذكية مترابطة"
+              : "Intelligent Connected Systems Built for the Real World"}
           </h3>
 
           <p>
-            We design and develop secure, scalable IoT solutions that connect
-            devices, systems, and data into intelligent platforms.
+            {isAR
+              ? "نصمم حلول IoT تربط الأجهزة والأنظمة."
+              : "We design and develop secure, scalable IoT solutions that connect devices, systems, and data into intelligent platforms."}
           </p>
 
           <p>
-            Our engineering team integrates hardware, embedded software,
-            communication technologies, and cloud infrastructure to create
-            reliable smart systems for industrial and commercial applications.
+            {isAR
+              ? "نقوم بدمج العتاد والبرمجيات لإنشاء أنظمة ذكية."
+              : "Our engineering team integrates hardware, embedded software, communication technologies, and cloud infrastructure to create reliable smart systems for industrial and commercial applications."}
           </p>
 
           <div className="service-main-image">
-            <img src={ppp1} alt="IoT smart systems"/>
+            <img src={ppp1} alt="" />
           </div>
 
         </div>
 
-
-        {/* INTRO */}
         <div className="service-intro-block">
-          <h4>End-to-End IoT Architecture</h4>
+          <h4>
+            {isAR ? "بنية IoT متكاملة" : "End-to-End IoT Architecture"}
+          </h4>
           <p>
-            We deliver complete IoT ecosystems that combine smart devices,
-            connectivity, cloud platforms, and intelligent control systems.
+            {isAR
+              ? "نقدم أنظمة IoT كاملة."
+              : "We deliver complete IoT ecosystems that combine smart devices, connectivity, cloud platforms, and intelligent control systems."}
           </p>
         </div>
 
-
-        {/* SECTIONS */}
         {sections.map((section, index) => (
           <div
             key={index}
             className={`service-section ${index % 2 !== 0 ? "reverse" : ""}`}
           >
-
             <div className="service-section-text">
 
               <h4>{section.title}</h4>
@@ -164,23 +249,22 @@ export default function IotIntro() {
             </div>
 
             <div className="service-section-image">
-              <img src={section.image} alt={section.title}/>
+              <img src={section.image} alt={section.title} />
             </div>
 
           </div>
         ))}
 
-
-        {/* WHY */}
         <div className="service-highlight-box">
 
           <div className="service-highlight-content">
 
-            <h4>Why Nexus Design Lab?</h4>
+            <h4>{isAR ? "لماذا Nexus Design Lab؟" : "Why Nexus Design Lab?"}</h4>
 
             <p>
-              We don’t just connect devices — we build intelligent ecosystems
-              that enable smarter decision-making.
+              {isAR
+                ? "نحن لا نربط الأجهزة فقط، بل نبني أنظمة ذكية."
+                : "We don’t just connect devices — we build intelligent ecosystems that enable smarter decision-making."}
             </p>
 
             <ul>
@@ -192,34 +276,39 @@ export default function IotIntro() {
           </div>
 
           <div className="service-highlight-image">
-            <img src={ppp6} alt="IoT engineering"/>
+            <img src={ppp6} alt="" />
           </div>
 
         </div>
 
-
-        {/* CTA */}
         <div className="service-cta">
 
-          <h4>Ready to Build a Connected Intelligent System?</h4>
+          <h4>
+            {isAR
+              ? "جاهز لبناء نظام ذكي؟"
+              : "Ready to Build a Connected Intelligent System?"}
+          </h4>
 
           <p>
-            Partner with Nexus Design Lab to design scalable IoT solutions
-            tailored to your operational needs.
+            {isAR
+              ? "صمم نظام IoT مخصص مع فريقنا."
+              : "Partner with Nexus Design Lab to design scalable IoT solutions tailored to your operational needs."}
           </p>
 
           <p>
-            Let’s transform your data into intelligent systems.
+            {isAR
+              ? "حوّل بياناتك إلى أنظمة ذكية."
+              : "Let’s transform your data into intelligent systems."}
           </p>
 
           <div className="service-cta-buttons">
 
             <button className="primary-btn">
-              Start Your IoT Project
+              {isAR ? "ابدأ مشروعك" : "Start Your IoT Project"}
             </button>
 
             <button className="secondary-btn">
-              Discuss Your System
+              {isAR ? "ناقش نظامك" : "Discuss Your System"}
             </button>
 
           </div>

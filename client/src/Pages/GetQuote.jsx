@@ -10,31 +10,39 @@ import {
   FaEnvelope,
   FaClock,
 } from "react-icons/fa";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function GetQuote() {
   const location = useLocation();
   const projectName = location.state?.projectName || "";
 
+  const { language } = useLanguage();
+  const isAR = language === "ar";
+
   return (
     <div className="contact-page">
-            {/* HERO */}
+      {/* HERO */}
       <section className="contact-hero-new">
         <div className="hero-shape hero-shape-1"></div>
         <div className="hero-shape hero-shape-2"></div>
 
         <div className="contact-hero-container">
           <div className="contact-hero-text">
-            <span className="contact-label">GET A QUOTE</span>
+            <span className="contact-label">
+              {isAR ? "طلب عرض سعر" : "GET A QUOTE"}
+            </span>
 
             <h1>
-              Request a <span>Quote</span>
+              {isAR ? "اطلب " : "Request a "}
+              <span>{isAR ? "عرض سعر" : "Quote"}</span>
               <br />
-              For Your Next Project
+              {isAR ? "لمشروعك القادم" : "For Your Next Project"}
             </h1>
 
             <p>
-              Share your project requirements with us and receive a tailored
-              quotation based on your needs, scope, and technical goals.
+              {isAR
+                ? "شارك تفاصيل مشروعك معنا وسنقدم لك عرض سعر مناسب حسب احتياجاتك ونطاق العمل."
+                : "Share your project requirements with us and receive a tailored quotation based on your needs, scope, and technical goals."}
             </p>
 
             <button
@@ -43,13 +51,16 @@ export default function GetQuote() {
                 window.scrollTo({ top: 700, behavior: "smooth" })
               }
             >
-              Start Your Request
+              {isAR ? "ابدأ الطلب" : "Start Your Request"}
             </button>
           </div>
 
           <div className="contact-hero-image">
             <div className="contact-hero-image-wrap">
-              <img src={heroImage} alt="Get a Quote Illustration" />
+              <img
+                src={heroImage}
+                alt={isAR ? "طلب عرض سعر" : "Get a Quote"}
+              />
             </div>
           </div>
         </div>
@@ -57,37 +68,37 @@ export default function GetQuote() {
 
       {/* CONTENT */}
       <section className="contact-content">
-        {/* LEFT SIDE – FORM */}
+        {/* LEFT */}
         <div className="left-column">
           <div className="contact-form card">
-            <h2>Request a Quote</h2>
+            <h2>{isAR ? "طلب عرض سعر" : "Request a Quote"}</h2>
+
             <p>
-              Share your project details with us and we’ll provide you with a
-              tailored quotation.
+              {isAR
+                ? "أدخل تفاصيل مشروعك وسنقوم بإرسال عرض مناسب لك."
+                : "Share your project details with us and we’ll provide you with a tailored quotation."}
             </p>
 
             <form>
-              {/* Full Name + Email */}
               <div className="form-row">
                 <div className="form-group">
                   <label>
-                    Full Name <span>*</span>
+                    {isAR ? "الاسم الكامل" : "Full Name"} <span>*</span>
                   </label>
                   <input type="text" required />
                 </div>
 
                 <div className="form-group">
                   <label>
-                    Email Address <span>*</span>
+                    {isAR ? "البريد الإلكتروني" : "Email Address"} <span>*</span>
                   </label>
                   <input type="email" required />
                 </div>
               </div>
 
-              {/* Phone */}
               <div className="form-group phone-group">
                 <label>
-                  Phone Number <span>*</span>
+                  {isAR ? "رقم الهاتف" : "Phone Number"} <span>*</span>
                 </label>
                 <div className="phone-row">
                   <select>
@@ -99,107 +110,83 @@ export default function GetQuote() {
                 </div>
               </div>
 
-              {/* Project Name (auto-filled) */}
               <div className="form-group">
                 <label>
-                  Project Name <span>*</span>
+                  {isAR ? "اسم المشروع" : "Project Name"} <span>*</span>
                 </label>
-                <input
-                  type="text"
-                  value={projectName}
-                  readOnly
-                />
+                <input type="text" value={projectName} readOnly />
               </div>
 
-              {/* Budget */}
               <div className="form-group">
                 <label>
-                  Estimated Budget <span>*</span>
+                  {isAR ? "الميزانية المتوقعة" : "Estimated Budget"} <span>*</span>
                 </label>
                 <input
                   type="number"
-                  placeholder="e.g. 5000 USD"
+                  placeholder={isAR ? "مثال: 5000 دولار" : "e.g. 5000 USD"}
                   required
                 />
               </div>
 
-              {/* Message */}
               <div className="form-group">
                 <label>
-                  Message <span>*</span>
+                  {isAR ? "الرسالة" : "Message"} <span>*</span>
                 </label>
                 <textarea rows="5" required />
               </div>
 
-              <button type="submit">Submit Request</button>
+              <button type="submit">
+                {isAR ? "إرسال الطلب" : "Submit Request"}
+              </button>
             </form>
           </div>
         </div>
 
-        {/* RIGHT SIDE – SAME AS CONTACT */}
+        {/* RIGHT */}
         <div className="right-column">
-          {/* CONTACT INFO */}
           <div className="contact-info card">
-            <h3>Contact Information</h3>
+            <h3>{isAR ? "معلومات التواصل" : "Contact Information"}</h3>
 
             <div className="info-item">
-              <div className="info-icon location">
-                <FaMapMarkerAlt />
-              </div>
+              <FaMapMarkerAlt />
               <div>
-                <strong>Location</strong>
-                <p>Ramallah, Palestine</p>
+                <strong>{isAR ? "الموقع" : "Location"}</strong>
+                <p>{isAR ? "رام الله - فلسطين" : "Ramallah, Palestine"}</p>
               </div>
             </div>
 
             <div className="info-item">
-              <div className="info-icon email">
-                <FaEnvelope />
-              </div>
+              <FaEnvelope />
               <div>
-                <strong>Email</strong>
+                <strong>{isAR ? "البريد" : "Email"}</strong>
                 <p>info@NDL.com</p>
               </div>
             </div>
 
             <div className="social-icons">
-              <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">
-                <FaLinkedinIn />
-              </a>
-              <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
-                <FaFacebookF />
-              </a>
-              <a
-                href="https://wa.me/970599000000"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <FaWhatsapp />
-              </a>
+              <FaLinkedinIn />
+              <FaFacebookF />
+              <FaWhatsapp />
             </div>
           </div>
 
-          {/* BUSINESS HOURS */}
           <div className="business-hours card">
             <h3>
-              <span className="clock-icon">
-                <FaClock />
-              </span>
-              Business Hours
+              <FaClock /> {isAR ? "ساعات العمل" : "Business Hours"}
             </h3>
 
             <div className="hours-row">
-              <span>Sunday - Thursday</span>
-              <strong>9:00 AM - 5:00 PM</strong>
+              <span>{isAR ? "الأحد - الخميس" : "Sunday - Thursday"}</span>
+              <strong>9:00 - 5:00</strong>
             </div>
 
             <div className="hours-row">
-              <span>Friday - Saturday</span>
-              <strong>Closed</strong>
+              <span>{isAR ? "الجمعة - السبت" : "Friday - Saturday"}</span>
+              <strong>{isAR ? "مغلق" : "Closed"}</strong>
             </div>
 
             <div className="response-time">
-              Response Time: Within 24 hours during business days
+              {isAR ? "الرد خلال 24 ساعة" : "Response within 24 hours"}
             </div>
           </div>
         </div>

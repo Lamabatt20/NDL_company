@@ -1,5 +1,6 @@
 import React from "react";
 import "./EmbeddedServiceIntro.css";
+import { useLanguage } from "../context/LanguageContext";
 
 import eep1 from "../assets/images/eep1.png";
 import eep2 from "../assets/images/eep2.jpg";
@@ -9,142 +10,232 @@ import eep5 from "../assets/images/eep5.jpg";
 import eep6 from "../assets/images/eep6.jpg";
 
 export default function AluminumIntro() {
+  const { language } = useLanguage();
+  const isAR = language === "ar";
+
   const sections = [
     {
-      title: "Engineering for Strength & Efficiency",
-      text: [
-        "Aluminum structures require precise design to ensure rigidity, stability, and long-term durability.",
-        "Our team analyzes load conditions, environmental exposure, and operational demands to create reliable structural frameworks."
-      ],
-      bullets: [
-        "Custom aluminum frames and support systems",
-        "Modular structural assemblies",
-        "Equipment mounting platforms",
-        "Machine base structures",
-        "Lightweight industrial enclosures"
-      ],
+      title: isAR
+        ? "هندسة القوة والكفاءة"
+        : "Engineering for Strength & Efficiency",
+      text: isAR
+        ? [
+            "تتطلب الهياكل المصنوعة من الألمنيوم تصميمًا دقيقًا لضمان الصلابة والاستقرار والمتانة طويلة الأمد.",
+            "يقوم فريقنا بتحليل الأحمال والظروف البيئية ومتطلبات التشغيل لبناء هياكل موثوقة."
+          ]
+        : [
+            "Aluminum structures require precise design to ensure rigidity, stability, and long-term durability.",
+            "Our team analyzes load conditions, environmental exposure, and operational demands to create reliable structural frameworks."
+          ],
+      bullets: isAR
+        ? [
+            "هياكل ألمنيوم مخصصة",
+            "أنظمة تركيب معيارية",
+            "منصات تثبيت المعدات",
+            "هياكل قواعد الماكينات",
+            "أغلفة صناعية خفيفة الوزن"
+          ]
+        : [
+            "Custom aluminum frames and support systems",
+            "Modular structural assemblies",
+            "Equipment mounting platforms",
+            "Machine base structures",
+            "Lightweight industrial enclosures"
+          ],
       image: eep2,
-      alt: "Aluminum structural design"
+      alt: isAR ? "تصميم هياكل ألمنيوم" : "Aluminum structural design"
     },
     {
-      title: "Structural Analysis & Optimization",
-      text: [
-        "We apply engineering principles to ensure every structure performs under real-world conditions.",
-        "Each design is optimized to balance strength, weight, and efficiency."
-      ],
-      bullets: [
-        "Load and stress distribution",
-        "Deflection and vibration analysis",
-        "Reinforcement strategies",
-        "Joint and fastening optimization",
-        "Thermal expansion considerations"
-      ],
+      title: isAR
+        ? "التحليل الهيكلي والتحسين"
+        : "Structural Analysis & Optimization",
+      text: isAR
+        ? [
+            "نطبق مبادئ هندسية لضمان أداء كل هيكل في الظروف الواقعية.",
+            "يتم تحسين كل تصميم لتحقيق التوازن بين القوة والوزن والكفاءة."
+          ]
+        : [
+            "We apply engineering principles to ensure every structure performs under real-world conditions.",
+            "Each design is optimized to balance strength, weight, and efficiency."
+          ],
+      bullets: isAR
+        ? [
+            "تحليل توزيع الأحمال والإجهاد",
+            "تحليل الانحراف والاهتزاز",
+            "استراتيجيات التعزيز",
+            "تحسين الوصلات والتثبيت",
+            "اعتبارات التمدد الحراري"
+          ]
+        : [
+            "Load and stress distribution",
+            "Deflection and vibration analysis",
+            "Reinforcement strategies",
+            "Joint and fastening optimization",
+            "Thermal expansion considerations"
+          ],
       image: eep3,
-      alt: "Structural analysis"
+      alt: isAR ? "التحليل الهيكلي" : "Structural analysis"
     },
     {
-      title: "Designed for Fabrication & Assembly",
-      text: [
-        "Our aluminum structures are designed with manufacturing efficiency in mind.",
-        "We ensure that every design is practical to fabricate and easy to assemble."
-      ],
-      bullets: [
-        "Extrusion profile selection",
-        "CNC machining compatibility",
-        "Welding and fastening techniques",
-        "Tolerance management",
-        "Ease of maintenance"
-      ],
+      title: isAR
+        ? "مصمم للتصنيع والتجميع"
+        : "Designed for Fabrication & Assembly",
+      text: isAR
+        ? [
+            "تم تصميم هياكل الألمنيوم لدينا مع مراعاة الكفاءة التصنيعية.",
+            "نضمن أن يكون كل تصميم عمليًا في التصنيع وسهل التجميع."
+          ]
+        : [
+            "Our aluminum structures are designed with manufacturing efficiency in mind.",
+            "We ensure that every design is practical to fabricate and easy to assemble."
+          ],
+      bullets: isAR
+        ? [
+            "اختيار مقاطع البروفايل",
+            "التوافق مع ماكينات CNC",
+            "تقنيات اللحام والتثبيت",
+            "إدارة التفاوتات",
+            "سهولة الصيانة"
+          ]
+        : [
+            "Extrusion profile selection",
+            "CNC machining compatibility",
+            "Welding and fastening techniques",
+            "Tolerance management",
+            "Ease of maintenance"
+          ],
       image: eep4,
-      alt: "Fabrication and assembly"
+      alt: isAR ? "التصنيع والتجميع" : "Fabrication and assembly"
     },
     {
-      title: "Integrated System Development",
-      text: [
-        "Aluminum structures often serve as the backbone of complex systems.",
-        "We collaborate with electronics and embedded teams to ensure full system integration."
-      ],
-      bullets: [
-        "Control unit integration",
-        "Sensor mounting",
-        "Cooling and ventilation systems",
-        "Automation components",
-        "Mechanical motion systems"
-      ],
+      title: isAR
+        ? "تطوير الأنظمة المتكاملة"
+        : "Integrated System Development",
+      text: isAR
+        ? [
+            "غالبًا ما تشكل هياكل الألمنيوم العمود الفقري للأنظمة المعقدة.",
+            "نتعاون مع فرق الإلكترونيات والأنظمة المدمجة لضمان التكامل الكامل للنظام."
+          ]
+        : [
+            "Aluminum structures often serve as the backbone of complex systems.",
+            "We collaborate with electronics and embedded teams to ensure full system integration."
+          ],
+      bullets: isAR
+        ? [
+            "دمج وحدات التحكم",
+            "تثبيت الحساسات",
+            "أنظمة التبريد والتهوية",
+            "مكونات الأتمتة",
+            "أنظمة الحركة الميكانيكية"
+          ]
+        : [
+            "Control unit integration",
+            "Sensor mounting",
+            "Cooling and ventilation systems",
+            "Automation components",
+            "Mechanical motion systems"
+          ],
       image: eep5,
-      alt: "System integration"
+      alt: isAR ? "تكامل الأنظمة" : "System integration"
     },
     {
-      title: "Built for Industrial Performance",
-      text: [
-        "Our designs are engineered for real-world environments where durability and efficiency are critical.",
-        "We deliver structures that are modular, scalable, and production-ready."
-      ],
-      bullets: [
-        "Industrial-grade design approach",
-        "Lightweight yet strong structures",
-        "Scalable modular systems",
-        "Long-term reliability",
-        "Cost-efficient solutions"
-      ],
+      title: isAR
+        ? "مصمم للأداء الصناعي"
+        : "Built for Industrial Performance",
+      text: isAR
+        ? [
+            "تم تصميم حلولنا للعمل في البيئات الواقعية حيث تكون المتانة والكفاءة عاملين أساسيين.",
+            "نقدم هياكل معيارية قابلة للتوسع وجاهزة للإنتاج."
+          ]
+        : [
+            "Our designs are engineered for real-world environments where durability and efficiency are critical.",
+            "We deliver structures that are modular, scalable, and production-ready."
+          ],
+      bullets: isAR
+        ? [
+            "منهجية تصميم بمعايير صناعية",
+            "هياكل خفيفة ولكن قوية",
+            "أنظمة معيارية قابلة للتوسع",
+            "اعتمادية طويلة الأمد",
+            "حلول فعالة من حيث التكلفة"
+          ]
+        : [
+            "Industrial-grade design approach",
+            "Lightweight yet strong structures",
+            "Scalable modular systems",
+            "Long-term reliability",
+            "Cost-efficient solutions"
+          ],
       image: eep6,
-      alt: "Industrial aluminum structures"
+      alt: isAR ? "هياكل ألمنيوم صناعية" : "Industrial aluminum structures"
     }
   ];
 
-  const whyChooseUs = [
-    "Strong structural engineering expertise",
-    "Practical manufacturing knowledge",
-    "Lightweight and efficient design philosophy",
-    "Integrated system development approach",
-    "Reliable long-term solutions"
-  ];
+  const whyChooseUs = isAR
+    ? [
+        "خبرة قوية في الهندسة الهيكلية",
+        "معرفة عملية بالتصنيع",
+        "فلسفة تصميم خفيفة وفعالة",
+        "منهجية تطوير أنظمة متكاملة",
+        "حلول موثوقة طويلة الأمد"
+      ]
+    : [
+        "Strong structural engineering expertise",
+        "Practical manufacturing knowledge",
+        "Lightweight and efficient design philosophy",
+        "Integrated system development approach",
+        "Reliable long-term solutions"
+      ];
 
   return (
-    <section className="embedded-service-page">
+    <section className="embedded-service-page" dir={isAR ? "rtl" : "ltr"}>
       <div className="site-container">
 
-        {/* HEADER */}
         <div className="service-main-header">
 
           <span className="service-label">
-            Mechanical Design Service
+            {isAR ? "خدمة التصميم الميكانيكي" : "Mechanical Design Service"}
           </span>
 
-          <h2>Aluminum Structure Design</h2>
+          <h2>
+            {isAR ? "تصميم الهياكل الألمنيوم" : "Aluminum Structure Design"}
+          </h2>
 
           <h3>
-            Lightweight Structural Solutions Engineered for Performance
+            {isAR
+              ? "حلول هيكلية خفيفة مصممة للأداء"
+              : "Lightweight Structural Solutions Engineered for Performance"}
           </h3>
 
           <p>
-            We design high-strength aluminum structures tailored for industrial
-            systems, automation platforms, and mechanical assemblies.
+            {isAR
+              ? "نقوم بتصميم هياكل ألمنيوم عالية المتانة مخصصة للأنظمة الصناعية ومنصات الأتمتة والتجميعات الميكانيكية."
+              : "We design high-strength aluminum structures tailored for industrial systems, automation platforms, and mechanical assemblies."}
           </p>
 
           <p>
-            Our engineering approach focuses on achieving the optimal balance
-            between strength, weight reduction, and manufacturability.
+            {isAR
+              ? "يركز نهجنا الهندسي على تحقيق التوازن الأمثل بين القوة وتقليل الوزن وقابلية التصنيع."
+              : "Our engineering approach focuses on achieving the optimal balance between strength, weight reduction, and manufacturability."}
           </p>
 
           <div className="service-main-image">
-            <img src={eep1} alt="Aluminum structures"/>
+            <img src={eep1} alt={isAR ? "هياكل ألمنيوم" : "Aluminum structures"} />
           </div>
 
         </div>
 
-
-        {/* INTRO */}
         <div className="service-intro-block">
-          <h4>Precision Structural Engineering</h4>
+          <h4>
+            {isAR ? "هندسة هيكلية دقيقة" : "Precision Structural Engineering"}
+          </h4>
           <p>
-            We develop aluminum structures that are efficient, modular, and
-            production-ready for demanding industrial environments.
+            {isAR
+              ? "نطوّر هياكل ألمنيوم فعالة ومعيارية وجاهزة للإنتاج للبيئات الصناعية المتطلبة."
+              : "We develop aluminum structures that are efficient, modular, and production-ready for demanding industrial environments."}
           </p>
         </div>
 
-
-        {/* SECTIONS */}
         {sections.map((section, index) => (
           <div
             key={index}
@@ -168,28 +259,26 @@ export default function AluminumIntro() {
             </div>
 
             <div className="service-section-image">
-              <img src={section.image} alt={section.alt}/>
+              <img src={section.image} alt={section.alt} />
             </div>
 
           </div>
         ))}
 
-
-        {/* WHY */}
         <div className="service-highlight-box">
 
           <div className="service-highlight-content">
 
-            <h4>Why Nexus Design Lab?</h4>
+            <h4>{isAR ? "لماذا Nexus Design Lab؟" : "Why Nexus Design Lab?"}</h4>
 
             <p>
-              Our engineering team combines structural analysis expertise with
-              practical manufacturing knowledge to deliver high-performance
-              aluminum systems.
+              {isAR
+                ? "يجمع فريقنا الهندسي بين خبرة التحليل الهيكلي والمعرفة العملية بالتصنيع لتقديم أنظمة ألمنيوم عالية الأداء."
+                : "Our engineering team combines structural analysis expertise with practical manufacturing knowledge to deliver high-performance aluminum systems."}
             </p>
 
             <ul>
-              {whyChooseUs.map((item,index)=>(
+              {whyChooseUs.map((item, index) => (
                 <li key={index}>{item}</li>
               ))}
             </ul>
@@ -197,34 +286,39 @@ export default function AluminumIntro() {
           </div>
 
           <div className="service-highlight-image">
-            <img src={eep6} alt="Aluminum engineering"/>
+            <img src={eep6} alt={isAR ? "الهندسة الألمنيوم" : "Aluminum engineering"} />
           </div>
 
         </div>
 
-
-        {/* CTA */}
         <div className="service-cta">
 
-          <h4>Looking for a Lightweight Structural Solution?</h4>
+          <h4>
+            {isAR
+              ? "هل تبحث عن حل هيكلي خفيف الوزن؟"
+              : "Looking for a Lightweight Structural Solution?"}
+          </h4>
 
           <p>
-            Partner with Nexus Design Lab to develop precision-engineered
-            aluminum structures tailored to your application.
+            {isAR
+              ? "تعاون مع Nexus Design Lab لتطوير هياكل ألمنيوم مصممة بدقة ومخصصة لتطبيقك."
+              : "Partner with Nexus Design Lab to develop precision-engineered aluminum structures tailored to your application."}
           </p>
 
           <p>
-            Let’s design systems built for strength, efficiency, and scalability.
+            {isAR
+              ? "لنصمم أنظمة مبنية على القوة والكفاءة وقابلية التوسع."
+              : "Let’s design systems built for strength, efficiency, and scalability."}
           </p>
 
           <div className="service-cta-buttons">
 
             <button className="primary-btn">
-              Start Your Structural Project
+              {isAR ? "ابدأ مشروعك الهيكلي" : "Start Your Structural Project"}
             </button>
 
             <button className="secondary-btn">
-              Discuss Your Design
+              {isAR ? "ناقش تصميمك" : "Discuss Your Design"}
             </button>
 
           </div>

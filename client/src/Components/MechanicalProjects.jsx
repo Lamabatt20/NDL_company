@@ -2,49 +2,14 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { getMechanicalProjects } from "../api";
 import ProjectModal from "./ProjectModal";
 import "./MechanicalProjects.css";
+import { useLanguage } from "../context/LanguageContext";
+import { getTranslatedProject } from "../utils/getTranslatedProject";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const placeholderCards = [
-  {
-    id: "placeholder-1",
-    title: "Coming Soon",
-    shortDesc: "A new mechanical solution is currently under development.",
-    isPlaceholder: true,
-  },
-  {
-    id: "placeholder-2",
-    title: "More Innovations Ahead",
-    shortDesc: "We are continuously building advanced mechanical systems.",
-    isPlaceholder: true,
-  },
-  {
-    id: "placeholder-3",
-    title: "Next Project Loading",
-    shortDesc: "Another real-world mechanical project will be showcased here soon.",
-    isPlaceholder: true,
-  },
-  {
-    id: "placeholder-4",
-    title: "Future Innovation",
-    shortDesc: "More advanced mechanical products will be added here soon.",
-    isPlaceholder: true,
-  },
-  {
-    id: "placeholder-5",
-    title: "In Development",
-    shortDesc: "This space is reserved for upcoming engineering work.",
-    isPlaceholder: true,
-  },
-  {
-    id: "placeholder-6",
-    title: "New Solution Soon",
-    shortDesc: "A new project will be published here in the near future.",
-    isPlaceholder: true,
-  },
-];
-
 export default function MechanicalProjects() {
+  const { language } = useLanguage();
+
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
   const [show, setShow] = useState(false);
@@ -88,10 +53,74 @@ export default function MechanicalProjects() {
     return () => observer.disconnect();
   }, []);
 
+  // 🔥 ترجمة المشاريع من DB
+  const translatedProjects = useMemo(() => {
+    return projects.map((project) =>
+      getTranslatedProject(project, language)
+    );
+  }, [projects, language]);
+
   const displayItems = useMemo(() => {
     if (isLoading) return [];
 
-    const items = [...projects];
+    const placeholderCards = [
+      {
+        id: "placeholder-1",
+        title: language === "ar" ? "قريبًا" : "Coming Soon",
+        shortDesc:
+          language === "ar"
+            ? "يتم تطوير حل ميكانيكي جديد."
+            : "A new mechanical solution is currently under development.",
+        isPlaceholder: true,
+      },
+      {
+        id: "placeholder-2",
+        title: language === "ar" ? "ابتكارات قادمة" : "More Innovations Ahead",
+        shortDesc:
+          language === "ar"
+            ? "نواصل تطوير أنظمة ميكانيكية متقدمة."
+            : "We are continuously building advanced mechanical systems.",
+        isPlaceholder: true,
+      },
+      {
+        id: "placeholder-3",
+        title: language === "ar" ? "مشروع قيد التحميل" : "Next Project Loading",
+        shortDesc:
+          language === "ar"
+            ? "سيتم عرض مشروع حقيقي قريبًا."
+            : "Another real-world mechanical project will be showcased here soon.",
+        isPlaceholder: true,
+      },
+      {
+        id: "placeholder-4",
+        title: language === "ar" ? "ابتكار مستقبلي" : "Future Innovation",
+        shortDesc:
+          language === "ar"
+            ? "سيتم إضافة المزيد من المنتجات قريبًا."
+            : "More advanced mechanical products will be added here soon.",
+        isPlaceholder: true,
+      },
+      {
+        id: "placeholder-5",
+        title: language === "ar" ? "قيد التطوير" : "In Development",
+        shortDesc:
+          language === "ar"
+            ? "هذه المساحة لمشاريع قادمة."
+            : "This space is reserved for upcoming engineering work.",
+        isPlaceholder: true,
+      },
+      {
+        id: "placeholder-6",
+        title: language === "ar" ? "حل جديد قريبًا" : "New Solution Soon",
+        shortDesc:
+          language === "ar"
+            ? "سيتم نشر مشروع جديد قريبًا."
+            : "A new project will be published here in the near future.",
+        isPlaceholder: true,
+      },
+    ];
+
+    const items = [...translatedProjects];
     const columnsPerRow = 3;
 
     if (items.length === 0) {
@@ -106,7 +135,7 @@ export default function MechanicalProjects() {
     }
 
     return items;
-  }, [projects, isLoading]);
+  }, [translatedProjects, isLoading, language]);
 
   return (
     <section
@@ -114,12 +143,15 @@ export default function MechanicalProjects() {
       className={`Mechanicalprojects ${show ? "show" : ""}`}
     >
       <div className="site-container">
+
         <h2 className={`Mechanicalprojects-title ${show ? "show" : ""}`}>
-          Our Projects
+          {language === "ar" ? "مشاريعنا" : "Our Projects"}
         </h2>
 
         <p className={`Mechanicalprojects-subtitle ${show ? "show" : ""}`}>
-          Innovative Mechanical systems designed for real-world applications.
+          {language === "ar"
+            ? "أنظمة ميكانيكية مبتكرة مصممة للتطبيقات الواقعية."
+            : "Innovative Mechanical systems designed for real-world applications."}
         </p>
 
         <div className="Mechanicalprojects-grid">
@@ -142,7 +174,9 @@ export default function MechanicalProjects() {
               ) : (
                 <div
                   key={project.id}
-                  className={`Mechanicalproject-card ${show ? "animate" : ""}`}
+                  className={`Mechanicalproject-card ${
+                    show ? "animate" : ""
+                  }`}
                   style={{ transitionDelay: `${index * 0.12}s` }}
                   onClick={() => setSelectedProject(project)}
                 >

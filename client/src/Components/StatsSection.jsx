@@ -8,45 +8,7 @@ import {
   FiCheckCircle,
 } from "react-icons/fi";
 import "./StatsSection.css";
-
-const statsData = [
-  {
-    value: 78,
-    suffix: "+",
-    label: "Projects Delivered",
-    icon: <FiBriefcase />,
-  },
-  {
-    value: 28,
-    suffix: "+",
-    label: "Clients Worldwide",
-    icon: <FiUsers />,
-  },
-  {
-    value: 80,
-    suffix: "+",
-    label: "Engineering Solutions",
-    icon: <FiSettings />,
-  },
-  {
-    value: 12,
-    suffix: "+",
-    label: "Industries Served",
-    icon: <FiLayers />,
-  },
-  {
-    value: 10,
-    suffix: "+",
-    label: "Years in business",
-    icon: <FiTrendingUp />,
-  },
-  {
-    value: 30,
-    suffix: "+",
-    label: "Projects completed",
-    icon: <FiCheckCircle />,
-  },
-];
+import { useLanguage } from "../context/LanguageContext";
 
 function StatItem({ value, suffix, label, icon, visible, delay }) {
   const [count, setCount] = useState(0);
@@ -90,8 +52,50 @@ function StatItem({ value, suffix, label, icon, visible, delay }) {
 }
 
 export default function StatsSection() {
+  const { language } = useLanguage();
+  const isAR = language === "ar";
+
   const sectionRef = useRef(null);
   const [visible, setVisible] = useState(false);
+
+  const statsData = [
+    {
+      value: 78,
+      suffix: "+",
+      label: isAR ? "مشروع تم إنجازه" : "Projects Delivered",
+      icon: <FiBriefcase />,
+    },
+    {
+      value: 28,
+      suffix: "+",
+      label: isAR ? "عميل حول العالم" : "Clients Worldwide",
+      icon: <FiUsers />,
+    },
+    {
+      value: 80,
+      suffix: "+",
+      label: isAR ? "حل هندسي" : "Engineering Solutions",
+      icon: <FiSettings />,
+    },
+    {
+      value: 12,
+      suffix: "+",
+      label: isAR ? "قطاع تم خدمته" : "Industries Served",
+      icon: <FiLayers />,
+    },
+    {
+      value: 10,
+      suffix: "+",
+      label: isAR ? "سنوات خبرة" : "Years in business",
+      icon: <FiTrendingUp />,
+    },
+    {
+      value: 30,
+      suffix: "+",
+      label: isAR ? "مشروع مكتمل" : "Projects completed",
+      icon: <FiCheckCircle />,
+    },
+  ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -111,7 +115,9 @@ export default function StatsSection() {
   return (
     <section className="stats" ref={sectionRef}>
       <div className="site-container">
-        <h2 className="stats-title">Achievements</h2>
+        <h2 className="stats-title">
+          {isAR ? "الإنجازات" : "Achievements"}
+        </h2>
 
         <div className="stats-grid">
           {statsData.map((item, index) => (

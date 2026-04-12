@@ -9,8 +9,12 @@ import {
   FaEnvelope,
   FaClock,
 } from "react-icons/fa";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function Contact() {
+  const { language } = useLanguage();
+  const isAR = language === "ar";
+
   return (
     <div className="contact-page">
       {/* HERO */}
@@ -19,20 +23,24 @@ export default function Contact() {
         <div className="hero-shape hero-shape-2"></div>
 
         <div className="contact-hero-container">
-          
-          {/* LEFT TEXT */}
           <div className="contact-hero-text">
-            <span className="contact-label">CONTACT NDL</span>
+            <span className="contact-label">
+              {isAR ? "تواصل مع NDL" : "CONTACT NDL"}
+            </span>
 
             <h1>
-              Let’s <span>Connect</span>
+              {isAR ? "دعنا " : "Let’s "}
+              <span>{isAR ? "نتواصل" : "Connect"}</span>
               <br />
-              And Build Something Great
+              {isAR
+                ? "ونبني شيئًا رائعًا"
+                : "And Build Something Great"}
             </h1>
 
             <p>
-              Whether you have a question, project idea, or collaboration opportunity,
-              our team is ready to help you turn your vision into reality.
+              {isAR
+                ? "سواء كان لديك سؤال أو فكرة مشروع أو فرصة تعاون، نحن جاهزون لمساعدتك."
+                : "Whether you have a question, project idea, or collaboration opportunity, our team is ready to help you turn your vision into reality."}
             </p>
 
             <button
@@ -40,176 +48,171 @@ export default function Contact() {
                 window.scrollTo({ top: 600, behavior: "smooth" })
               }
             >
-              Get in Touch
+              {isAR ? "ابدأ التواصل" : "Get in Touch"}
             </button>
           </div>
 
-          {/* RIGHT IMAGE */}
           <div className="contact-hero-image">
             <div className="contact-hero-image-wrap">
-              <img src={heroImage} alt="Contact Illustration" />
+              <img
+                src={heroImage}
+                alt={isAR ? "تواصل" : "Contact Illustration"}
+              />
             </div>
           </div>
-
         </div>
       </section>
 
       {/* CONTENT */}
       <section className="contact-content">
-        {/* LEFT SIDE */}
+        {/* LEFT */}
         <div className="left-column">
-          {/* FORM CARD */}
           <div className="contact-form card">
-            <h2>Get in Touch</h2>
+            <h2>{isAR ? "تواصل معنا" : "Get in Touch"}</h2>
+
             <p>
-              Have questions or want to work with us? Fill out the form below and
-              we’ll get back to you shortly.
+              {isAR
+                ? "هل لديك سؤال أو ترغب بالعمل معنا؟ املأ النموذج وسنرد عليك قريبًا."
+                : "Have questions or want to work with us? Fill out the form below and we’ll get back to you shortly."}
             </p>
 
             <form>
-            {/* Full Name + Email */}
-            <div className="form-row">
+              <div className="form-row">
                 <div className="form-group">
-                <label>
-                    Full Name <span>*</span>
-                </label>
-                <input type="text" placeholder="Your name" maxLength={50} required />
-                <small>0/50 characters</small>
+                  <label>
+                    {isAR ? "الاسم الكامل" : "Full Name"} <span>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder={isAR ? "اسمك" : "Your name"}
+                  />
                 </div>
 
                 <div className="form-group">
-                <label>
-                    Email Address <span>*</span>
-                </label>
-                <input
+                  <label>
+                    {isAR ? "البريد الإلكتروني" : "Email"} <span>*</span>
+                  </label>
+                  <input
                     type="email"
-                    placeholder="you@example.com"
-                    required
-                />
+                    placeholder={isAR ? "example@mail.com" : "you@example.com"}
+                  />
                 </div>
-            </div>
+              </div>
 
-            {/* Company + Phone */}
-            <div className="form-row">
+              <div className="form-row">
                 <div className="form-group">
-                <label>Company Name (Optional)</label>
-                <input type="text" placeholder="Your company" maxLength={100} />
-                <small>0/100 characters</small>
+                  <label>
+                    {isAR ? "الشركة (اختياري)" : "Company"}
+                  </label>
+                  <input
+                    type="text"
+                    placeholder={isAR ? "اسم الشركة" : "Your company"}
+                  />
                 </div>
 
                 <div className="form-group phone-group">
-                <label>
-                    Phone Number <span>*</span>
-                </label>
-                <div className="phone-row">
+                  <label>
+                    {isAR ? "رقم الهاتف" : "Phone"} <span>*</span>
+                  </label>
+                  <div className="phone-row">
                     <select>
-                    <option>+966</option>
-                    <option>+970</option>
-                    <option>+972</option>
+                      <option>+970</option>
+                      <option>+966</option>
+                      <option>+972</option>
                     </select>
-                    <input type="text" placeholder="Phone number" required />
+                    <input
+                      type="text"
+                      placeholder={isAR ? "رقم الهاتف" : "Phone number"}
+                    />
+                  </div>
                 </div>
-                </div>
-            </div>
+              </div>
 
-            {/* Subject */}
-            <div className="form-group">
+              <div className="form-group">
                 <label>
-                Subject <span>*</span>
+                  {isAR ? "الموضوع" : "Subject"} <span>*</span>
                 </label>
                 <input
-                type="text"
-                placeholder="How can we help you?"
-                maxLength={100}
-                required
+                  type="text"
+                  placeholder={
+                    isAR ? "كيف يمكننا مساعدتك؟" : "How can we help?"
+                  }
                 />
-                <small>0/100 characters</small>
-            </div>
+              </div>
 
-            {/* Message */}
-            <div className="form-group">
+              <div className="form-group">
                 <label>
-                Message <span>*</span>
+                  {isAR ? "الرسالة" : "Message"} <span>*</span>
                 </label>
                 <textarea
-                placeholder="Describe your project or inquiry"
-                rows="5"
-                maxLength={1000}
-                required
+                  rows="5"
+                  placeholder={
+                    isAR
+                      ? "اشرح فكرتك أو طلبك"
+                      : "Describe your project"
+                  }
                 ></textarea>
-                <small>0/1000 characters</small>
-            </div>
+              </div>
 
-            <button type="submit">Send Message</button>
+              <button type="submit">
+                {isAR ? "إرسال" : "Send Message"}
+              </button>
             </form>
-
           </div>
         </div>
 
-        {/* RIGHT SIDE */}
+        {/* RIGHT */}
         <div className="right-column">
-          {/* CONTACT INFO CARD */}
           <div className="contact-info card">
-            <h3>Contact Information</h3>
+            <h3>{isAR ? "معلومات التواصل" : "Contact Information"}</h3>
 
             <div className="info-item">
-              <div className="info-icon location">
-                <FaMapMarkerAlt />
-              </div>
+              <FaMapMarkerAlt />
               <div>
-                <strong>Location</strong>
-                <p>Ramallah, Palestine</p>
+                <strong>{isAR ? "الموقع" : "Location"}</strong>
+                <p>{isAR ? "رام الله - فلسطين" : "Ramallah, Palestine"}</p>
               </div>
             </div>
 
             <div className="info-item">
-              <div className="info-icon email">
-                <FaEnvelope />
-              </div>
+              <FaEnvelope />
               <div>
-                <strong>Email</strong>
+                <strong>{isAR ? "البريد" : "Email"}</strong>
                 <p>info@NDL.com</p>
               </div>
             </div>
 
             <div className="social-icons">
-              <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">
-                <FaLinkedinIn />
-              </a>
-              <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
-                <FaFacebookF />
-              </a>
-              <a
-                href="https://wa.me/970599000000"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <FaWhatsapp />
-              </a>
+              <FaLinkedinIn />
+              <FaFacebookF />
+              <FaWhatsapp />
             </div>
           </div>
 
-          {/* BUSINESS HOURS CARD */}
           <div className="business-hours card">
             <h3>
-              <span className="clock-icon">
-                <FaClock />
-              </span>
-              Business Hours
+              <FaClock />{" "}
+              {isAR ? "ساعات العمل" : "Business Hours"}
             </h3>
 
             <div className="hours-row">
-              <span>Sunday - Thursday</span>
-              <strong>9:00 AM - 5:00 PM</strong>
+              <span>
+                {isAR ? "الأحد - الخميس" : "Sunday - Thursday"}
+              </span>
+              <strong>9:00 - 5:00</strong>
             </div>
 
             <div className="hours-row">
-              <span>Friday - Saturday</span>
-              <strong>Closed</strong>
+              <span>
+                {isAR ? "الجمعة - السبت" : "Friday - Saturday"}
+              </span>
+              <strong>{isAR ? "مغلق" : "Closed"}</strong>
             </div>
 
             <div className="response-time">
-              Response Time: Within 24 hours during business days
+              {isAR
+                ? "الرد خلال 24 ساعة"
+                : "Response within 24 hours"}
             </div>
           </div>
         </div>

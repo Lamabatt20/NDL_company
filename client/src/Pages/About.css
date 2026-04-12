@@ -717,3 +717,45 @@
     padding: 40px 24px;
   }
 }
+
+.aboutsd-page[dir="rtl"] .aboutsd-label {
+  display: block;
+  width: 100%;
+  text-align: right;
+}
+
+
+.aboutsd-page[dir="rtl"] .aboutsd-text p {
+  text-align: right;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.aboutsd-page[dir="rtl"] h3,
+.aboutsd-page[dir="rtl"] h4 {
+  text-align: right;
+}
+
+
+.aboutsd-page[dir="rtl"] .info-box h3,
+.aboutsd-page[dir="rtl"] .card h4,
+.aboutsd-page[dir="rtl"] .choose-item p {
+  text-align: right;
+}
+
+
+.aboutsd-page[dir="rtl"] .info-box p,
+.aboutsd-page[dir="rtl"] .card p {
+  text-align: right;
+}
+
+/* CTA section (الجزء الأزرق تحت) */
+.aboutsd-page[dir="rtl"] .pre-footer-text h2,
+.aboutsd-page[dir="rtl"] .pre-footer-text p {
+  text-align: right;
+}
+
+/* عناصر القائمة */
+.aboutsd-page[dir="rtl"] .choose-item {
+  justify-content: flex-start;
+}

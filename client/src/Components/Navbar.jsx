@@ -1,7 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaChevronDown } from "react-icons/fa";
 import "./Navbar.css";
+
+import { useLanguage } from "../context/LanguageContext";
 
 import logoDefault from "../assets/images/logob.png";
 import logoEmbedded from "../assets/images/logow.png";
@@ -30,8 +32,9 @@ function Navbar() {
   const navigate = useNavigate();
   const desktopDropdownRef = useRef(null);
 
+  const { language, setLanguage } = useLanguage();
+
   const [menuOpen, setMenuOpen] = useState(false);
-  const [language, setLanguage] = useState("en");
   const [scrolled, setScrolled] = useState(false);
   const [openMobileSection, setOpenMobileSection] = useState(null);
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -40,9 +43,17 @@ function Navbar() {
   const isEmbeddedPage = location.pathname.startsWith("/embedded");
   const isMechanicalPage = location.pathname.startsWith("/mechanical");
   const isCareersPage = location.pathname === "/careers";
-  const isContactPage = location.pathname === "/contact" || location.pathname === "/get-a-quote";
+  const isContactPage =
+    location.pathname === "/contact" || location.pathname === "/get-a-quote";
   const isAboutPage = location.pathname === "/about";
-  const hasHeroPage = isHome || isEmbeddedPage || isMechanicalPage || isCareersPage || isContactPage || isAboutPage;
+
+  const hasHeroPage =
+    isHome ||
+    isEmbeddedPage ||
+    isMechanicalPage ||
+    isCareersPage ||
+    isContactPage ||
+    isAboutPage;
 
   useEffect(() => {
     const onScroll = () => {
@@ -75,6 +86,10 @@ function Navbar() {
     };
   }, []);
 
+  const getText = (en, ar) => {
+    return language === "ar" ? ar : en;
+  };
+
   const getNavbarConfig = () => {
     if (isEmbeddedPage) return "navbar navbar-embedded";
     if (isMechanicalPage) return "navbar navbar-mechanical";
@@ -83,32 +98,44 @@ function Navbar() {
 
   const embeddedServices = [
     {
-      title: "PCB Schematic Design",
+      id: "pcbSchematic",
+      title: getText("PCB Schematic Design", "تصميم مخططات PCB"),
       image: pcbImg,
       path: "/embedded/pcb-schematic",
     },
     {
-      title: "PCB Layout Design",
+      id: "pcbLayout",
+      title: getText("PCB Layout Design", "تصميم PCB Layout"),
       image: layoutImg,
       path: "/embedded/pcb-layout",
     },
     {
-      title: "Embedded Software Development",
+      id: "embeddedSoftware",
+      title: getText(
+        "Embedded Software Development",
+        "تطوير برمجيات الأنظمة المدمجة"
+      ),
       image: swImg,
       path: "/embedded/embedded-sw",
     },
     {
-      title: "Electronic Products Development",
+      id: "electronicProducts",
+      title: getText(
+        "Electronic Products Development",
+        "تطوير المنتجات الإلكترونية"
+      ),
       image: productImg,
       path: "/embedded/product-dev",
     },
     {
-      title: "IoT Smart Solutions",
+      id: "iotSolutions",
+      title: getText("IoT Smart Solutions", "حلول إنترنت الأشياء الذكية"),
       image: iotImg,
       path: "/embedded/iot",
     },
     {
-      title: "AI Integration",
+      id: "aiIntegration",
+      title: getText("AI Integration", "دمج الذكاء الاصطناعي"),
       image: aiImg,
       path: "/embedded/ai",
     },
@@ -116,32 +143,38 @@ function Navbar() {
 
   const mechanicalServices = [
     {
-      title: "Sheet Metal Design",
+      id: "sheetMetal",
+      title: getText("Sheet Metal Design", "تصميم الصفائح المعدنية"),
       image: sheetImg,
       path: "/mechanical/sheet-metal",
     },
     {
-      title: "Aluminum Structure Design",
+      id: "aluminumStructure",
+      title: getText("Aluminum Structure Design", "تصميم هياكل الألمنيوم"),
       image: aluminumImg,
       path: "/mechanical/aluminum",
     },
     {
-      title: "Product Enclosure Design",
+      id: "enclosure",
+      title: getText("Product Enclosure Design", "تصميم أغلفة المنتجات"),
       image: enclosureImg,
       path: "/mechanical/enclosure",
     },
     {
-      title: "Steel Structure Design",
+      id: "steelStructure",
+      title: getText("Steel Structure Design", "تصميم الهياكل الفولاذية"),
       image: steelImg,
       path: "/mechanical/steel",
     },
     {
-      title: "Product Design",
+      id: "productDesign",
+      title: getText("Product Design", "تصميم المنتجات"),
       image: productDesignImg,
       path: "/mechanical/product-design",
     },
     {
-      title: "Wood and Furniture Design",
+      id: "woodFurniture",
+      title: getText("Wood and Furniture Design", "تصميم الخشب والأثاث"),
       image: woodImg,
       path: "/mechanical/wood",
     },
@@ -156,7 +189,7 @@ function Navbar() {
       <div className="mega-grid">
         {items.map((item) => (
           <div
-            key={item.title}
+            key={item.id}
             className="mega-card"
             onClick={() => {
               navigate(item.path);
@@ -185,7 +218,7 @@ function Navbar() {
 
   const renderMobileServiceCards = (items) =>
     items.map((service) => (
-      <li key={service.title}>
+      <li key={service.id}>
         <NavLink to={service.path} onClick={() => setMenuOpen(false)}>
           <div className="sidebar-service-card">
             <img src={service.image} alt={service.title} />
@@ -213,7 +246,7 @@ function Navbar() {
             <button
               className="nav-close-btn"
               onClick={() => setMenuOpen(false)}
-              aria-label="Close menu"
+              aria-label={getText("Close menu", "إغلاق القائمة")}
               type="button"
             >
               ×
@@ -223,7 +256,13 @@ function Navbar() {
           <div className="navbar-logo">
             <NavLink to="/">
               <img
-                src={hasHeroPage && !scrolled ? logoDefault : (isEmbeddedPage || isMechanicalPage ? logoEmbedded : logoDefault)}
+                src={
+                  hasHeroPage && !scrolled
+                    ? logoDefault
+                    : isEmbeddedPage || isMechanicalPage
+                    ? logoEmbedded
+                    : logoDefault
+                }
                 alt="Logo"
               />
             </NavLink>
@@ -232,12 +271,12 @@ function Navbar() {
           <ul className="navbar-links" ref={desktopDropdownRef}>
             <li>
               <NavLink to="/" end>
-                Home
+                {getText("Home", "الرئيسية")}
               </NavLink>
             </li>
 
             <li>
-              <NavLink to="/about">About Us</NavLink>
+              <NavLink to="/about">{getText("About Us", "من نحن")}</NavLink>
             </li>
 
             <li className="nav-dropdown-item">
@@ -263,7 +302,7 @@ function Navbar() {
                   role="button"
                   tabIndex={0}
                 >
-                  Mechanical Designs
+                  {getText("Mechanical Designs", "التصاميم الميكانيكية")}
                 </span>
 
                 <FaChevronDown
@@ -301,7 +340,7 @@ function Navbar() {
                   role="button"
                   tabIndex={0}
                 >
-                  Embedded Designs
+                  {getText("Embedded Designs", "التصاميم المدمجة")}
                 </span>
 
                 <FaChevronDown
@@ -317,22 +356,32 @@ function Navbar() {
             </li>
 
             <li>
-              <NavLink to="/careers">Careers</NavLink>
+              <NavLink to="/careers">{getText("Careers", "الوظائف")}</NavLink>
             </li>
 
             <li>
               <NavLink to="/contact" className="contact-btn">
-                Contact Us
+                {getText("Contact Us", "تواصل معنا")}
               </NavLink>
             </li>
           </ul>
 
           <div className="language-selector">
             <img
-              src={hasHeroPage && !scrolled ? globeIcon : (isEmbeddedPage || isMechanicalPage ? globeBlue : globeIcon)}
-              alt="Lang"
+              src={
+                hasHeroPage && !scrolled
+                  ? globeIcon
+                  : isEmbeddedPage || isMechanicalPage
+                  ? globeBlue
+                  : globeIcon
+              }
+              alt={getText("Language", "اللغة")}
             />
-            <select value={language} onChange={(e) => setLanguage(e.target.value)}>
+            <select
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+              aria-label={getText("Language", "اللغة")}
+            >
               <option value="en">EN</option>
               <option value="ar">AR</option>
             </select>
@@ -349,13 +398,13 @@ function Navbar() {
         <ul className="sidebar-links">
           <li>
             <NavLink to="/" onClick={() => setMenuOpen(false)}>
-              Home
+              {getText("Home", "الرئيسية")}
             </NavLink>
           </li>
 
           <li>
             <NavLink to="/about" onClick={() => setMenuOpen(false)}>
-              About Us
+              {getText("About Us", "من نحن")}
             </NavLink>
           </li>
 
@@ -364,7 +413,7 @@ function Navbar() {
               className="sidebar-group-title"
               onClick={() => toggleMobileSection("mechanical")}
             >
-              <span>Mechanical Designs</span>
+              <span>{getText("Mechanical Designs", "التصاميم الميكانيكية")}</span>
               <FaChevronDown
                 className={openMobileSection === "mechanical" ? "rotate" : ""}
               />
@@ -384,7 +433,7 @@ function Navbar() {
               className="sidebar-group-title"
               onClick={() => toggleMobileSection("embedded")}
             >
-              <span>Embedded Designs</span>
+              <span>{getText("Embedded Designs", "التصاميم المدمجة")}</span>
               <FaChevronDown
                 className={openMobileSection === "embedded" ? "rotate" : ""}
               />
@@ -401,7 +450,7 @@ function Navbar() {
 
           <li>
             <NavLink to="/careers" onClick={() => setMenuOpen(false)}>
-              Careers
+              {getText("Careers", "الوظائف")}
             </NavLink>
           </li>
 
@@ -411,7 +460,7 @@ function Navbar() {
               className="contact-btn"
               onClick={() => setMenuOpen(false)}
             >
-              Contact Us
+              {getText("Contact Us", "تواصل معنا")}
             </NavLink>
           </li>
         </ul>

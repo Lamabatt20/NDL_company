@@ -2,6 +2,8 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import checkIcon from "../assets/icons/IMG_4911.png";
 import "./ProjectModal.css";
+import { useLanguage } from "../context/LanguageContext";
+import { getTranslatedProject } from "../utils/getTranslatedProject";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -47,10 +49,8 @@ const parseDescription = (description) => {
       return false;
     }
 
-
     if (t.endsWith(":") && t.length <= 45) return true;
 
-    
     if (
       t.length <= 45 &&
       !t.includes(".") &&
@@ -97,7 +97,7 @@ const parseDescription = (description) => {
 };
 
 /* ================= MEDIA VIEWER ================= */
-function MediaViewer({ media, onClose }) {
+function MediaViewer({ media, onClose, isAR }) {
   if (!media) return null;
 
   return (
@@ -113,7 +113,9 @@ function MediaViewer({ media, onClose }) {
               src={getMediaUrl(media.videoUrl || media.imageUrl)}
               type="video/mp4"
             />
-            Your browser does not support the video tag.
+            {isAR
+              ? "المتصفح لا يدعم الفيديو"
+              : "Your browser does not support the video tag."}
           </video>
         ) : (
           <img
@@ -129,18 +131,26 @@ function MediaViewer({ media, onClose }) {
 
 /* ================= MAIN COMPONENT ================= */
 export default function ProjectModal({ project, onClose }) {
+  const { language } = useLanguage();
+  const isAR = language === "ar";
+
   const [selectedMedia, setSelectedMedia] = useState(null);
   const navigate = useNavigate();
 
+  const translatedProject = getTranslatedProject(project, language);
+
   const handleGetQuote = () => {
-    navigate("/get-a-quote", { state: { projectName: project.title } });
+    navigate("/get-a-quote", {
+      state: { projectName: translatedProject.title },
+    });
     onClose();
   };
 
-  const visuals = project?.images || [];
+  const visuals = translatedProject?.images || [];
+
   const sections = useMemo(
-    () => parseDescription(project?.description),
-    [project?.description]
+    () => parseDescription(translatedProject?.description),
+    [translatedProject?.description]
   );
 
   const galleryItems = visuals.slice(sections.length + 1);
@@ -171,13 +181,13 @@ export default function ProjectModal({ project, onClose }) {
       <div className="modal-backdrop" onClick={onClose}>
         <div
           className="modal-content full-modal"
+          dir={isAR ? "rtl" : "ltr"}
           onClick={(e) => e.stopPropagation()}
         >
           <button className="modal-close" onClick={onClose}>
             ×
           </button>
 
-          {/* HERO */}
           {visuals[0] && (
             <div
               className="modal-hero"
@@ -187,34 +197,33 @@ export default function ProjectModal({ project, onClose }) {
                 <video autoPlay muted loop playsInline>
                   <source
                     src={getMediaUrl(
-                      visuals[0].videoUrl || visuals[0].imageUrl
-                    )}
+                      visuals[0].videoUrl || visuals[0].imageUrl)
+                    }
                     type="video/mp4"
                   />
-                  Your browser does not support the video tag.
                 </video>
               ) : (
                 <img
                   src={getMediaUrl(visuals[0].imageUrl)}
-                  alt={project.title}
+                  alt={translatedProject.title}
                 />
               )}
             </div>
           )}
 
-          {/* HEADER */}
           <div className="modal-header">
             <div className="modal-header-content">
-              <h2>{project.title}</h2>
-              {project.shortDesc && <p>{project.shortDesc}</p>}
+              <h2>{translatedProject.title}</h2>
+              {translatedProject.shortDesc && (
+                <p>{translatedProject.shortDesc}</p>
+              )}
             </div>
 
             <button className="get-quote-btn" onClick={handleGetQuote}>
-              Get a Quote
+              {isAR ? "اطلب عرض سعر" : "Get a Quote"}
             </button>
           </div>
 
-          {/* CONTENT */}
           <div className="modal-zigzag">
             {sections.map((sec, i) => {
               const media = visuals[i + 1];
@@ -233,6 +242,7 @@ export default function ProjectModal({ project, onClose }) {
                 <div
                   key={i}
                   className={`zig-row ${reverse ? "reverse" : ""}`}
+                  
                 >
                   <div className={`zig-card ${!hasMedia ? "no-media" : ""}`}>
                     <div className="zig-text">
@@ -250,7 +260,7 @@ export default function ProjectModal({ project, onClose }) {
                                 <img
                                   className="bullet-icon"
                                   src={checkIcon}
-                                  alt="Check"
+                                  alt=""
                                 />
                                 <span>{item.text}</span>
                               </li>
@@ -273,13 +283,12 @@ export default function ProjectModal({ project, onClose }) {
                               )}
                               type="video/mp4"
                             />
-                            Your browser does not support the video tag.
+                            {isAR
+                              ? "المتصفح لا يدعم الفيديو"
+                              : "Your browser does not support the video tag."}
                           </video>
                         ) : (
-                          <img
-                            src={getMediaUrl(media.imageUrl)}
-                            alt={sec.title || `Project media ${i + 1}`}
-                          />
+                          <img src={getMediaUrl(media.imageUrl)} alt="" />
                         )}
                       </div>
                     )}
@@ -289,10 +298,11 @@ export default function ProjectModal({ project, onClose }) {
             })}
           </div>
 
-          {/* GALLERY */}
           {galleryItems.length > 0 && (
             <div className="modal-gallery-wrap">
-              <h3 className="gallery-title">More Media</h3>
+              <h3 className="gallery-title">
+                {isAR ? "وسائط إضافية" : "More Media"}
+              </h3>
 
               <div className="modal-gallery">
                 {galleryItems.map((m, i) => (
@@ -307,13 +317,12 @@ export default function ProjectModal({ project, onClose }) {
                           src={getMediaUrl(m.videoUrl || m.imageUrl)}
                           type="video/mp4"
                         />
-                        Your browser does not support the video tag.
+                        {isAR
+                          ? "المتصفح لا يدعم الفيديو"
+                          : "Your browser does not support the video tag."}
                       </video>
                     ) : (
-                      <img
-                        src={getMediaUrl(m.imageUrl)}
-                        alt={`Gallery ${i + 1}`}
-                      />
+                      <img src={getMediaUrl(m.imageUrl)} alt="" />
                     )}
                   </div>
                 ))}
@@ -326,6 +335,7 @@ export default function ProjectModal({ project, onClose }) {
       <MediaViewer
         media={selectedMedia}
         onClose={() => setSelectedMedia(null)}
+        isAR={isAR}
       />
     </>
   );

@@ -42,3 +42,14 @@ code {
   margin: 0 auto;
   padding-inline: clamp(var(--site-padding-min), 4vw, var(--site-padding-max));
 }
+html[dir="rtl"],
+body.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="ltr"],
+body.ltr {
+  direction: ltr;
+  text-align: left;
+}

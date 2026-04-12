@@ -1,5 +1,6 @@
 import React from "react";
 import "./OurClients.css";
+import { useLanguage } from "../context/LanguageContext";
 
 import client1 from "../assets/images/client1.avif";
 import client2 from "../assets/images/client2.png";
@@ -9,6 +10,8 @@ import client5 from "../assets/images/client5.svg";
 import client6 from "../assets/images/client6.webp";
 
 export default function OurClients() {
+  const { language } = useLanguage();
+
   const clients = [
     client1,
     client2,
@@ -20,20 +23,30 @@ export default function OurClients() {
 
   return (
     <section className="our-clients">
-      <h2>Our Clients</h2>
+      
+      <h2>
+        {language === "ar" ? "عملاؤنا" : "Our Clients"}
+      </h2>
+
       <p className="subtitle">
-        Trusted by innovative companies across engineering and industry
+        {language === "ar"
+          ? "موثوق بنا من قبل شركات مبتكرة في مجالات الهندسة والصناعة"
+          : "Trusted by innovative companies across engineering and industry"}
       </p>
 
       <div className="clients-slider">
         <div className="clients-track">
           {[...clients, ...clients].map((logo, i) => (
             <div className="client-logo" key={i}>
-              <img src={logo} alt="Client logo" />
+              <img
+                src={logo}
+                alt={language === "ar" ? "شعار عميل" : "Client logo"}
+              />
             </div>
           ))}
         </div>
       </div>
+
     </section>
   );
 }

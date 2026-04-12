@@ -36,7 +36,7 @@
   box-sizing: border-box;
   color: #ffffff;
   text-align: left;
-  animation: mechanicalFadeUp 1s ease forwards;
+  animation: embeddedFadeUp 1s ease forwards;
 }
 
 .embedded-hero-label {
@@ -65,7 +65,6 @@
 }
 
 .embedded-hero-content p {
-  max-width: 760px;
   max-width: 620px;
   margin: 0;
   font-size: 18px;
@@ -75,6 +74,27 @@
 }
 
 
+.embedded-hero-content[dir="rtl"] {
+  text-align: right;
+}
+
+.embedded-hero-content[dir="rtl"] .embedded-hero-label {
+  display: inline-block;
+  text-align: right;
+  margin-left: auto;
+}
+
+.embedded-hero-content[dir="rtl"] h1 {
+  text-align: right;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.embedded-hero-content[dir="rtl"] p {
+  text-align: right;
+  margin-left: auto;
+  margin-right: 0;
+}
 
 @keyframes embeddedFadeUp {
   from {
@@ -114,10 +134,9 @@
 }
 
 @media (max-width: 768px) {
-
   .embedded-hero {
     min-height: 70vh;
-    padding-top: 90px; 
+    padding-top: 90px;
     background-position: center;
   }
 
@@ -159,6 +178,15 @@
     margin: 0 auto;
   }
 
+  .embedded-hero-content[dir="rtl"] {
+    text-align: center;
+  }
 
-
+  .embedded-hero-content[dir="rtl"] .embedded-hero-label,
+  .embedded-hero-content[dir="rtl"] h1,
+  .embedded-hero-content[dir="rtl"] p {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

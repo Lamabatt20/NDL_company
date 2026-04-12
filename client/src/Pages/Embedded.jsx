@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import EmbeddedHero from "../Components/EmbeddedHero";
 import EmbeddedIntro from "../Components/EmbeddedIntro";
 import EmbeddedProjects from "../Components/EmbeddedProjects";
@@ -16,52 +16,93 @@ export default function Embedded() {
   const { service } = useParams();
 
   const services = useMemo(
-  () => ({
-    home: {
-      title: "Embedded Systems Designs",
-      heading: "Smart Embedded Solutions",
-      description: "We design intelligent embedded systems that power modern devices with efficiency and reliability",
-      heroImage: mainHero
-    },
-    "pcb-schematic": {
-      title: "PCB Schematic Design",
-      heading: "Accurate Circuit Design",
-      description: "We create precise and optimized schematics to ensure strong and reliable electronic systems",
-      heroImage: pcbHero
-    },
-    "pcb-layout": {
-      title: "PCB Layout Design",
-      heading: "High-Quality PCB Layouts",
-      description: "Professional PCB layouts focused on performance, signal integrity, and manufacturability",
-      heroImage: layoutHero
-    },
-    "embedded-sw": {
-      title: "Embedded Software Development",
-      heading: "Reliable Embedded Software",
-      description: "We develop efficient and scalable embedded software tailored for real-time systems",
-      heroImage: swHero
-    },
-    "product-dev": {
-      title: "Electronic Products Development",
-      heading: "From Idea to Product",
-      description: "We transform concepts into fully functional electronic products ready for real-world use",
-      heroImage: productHero
-    },
-    iot: {
-      title: "IoT Smart Solutions",
-      heading: "Connected Smart Systems",
-      description: "We build IoT solutions that connect devices and enable smart, data-driven environments",
-      heroImage: iotHero
-    },
-    ai: {
-      title: "AI Integration",
-      heading: "AI-Powered Systems",
-      description: "We integrate AI into embedded systems to enhance automation and decision-making",
-      heroImage: aiHero
-    }
-  }),
-  []
-);
+    () => ({
+      home: {
+        title: "Embedded Systems Designs",
+        titleAr: "تصاميم الأنظمة المدمجة",
+        heading: "Smart Embedded Solutions",
+        headingAr: "حلول الأنظمة المدمجة الذكية",
+        description:
+          "We design intelligent embedded systems that power modern devices with efficiency and reliability.",
+        descriptionAr:
+          "نقوم بتصميم أنظمة مدمجة ذكية تدعم الأجهزة الحديثة بكفاءة واعتمادية.",
+        heroImage: mainHero,
+      },
+
+      "pcb-schematic": {
+        title: "PCB Schematic Design",
+        titleAr: "تصميم مخططات PCB",
+        heading: "Accurate Circuit Design",
+        headingAr: "تصميم دوائر بدقة عالية",
+        description:
+          "We create precise and optimized schematics to ensure strong and reliable electronic systems.",
+        descriptionAr:
+          "نقوم بإنشاء مخططات دقيقة ومحسنة لضمان أنظمة إلكترونية قوية وموثوقة.",
+        heroImage: pcbHero,
+      },
+
+      "pcb-layout": {
+        title: "PCB Layout Design",
+        titleAr: "تصميم PCB Layout",
+        heading: "High-Quality PCB Layouts",
+        headingAr: "تصميمات PCB عالية الجودة",
+        description:
+          "Professional PCB layouts focused on performance, signal integrity, and manufacturability.",
+        descriptionAr:
+          "تصميمات PCB احترافية تركز على الأداء وسلامة الإشارة وقابلية التصنيع.",
+        heroImage: layoutHero,
+      },
+
+      "embedded-sw": {
+        title: "Embedded Software Development",
+        titleAr: "تطوير البرمجيات المدمجة",
+        heading: "Reliable Embedded Software",
+        headingAr: "برمجيات مدمجة موثوقة",
+        description:
+          "We develop efficient and scalable embedded software tailored for real-time systems.",
+        descriptionAr:
+          "نقوم بتطوير برمجيات مدمجة فعالة وقابلة للتوسع ومناسبة للأنظمة اللحظية.",
+        heroImage: swHero,
+      },
+
+      "product-dev": {
+        title: "Electronic Products Development",
+        titleAr: "تطوير المنتجات الإلكترونية",
+        heading: "From Idea to Product",
+        headingAr: "من الفكرة إلى المنتج",
+        description:
+          "We transform concepts into fully functional electronic products ready for real-world use.",
+        descriptionAr:
+          "نحوّل الأفكار إلى منتجات إلكترونية متكاملة وجاهزة للاستخدام الواقعي.",
+        heroImage: productHero,
+      },
+
+      iot: {
+        title: "IoT Smart Solutions",
+        titleAr: "حلول إنترنت الأشياء الذكية",
+        heading: "Connected Smart Systems",
+        headingAr: "أنظمة ذكية مترابطة",
+        description:
+          "We build IoT solutions that connect devices and enable smart, data-driven environments.",
+        descriptionAr:
+          "نقوم ببناء حلول إنترنت الأشياء التي تربط الأجهزة وتوفر بيئات ذكية قائمة على البيانات.",
+        heroImage: iotHero,
+      },
+
+      ai: {
+        title: "AI Integration",
+        titleAr: "دمج الذكاء الاصطناعي",
+        heading: "AI-Powered Systems",
+        headingAr: "أنظمة مدعومة بالذكاء الاصطناعي",
+        description:
+          "We integrate AI into embedded systems to enhance automation and decision-making.",
+        descriptionAr:
+          "نقوم بدمج الذكاء الاصطناعي داخل الأنظمة المدمجة لتعزيز الأتمتة واتخاذ القرار.",
+        heroImage: aiHero,
+      },
+    }),
+    []
+  );
 
   const [activeService, setActiveService] = useState("home");
 
@@ -79,11 +120,10 @@ export default function Embedded() {
         activeService={activeService}
         services={services}
       />
+
       <EmbeddedIntro activeService={activeService} />
 
-      
       <EmbeddedProjects activeService={activeService} />
-      
     </>
   );
 }

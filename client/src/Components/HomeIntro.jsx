@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./EmbeddedIntro.css";
 import workflowVideo from "../assets/videos/Blue and Orange Corporate Product Development Roadmap Presentation.mp4";
+import { useLanguage } from "../context/LanguageContext";
 
 export default function HomeIntro() {
+  const { language } = useLanguage();
+
   const sectionRef = useRef(null);
   const videoRef = useRef(null);
   const [show, setShow] = useState(false);
@@ -52,11 +55,20 @@ export default function HomeIntro() {
     >
       <div className="site-container">
         <div className="embedded-intro-head">
-          <span className="embedded-intro-badge">Development Process</span>
-          <h2 className="embedded-intro-title">Embedded Systems Workflow</h2>
+          <span className="embedded-intro-badge">
+            {language === "ar" ? "مراحل التطوير" : "Development Process"}
+          </span>
+
+          <h2 className="embedded-intro-title">
+            {language === "ar"
+              ? "مسار تطوير الأنظمة المدمجة"
+              : "Embedded Systems Workflow"}
+          </h2>
+
           <p className="embedded-intro-subtitle">
-            A structured product development journey from concept to launch,
-            designed to ensure performance, validation, and production readiness.
+            {language === "ar"
+              ? "رحلة تطوير منتج منظمة من الفكرة إلى الإطلاق، مصممة لضمان الأداء، والتحقق، والاستعداد للإنتاج."
+              : "A structured product development journey from concept to launch, designed to ensure performance, validation, and production readiness."}
           </p>
         </div>
 

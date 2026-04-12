@@ -2,31 +2,14 @@ import React, { useEffect, useState, useRef, useMemo } from "react";
 import { getGeneralProjects } from "../api";
 import ProjectModal from "./ProjectModal";
 import "./ProjectsSection.css";
+import { useLanguage } from "../context/LanguageContext";
+import { getTranslatedProject } from "../utils/getTranslatedProject";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const placeholderCards = [
-  {
-    id: "placeholder-1",
-    title: "Coming Soon",
-    shortDesc: "A new engineering solution is currently in development.",
-    isPlaceholder: true,
-  },
-  {
-    id: "placeholder-2",
-    title: "More Innovations Ahead",
-    shortDesc: "We are continuously expanding our product portfolio.",
-    isPlaceholder: true,
-  },
-  {
-    id: "placeholder-3",
-    title: "Next Product Loading",
-    shortDesc: "Another real-world product will be showcased here soon.",
-    isPlaceholder: true,
-  },
-];
-
 export default function ProjectsSection() {
+  const { language } = useLanguage();
+
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
   const [animateCards, setAnimateCards] = useState(false);
@@ -82,10 +65,44 @@ export default function ProjectsSection() {
     setTimeout(() => setAnimateCards(true), 50);
   };
 
+  const translatedProjects = useMemo(() => {
+    return projects.map((project) => getTranslatedProject(project, language));
+  }, [projects, language]);
+
   const displayItems = useMemo(() => {
     if (isLoading) return [];
 
-    const items = [...projects];
+    const placeholderCards = [
+      {
+        id: "placeholder-1",
+        title: language === "ar" ? "قريبًا" : "Coming Soon",
+        shortDesc:
+          language === "ar"
+            ? "يتم حاليًا تطوير حل هندسي جديد."
+            : "A new engineering solution is currently in development.",
+        isPlaceholder: true,
+      },
+      {
+        id: "placeholder-2",
+        title: language === "ar" ? "ابتكارات قادمة" : "More Innovations Ahead",
+        shortDesc:
+          language === "ar"
+            ? "نواصل توسيع مجموعة منتجاتنا."
+            : "We are continuously expanding our product portfolio.",
+        isPlaceholder: true,
+      },
+      {
+        id: "placeholder-3",
+        title: language === "ar" ? "منتج قيد التحميل" : "Next Product Loading",
+        shortDesc:
+          language === "ar"
+            ? "سيتم عرض منتج حقيقي جديد هنا قريبًا."
+            : "Another real-world product will be showcased here soon.",
+        isPlaceholder: true,
+      },
+    ];
+
+    const items = [...translatedProjects];
     const columnsPerRow = 3;
 
     if (items.length === 0) {
@@ -100,17 +117,19 @@ export default function ProjectsSection() {
     }
 
     return items;
-  }, [projects, isLoading]);
+  }, [translatedProjects, isLoading, language]);
 
   return (
     <section className="projects" ref={sectionRef} id="projects">
       <div className="site-container">
         <h2 className={`projects-title ${titleVisible ? "show" : ""}`}>
-          Our Products
+          {language === "ar" ? "منتجاتنا" : "Our Products"}
         </h2>
 
         <p className={`projects-subtitle ${titleVisible ? "show" : ""}`}>
-          Real-world engineering solutions delivered with precision and innovation.
+          {language === "ar"
+            ? "حلول هندسية واقعية يتم تنفيذها بدقة وابتكار."
+            : "Real-world engineering solutions delivered with precision and innovation."}
         </p>
 
         <div className="projects-grid">

@@ -377,3 +377,67 @@
     padding: 50px 20px;
   }
 }
+
+
+.career-page[dir="rtl"] .career-hero-text,
+.career-page[dir="rtl"] .career-hero-text h1,
+.career-page[dir="rtl"] .career-hero-text p,
+.career-page[dir="rtl"] .job-card h3,
+.career-page[dir="rtl"] .job-details h4,
+.career-page[dir="rtl"] .resume-box h3 {
+  text-align: right;
+}
+
+.career-page[dir="rtl"] .career-label {
+  text-align: right;
+}
+
+.career-page[dir="rtl"] .career-filters input,
+.career-page[dir="rtl"] .career-filters select,
+.career-page[dir="rtl"] .resume-box input,
+.career-page[dir="rtl"] .resume-box textarea {
+  direction: rtl;
+  text-align: right;
+}
+
+.career-page[dir="rtl"] ul {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.career-page[dir="rtl"] li {
+  padding-right: 30px;
+  padding-left: 0;
+}
+
+.career-page[dir="rtl"] li::before {
+  right: 0;
+  left: auto;
+}
+
+.career-page[dir="rtl"] .career-shape-1 {
+  left: -100px;
+  right: auto;
+}
+
+.career-page[dir="rtl"] .career-shape-2 {
+  right: -80px;
+  left: auto;
+}
+
+.career-page[dir="rtl"] .career-hero-image-wrap::before {
+  left: -20px;
+  right: auto;
+}
+
+.career-page[dir="rtl"] .close-btn {
+  left: 10px;
+  right: auto;
+}
+
+@media (max-width: 900px) {
+  .career-page[dir="rtl"] .career-hero-text h1,
+  .career-page[dir="rtl"] .career-hero-text p {
+    text-align: center;
+  }
+}

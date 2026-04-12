@@ -165,4 +165,6 @@
   border-radius: 6px;
 }
 }
-
+html[dir="rtl"] .hero-content {
+  margin-top: -40px;
+}

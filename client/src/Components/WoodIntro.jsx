@@ -1,5 +1,6 @@
 import React from "react";
 import "./EmbeddedServiceIntro.css";
+import { useLanguage } from "../context/LanguageContext";
 
 import ss1 from "../assets/images/ss1.png";
 import ss2 from "../assets/images/ss2.png";
@@ -9,122 +10,219 @@ import ss5 from "../assets/images/ss5.webp";
 import ss6 from "../assets/images/ss6.jpg";
 
 export default function WoodIntro() {
+
+  const { language } = useLanguage();
+  const isAR = language === "ar";
+
   const sections = [
     {
-      title: "Engineering-Based Furniture Development",
-      text: [
-        "Furniture design requires more than appearance — it demands proper structural planning and engineering precision.",
-        "We ensure every design balances strength, comfort, and usability."
-      ],
-      bullets: [
-        "Custom furniture for residential and commercial spaces",
-        "Workstations and industrial tables",
-        "Storage systems and cabinetry",
-        "Wooden structural components",
-        "Hybrid wood-metal designs"
-      ],
+      title: isAR
+        ? "تطوير الأثاث بأسلوب هندسي"
+        : "Engineering-Based Furniture Development",
+      text: isAR
+        ? [
+            "يتطلب تصميم الأثاث أكثر من الشكل.",
+            "نوازن بين القوة والراحة والاستخدام."
+          ]
+        : [
+            "Furniture design requires more than appearance — it demands proper structural planning and engineering precision.",
+            "We ensure every design balances strength, comfort, and usability."
+          ],
+      bullets: isAR
+        ? [
+            "أثاث مخصص",
+            "طاولات عمل",
+            "أنظمة تخزين",
+            "مكونات خشبية",
+            "تصاميم مختلطة"
+          ]
+        : [
+            "Custom furniture for residential and commercial spaces",
+            "Workstations and industrial tables",
+            "Storage systems and cabinetry",
+            "Wooden structural components",
+            "Hybrid wood-metal designs"
+          ],
       image: ss2,
-      alt: "Furniture development"
+      alt: isAR ? "الأثاث" : "Furniture development"
     },
+
     {
-      title: "Material Selection & Structural Integrity",
-      text: [
-        "We carefully select materials and design joinery systems to ensure durability and performance.",
-        "Each design is optimized for real-world use."
-      ],
-      bullets: [
-        "Wood type selection",
-        "Joinery and fastening systems",
-        "Structural reinforcement",
-        "Surface finishing",
-        "Ergonomic design planning"
-      ],
+      title: isAR
+        ? "اختيار المواد والقوة"
+        : "Material Selection & Structural Integrity",
+      text: isAR
+        ? [
+            "نختار المواد بعناية.",
+            "نضمن المتانة والأداء."
+          ]
+        : [
+            "We carefully select materials and design joinery systems to ensure durability and performance.",
+            "Each design is optimized for real-world use."
+          ],
+      bullets: isAR
+        ? [
+            "اختيار الخشب",
+            "أنظمة التثبيت",
+            "تعزيز الهيكل",
+            "التشطيب",
+            "تصميم مريح"
+          ]
+        : [
+            "Wood type selection",
+            "Joinery and fastening systems",
+            "Structural reinforcement",
+            "Surface finishing",
+            "Ergonomic design planning"
+          ],
       image: ss3,
-      alt: "Material and structure"
+      alt: isAR ? "المواد" : "Material and structure"
     },
+
     {
-      title: "Designed for Fabrication & Assembly",
-      text: [
-        "Our designs are created with production efficiency in mind.",
-        "We ensure smooth transition from design to workshop."
-      ],
-      bullets: [
-        "Detailed CAD models",
-        "Assembly documentation",
-        "Cutting and layout plans",
-        "Bill of materials (BOM)",
-        "CNC-ready files"
-      ],
+      title: isAR
+        ? "جاهز للتصنيع"
+        : "Designed for Fabrication & Assembly",
+      text: isAR
+        ? [
+            "نصمّم مع مراعاة الإنتاج.",
+            "نضمن انتقال سلس."
+          ]
+        : [
+            "Our designs are created with production efficiency in mind.",
+            "We ensure smooth transition from design to workshop."
+          ],
+      bullets: isAR
+        ? [
+            "نماذج CAD",
+            "توثيق التجميع",
+            "خطط القص",
+            "BOM",
+            "ملفات CNC"
+          ]
+        : [
+            "Detailed CAD models",
+            "Assembly documentation",
+            "Cutting and layout plans",
+            "Bill of materials (BOM)",
+            "CNC-ready files"
+          ],
       image: ss4,
-      alt: "Fabrication wood"
+      alt: isAR ? "التصنيع" : "Fabrication"
     },
+
     {
-      title: "Integrated Design Perspective",
-      text: [
-        "We integrate wood structures with modern systems and technologies.",
-        "This enables innovative and functional hybrid designs."
-      ],
-      bullets: [
-        "Embedded electronics integration",
-        "Lighting systems",
-        "Metal structural frames",
-        "Automation components",
-        "Smart furniture solutions"
-      ],
+      title: isAR
+        ? "تصميم متكامل"
+        : "Integrated Design Perspective",
+      text: isAR
+        ? [
+            "ندمج الأنظمة الحديثة.",
+            "نخلق تصاميم مبتكرة."
+          ]
+        : [
+            "We integrate wood structures with modern systems and technologies.",
+            "This enables innovative and functional hybrid designs."
+          ],
+      bullets: isAR
+        ? [
+            "دمج إلكترونيات",
+            "إضاءة",
+            "هياكل معدنية",
+            "أتمتة",
+            "أثاث ذكي"
+          ]
+        : [
+            "Embedded electronics integration",
+            "Lighting systems",
+            "Metal structural frames",
+            "Automation components",
+            "Smart furniture solutions"
+          ],
       image: ss5,
-      alt: "Integrated wood design"
+      alt: isAR ? "التكامل" : "Integrated design"
     },
+
     {
-      title: "Built for Durability & Aesthetics",
-      text: [
-        "Our designs combine visual refinement with structural strength.",
-        "We create products that are both elegant and long-lasting."
-      ],
-      bullets: [
-        "Long-term durability",
-        "Professional appearance",
-        "Functional layouts",
-        "Clean finishing",
-        "Efficient assembly"
-      ],
+      title: isAR
+        ? "المتانة والجمال"
+        : "Built for Durability & Aesthetics",
+      text: isAR
+        ? [
+            "نوازن بين الشكل والقوة.",
+            "نصمّم منتجات تدوم."
+          ]
+        : [
+            "Our designs combine visual refinement with structural strength.",
+            "We create products that are both elegant and long-lasting."
+          ],
+      bullets: isAR
+        ? [
+            "متانة طويلة",
+            "مظهر احترافي",
+            "تنظيم عملي",
+            "تشطيب نظيف",
+            "سهولة التجميع"
+          ]
+        : [
+            "Long-term durability",
+            "Professional appearance",
+            "Functional layouts",
+            "Clean finishing",
+            "Efficient assembly"
+          ],
       image: ss6,
-      alt: "Wood durability"
+      alt: isAR ? "المتانة" : "Durability"
     }
   ];
 
-  const whyChooseUs = [
-    "Engineering-driven furniture design",
-    "Strong material and structural expertise",
-    "Production-ready workflow",
-    "Balanced aesthetics and functionality",
-    "Long-term durability focus"
-  ];
+  const whyChooseUs = isAR
+    ? [
+        "تصميم هندسي للأثاث",
+        "خبرة بالمواد",
+        "جاهزية للإنتاج",
+        "توازن الشكل والوظيفة",
+        "متانة طويلة"
+      ]
+    : [
+        "Engineering-driven furniture design",
+        "Strong material and structural expertise",
+        "Production-ready workflow",
+        "Balanced aesthetics and functionality",
+        "Long-term durability focus"
+      ];
 
   return (
-    <section className="embedded-service-page">
+    <section className="embedded-service-page" dir={isAR ? "rtl" : "ltr"}>
+
       <div className="site-container">
 
-        {/* HEADER */}
         <div className="service-main-header">
 
           <span className="service-label">
-            Mechanical Design Service
+            {isAR ? "خدمة التصميم الميكانيكي" : "Mechanical Design Service"}
           </span>
 
-          <h2>Wood & Furniture Design</h2>
+          <h2>
+            {isAR ? "تصميم الأثاث والخشب" : "Wood & Furniture Design"}
+          </h2>
 
           <h3>
-            Functional, Durable, and Precision-Crafted Designs
+            {isAR
+              ? "تصاميم عملية ومتينة"
+              : "Functional, Durable, and Precision-Crafted Designs"}
           </h3>
 
           <p>
-            We design custom wood and furniture solutions that combine
-            structural integrity, functionality, and refined aesthetics.
+            {isAR
+              ? "نصمّم أثاث مخصص."
+              : "We design custom wood and furniture solutions that combine structural integrity, functionality, and refined aesthetics."}
           </p>
 
           <p>
-            Our approach blends engineering principles with craftsmanship
-            to create designs that are visually compelling and mechanically sound.
+            {isAR
+              ? "نجمع بين الهندسة والحرفية."
+              : "Our approach blends engineering principles with craftsmanship to create designs that are visually compelling and mechanically sound."}
           </p>
 
           <div className="service-main-image">
@@ -133,18 +231,17 @@ export default function WoodIntro() {
 
         </div>
 
-
-        {/* INTRO */}
         <div className="service-intro-block">
-          <h4>Engineering Meets Craftsmanship</h4>
+          <h4>
+            {isAR ? "الهندسة والحرفية" : "Engineering Meets Craftsmanship"}
+          </h4>
           <p>
-            We develop wood and furniture solutions that combine durability,
-            usability, and refined design for real-world applications.
+            {isAR
+              ? "نطوّر حلول متكاملة."
+              : "We develop wood and furniture solutions that combine durability, usability, and refined design for real-world applications."}
           </p>
         </div>
 
-
-        {/* SECTIONS */}
         {sections.map((section, index) => (
           <div
             key={index}
@@ -174,17 +271,16 @@ export default function WoodIntro() {
           </div>
         ))}
 
-
-        {/* WHY */}
         <div className="service-highlight-box">
 
           <div className="service-highlight-content">
 
-            <h4>Why Nexus Design Lab?</h4>
+            <h4>{isAR ? "لماذا Nexus Design Lab؟" : "Why Nexus Design Lab?"}</h4>
 
             <p>
-              We bring engineering precision into furniture design, ensuring
-              durability, usability, and production efficiency.
+              {isAR
+                ? "نقدّم تصاميم أثاث هندسية."
+                : "We bring engineering precision into furniture design, ensuring durability, usability, and production efficiency."}
             </p>
 
             <ul>
@@ -201,29 +297,34 @@ export default function WoodIntro() {
 
         </div>
 
-
-        {/* CTA */}
         <div className="service-cta">
 
-          <h4>Looking to Build Custom Furniture or Wood Solutions?</h4>
+          <h4>
+            {isAR
+              ? "تحتاج أثاث مخصص؟"
+              : "Looking to Build Custom Furniture or Wood Solutions?"}
+          </h4>
 
           <p>
-            Partner with Nexus Design Lab to design functional and durable
-            wood products tailored to your needs.
+            {isAR
+              ? "ابدأ مشروعك معنا."
+              : "Partner with Nexus Design Lab to design functional and durable wood products tailored to your needs."}
           </p>
 
           <p>
-            Let’s create designs that combine craftsmanship with engineering precision.
+            {isAR
+              ? "لننشئ تصميم احترافي."
+              : "Let’s create designs that combine craftsmanship with engineering precision."}
           </p>
 
           <div className="service-cta-buttons">
 
             <button className="primary-btn">
-              Start Your Furniture Project
+              {isAR ? "ابدأ مشروعك" : "Start Your Furniture Project"}
             </button>
 
             <button className="secondary-btn">
-              Discuss Your Design
+              {isAR ? "ناقش التصميم" : "Discuss Your Design"}
             </button>
 
           </div>
@@ -231,6 +332,7 @@ export default function WoodIntro() {
         </div>
 
       </div>
+
     </section>
   );
 }

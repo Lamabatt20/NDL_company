@@ -2,49 +2,14 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { getEmbeddedProjects } from "../api";
 import ProjectModal from "./ProjectModal";
 import "./EmbeddedProjects.css";
+import { useLanguage } from "../context/LanguageContext";
+import { getTranslatedProject } from "../utils/getTranslatedProject";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const placeholderCards = [
-  {
-    id: "placeholder-1",
-    title: "Coming Soon",
-    shortDesc: "A new embedded solution is currently under development.",
-    isPlaceholder: true,
-  },
-  {
-    id: "placeholder-2",
-    title: "More Innovations Ahead",
-    shortDesc: "We are continuously building smarter embedded systems.",
-    isPlaceholder: true,
-  },
-  {
-    id: "placeholder-3",
-    title: "Next Project Loading",
-    shortDesc: "Another real-world embedded project will be showcased here soon.",
-    isPlaceholder: true,
-  },
-  {
-    id: "placeholder-4",
-    title: "Future Innovation",
-    shortDesc: "More advanced embedded products will be added here soon.",
-    isPlaceholder: true,
-  },
-  {
-    id: "placeholder-5",
-    title: "In Development",
-    shortDesc: "This space is reserved for upcoming engineering work.",
-    isPlaceholder: true,
-  },
-  {
-    id: "placeholder-6",
-    title: "New Solution Soon",
-    shortDesc: "A new project will be published here in the near future.",
-    isPlaceholder: true,
-  },
-];
-
 export default function EmbeddedProjects() {
+  const { language } = useLanguage();
+
   const [projects, setProjects] = useState([]);
   const [selectedProject, setSelectedProject] = useState(null);
   const [show, setShow] = useState(false);
@@ -91,10 +56,71 @@ export default function EmbeddedProjects() {
     return () => observer.disconnect();
   }, []);
 
+  const translatedProjects = useMemo(() => {
+    return projects.map((project) => getTranslatedProject(project, language));
+  }, [projects, language]);
+
   const displayItems = useMemo(() => {
     if (isLoading) return [];
 
-    const items = [...projects];
+    const placeholderCards = [
+      {
+        id: "placeholder-1",
+        title: language === "ar" ? "قريبًا" : "Coming Soon",
+        shortDesc:
+          language === "ar"
+            ? "يتم حاليًا تطوير حل مدمج جديد."
+            : "A new embedded solution is currently under development.",
+        isPlaceholder: true,
+      },
+      {
+        id: "placeholder-2",
+        title: language === "ar" ? "ابتكارات قادمة" : "More Innovations Ahead",
+        shortDesc:
+          language === "ar"
+            ? "نواصل بناء أنظمة مدمجة أكثر تطورًا."
+            : "We are continuously building smarter embedded systems.",
+        isPlaceholder: true,
+      },
+      {
+        id: "placeholder-3",
+        title: language === "ar" ? "مشروع قيد التحميل" : "Next Project Loading",
+        shortDesc:
+          language === "ar"
+            ? "سيتم عرض مشروع حقيقي قريبًا."
+            : "Another real-world embedded project will be showcased here soon.",
+        isPlaceholder: true,
+      },
+      {
+        id: "placeholder-4",
+        title: language === "ar" ? "ابتكار مستقبلي" : "Future Innovation",
+        shortDesc:
+          language === "ar"
+            ? "سيتم إضافة المزيد من المنتجات المدمجة المتقدمة قريبًا."
+            : "More advanced embedded products will be added here soon.",
+        isPlaceholder: true,
+      },
+      {
+        id: "placeholder-5",
+        title: language === "ar" ? "قيد التطوير" : "In Development",
+        shortDesc:
+          language === "ar"
+            ? "هذه المساحة مخصصة لأعمال هندسية قادمة."
+            : "This space is reserved for upcoming engineering work.",
+        isPlaceholder: true,
+      },
+      {
+        id: "placeholder-6",
+        title: language === "ar" ? "حل جديد قريبًا" : "New Solution Soon",
+        shortDesc:
+          language === "ar"
+            ? "سيتم نشر مشروع جديد هنا قريبًا."
+            : "A new project will be published here in the near future.",
+        isPlaceholder: true,
+      },
+    ];
+
+    const items = [...translatedProjects];
     const columnsPerRow = 3;
 
     if (items.length === 0) {
@@ -109,7 +135,7 @@ export default function EmbeddedProjects() {
     }
 
     return items;
-  }, [projects, isLoading]);
+  }, [translatedProjects, isLoading, language]);
 
   return (
     <section
@@ -118,11 +144,13 @@ export default function EmbeddedProjects() {
     >
       <div className="site-container">
         <h2 className={`Embeddedprojects-title ${show ? "show" : ""}`}>
-          Our Projects
+          {language === "ar" ? "مشاريعنا" : "Our Projects"}
         </h2>
 
         <p className={`Embeddedprojects-subtitle ${show ? "show" : ""}`}>
-          Innovative embedded systems designed for real-world applications.
+          {language === "ar"
+            ? "أنظمة مدمجة مبتكرة مصممة لتطبيقات واقعية."
+            : "Innovative embedded systems designed for real-world applications."}
         </p>
 
         <div className="Embeddedprojects-grid">

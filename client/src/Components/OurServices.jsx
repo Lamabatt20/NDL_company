@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./OurServices.css";
+import { useLanguage } from "../context/LanguageContext";
 
 import serviceImg1 from "../assets/images/service1.png";
 import serviceImg2 from "../assets/images/service2.png";
@@ -16,6 +17,9 @@ import serviceImg11 from "../assets/images/Picture1.png";
 import serviceImg12 from "../assets/images/Picture4.png";
 
 export default function OurServices() {
+  const { language } = useLanguage();
+  const isAR = language === "ar";
+
   const sectionRef = useRef(null);
   const navigate = useNavigate();
 
@@ -24,75 +28,88 @@ export default function OurServices() {
 
   const services = [
     {
-      title: "PCB Schematic Design",
-      description:
-        "Robust and production-ready schematic design built on best engineering practices.",
+      title: isAR ? "تصميم مخططات PCB" : "PCB Schematic Design",
+      description: isAR
+        ? "تصميم مخططات احترافي وجاهز للإنتاج."
+        : "Robust and production-ready schematic design.",
       path: "/embedded/pcb-schematic"
     },
     {
-      title: "PCB Layout Design",
-      description:
-        "High-quality multilayer PCB layout optimized for signal integrity and manufacturability.",
+      title: isAR ? "تصميم PCB Layout" : "PCB Layout Design",
+      description: isAR
+        ? "تصميم لوحات متعددة الطبقات بجودة عالية."
+        : "High-quality multilayer PCB layout.",
       path: "/embedded/pcb-layout"
     },
     {
-      title: "Embedded Software Development",
-      description:
-        "Efficient firmware and embedded software tailored for real-time systems.",
+      title: isAR ? "تطوير البرمجيات المدمجة" : "Embedded Software Development",
+      description: isAR
+        ? "Firmware فعال للأنظمة اللحظية."
+        : "Efficient firmware for real-time systems.",
       path: "/embedded/embedded-sw"
     },
     {
-      title: "Electronic Products Development",
-      description:
-        "End-to-end electronic product development — from concept to testing.",
+      title: isAR ? "تطوير المنتجات الإلكترونية" : "Electronic Products Development",
+      description: isAR
+        ? "تطوير المنتج من الفكرة حتى الاختبار."
+        : "End-to-end electronic product development.",
       path: "/embedded/product-dev"
     },
     {
-      title: "IoT Smart Solutions",
-      description:
-        "Secure and connected IoT systems integrating sensors and cloud platforms.",
+      title: isAR ? "حلول IoT الذكية" : "IoT Smart Solutions",
+      description: isAR
+        ? "أنظمة متصلة وآمنة."
+        : "Secure and connected IoT systems.",
       path: "/embedded/iot"
     },
     {
-      title: "AI Integration",
-      description:
-        "Integration of intelligent algorithms and AI-driven systems into hardware and software platforms.",
+      title: isAR ? "دمج الذكاء الاصطناعي" : "AI Integration",
+      description: isAR
+        ? "دمج الذكاء داخل الأنظمة."
+        : "AI-driven systems integration.",
       path: "/embedded/ai"
     },
+
     {
-      title: "Sheet Metal Design",
-      description:
-        "Precision sheet-metal solutions optimized for manufacturability and structural integrity.",
+      title: isAR ? "تصميم الصفائح المعدنية" : "Sheet Metal Design",
+      description: isAR
+        ? "حلول دقيقة وقابلة للتصنيع."
+        : "Precision sheet-metal solutions.",
       path: "/mechanical/sheet-metal"
     },
     {
-      title: "Aluminum Structure Design",
-      description:
-        "Lightweight and durable aluminum structures engineered for industrial applications.",
+      title: isAR ? "تصميم هياكل الألمنيوم" : "Aluminum Structure Design",
+      description: isAR
+        ? "هياكل خفيفة وقوية."
+        : "Lightweight aluminum structures.",
       path: "/mechanical/aluminum"
     },
     {
-      title: "Product Enclosure Design",
-      description:
-        "Professional enclosure development balancing aesthetics, durability, and real-world requirements.",
+      title: isAR ? "تصميم الأغلفة" : "Product Enclosure Design",
+      description: isAR
+        ? "أغلفة احترافية وعملية."
+        : "Professional enclosure development.",
       path: "/mechanical/enclosure"
     },
     {
-      title: "Steel Structure Design",
-      description:
-        "Heavy-duty steel structures engineered for strength, stability, and compliance with industrial and construction standards.",
+      title: isAR ? "تصميم الهياكل الحديدية" : "Steel Structure Design",
+      description: isAR
+        ? "هياكل قوية للصناعة."
+        : "Heavy-duty steel structures.",
       path: "/mechanical/steel"
     },
     {
-      title: "Product Design",
-      description:
-        "Comprehensive product design services covering concept development, functionality, usability, and manufacturability — transforming ideas into market-ready, production-ready solutions.",
+      title: isAR ? "تصميم المنتجات" : "Product Design",
+      description: isAR
+        ? "تحويل الأفكار إلى منتجات."
+        : "Full product design solutions.",
       path: "/mechanical/product-design"
     },
     {
-      title: "Wood and Furniture Design",
-      description:
-        "Custom wood and furniture design combining engineering, functionality, and refined aesthetics.",
+      title: isAR ? "تصميم الخشب والأثاث" : "Wood and Furniture Design",
+      description: isAR
+        ? "تصاميم عملية وجمالية."
+        : "Custom furniture design.",
       path: "/mechanical/wood"
     }
   ];
@@ -121,7 +138,6 @@ export default function OurServices() {
     );
 
     if (sectionRef.current) observer.observe(sectionRef.current);
-
     return () => observer.disconnect();
   }, []);
 
@@ -133,13 +149,6 @@ export default function OurServices() {
           className="service-card show clickable-card"
           style={{ transitionDelay: `${index * 0.08}s` }}
           onClick={() => navigate(service.path)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              navigate(service.path);
-            }
-          }}
-          role="button"
-          tabIndex={0}
         >
           <img src={images[startIndex + index]} alt={service.title} />
 
@@ -159,13 +168,12 @@ export default function OurServices() {
     >
       <div className="site-container">
         <div className="services-header">
-          <h2>Our Services</h2>
+          <h2>{isAR ? "خدماتنا" : "Our Services"}</h2>
+
           <p className="main-text">
-            We provide end-to-end engineering solutions covering electronics,
-            embedded systems, mechanical design, and intelligent technologies.
-            From concept to hardware, software, and AI integration, our
-            services help businesses transform ideas into high-performance
-            products built for real-world deployment.
+            {isAR
+              ? "نقدم حلول هندسية متكاملة تشمل الإلكترونيات والأنظمة المدمجة والتصميم الميكانيكي."
+              : "We provide end-to-end engineering solutions covering electronics, embedded systems, mechanical design, and AI integration."}
           </p>
         </div>
 
@@ -174,14 +182,14 @@ export default function OurServices() {
             className={activeLab === "electronics" ? "active" : ""}
             onClick={() => setActiveLab("electronics")}
           >
-            Electronics Design Lab
+            {isAR ? "قسم الإلكترونيات" : "Electronics Design Lab"}
           </button>
 
           <button
             className={activeLab === "mechanical" ? "active" : ""}
             onClick={() => setActiveLab("mechanical")}
           >
-            Mechanical Design Lab
+            {isAR ? "قسم الميكانيك" : "Mechanical Design Lab"}
           </button>
         </div>
 
