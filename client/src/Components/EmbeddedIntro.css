@@ -1,6 +1,6 @@
 .embedded-intro {
   padding: 40px 0;
-  background: #e6e6e6;
+  background: linear-gradient(135deg, #F8FAFC 0%, #EAF2FB 100%);
   opacity: 0;
   transform: translateY(40px);
   transition: all 0.8s ease;

@@ -1,6 +1,6 @@
 .embedded-service-page {
   padding: 40px 0;
-  background: #e6e6e6;
+  background: linear-gradient(135deg, #F8FAFC 0%, #EAF2FB 100%);
 }
 
 .site-container {
