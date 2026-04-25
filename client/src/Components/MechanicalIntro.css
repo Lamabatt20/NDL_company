@@ -59,8 +59,36 @@
 }
 
 .mechanical-features div {
+
+  position: relative;
+
+  padding-left: 32px;
+
   margin-bottom: 10px;
+
   font-weight: 500;
+
+}
+.mechanical-features div::before {
+
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  top: 0.5em;
+
+  width: 14px;
+
+  height: 14px;
+
+  background-color: #17477b;
+
+  mask: url("../assets/icons/IMG_4911.png") no-repeat center / contain;
+
+  -webkit-mask: url("../assets/icons/IMG_4911.png") no-repeat center / contain;
+
 }
 
 /* image */
