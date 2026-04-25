@@ -205,120 +205,135 @@
   }
 }
 
-/* Responsive */
 @media (max-width: 768px) {
+
   .remote-connectivity {
-    padding: 8vh 5vw;
+
+    padding: 6vh 4vw;
+
   }
 
   .map-wrapper {
+
     max-width: 100%;
-    padding: 0 10px;
-    border-radius: 14px;
-    box-shadow: 
-      0 10px 35px rgba(0,0,0,0.12),
-      inset 0 0 0 1px rgba(255,255,255,0.12);
+
+    padding: 0;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
   }
 
   .world-map {
-    width: 120%;
-    max-width: none;
-    margin: 0 -10%;
+
+    width: 100%;
+
+    max-width: 100%;
+
+    margin: 0;
+
+    
+
     filter: 
-      contrast(1.6) 
-      saturate(1.7) 
-      brightness(1.2)
-      drop-shadow(0 0 16px rgba(0,0,0,0.4))
-      sepia(0.15);
-  }
 
-  .loca .dot {
-    width: 11px;
-    height: 11px;
-    filter: drop-shadow(0 0 9px rgba(23, 71, 123, 0.9));
-  }
+      brightness(0) 
 
-  .loca.palestine .dot {
-    width: 18px;
-    height: 18px;
-  }
+      saturate(100%) 
 
-  .pulse {
-    width: 22px;
-    height: 22px;
+      invert(20%) 
+
+      sepia(60%) 
+
+      saturate(900%) 
+
+      hue-rotate(180deg) 
+
+      brightness(100%) 
+
+      contrast(100%)
+
+      drop-shadow(0 0 12px rgba(23, 71, 123, 0.4));
+
   }
 
   .curve-path {
-    stroke-width: 0.4;
-    filter: 
-      drop-shadow(0 0 7px rgba(23, 71, 123, 0.45))
-      contrast(1.35);
+
+    stroke-width: 0.35;
+
   }
+
+  .loca .dot {
+
+    width: 10px;
+
+    height: 10px;
+
+  }
+
+  .loca.palestine .dot {
+
+    width: 16px;
+
+    height: 16px;
+
+  }
+
+  .pulse {
+
+    width: 18px;
+
+    height: 18px;
+
+  }
+
 }
 
 @media (max-width: 480px) {
+
   .remote-connectivity {
-    padding: 6vh 3vw;
+
+    padding: 5vh 4vw;
+
   }
 
   .remote-connectivity h2 {
-    font-size: 32px;
+
+    font-size: 28px;
+
   }
 
   .remote-connectivity .subtitle {
-    font-size: 14px;
-    margin-bottom: 40px;
-  }
 
-  .map-wrapper {
-    max-width: 100%;
-    padding: 0 5px;
-    border-radius: 16px;
-    box-shadow: 
-      0 12px 40px rgba(0,0,0,0.15),
-      inset 0 0 0 1px rgba(255,255,255,0.15);
+    font-size: 13px;
+
   }
 
   .world-map {
-    width: 130%;
-    max-width: none;
-    margin: 0 -15%;
-    filter: 
-      contrast(1.8) 
-      saturate(1.9) 
-      brightness(1.3)
-      drop-shadow(0 0 20px rgba(0,0,0,0.5))
-      sepia(0.2);
-  }
 
-  .curve-path {
-    stroke-width: 0.5;
+    width: 100%;
+
+    margin: 0;
+
   }
 
   .loca .dot {
-    width: 12px;
-    height: 12px;
-    filter: drop-shadow(0 0 10px rgba(23, 71, 123, 1));
+
+    width: 9px;
+
+    height: 9px;
+
   }
 
   .loca.palestine .dot {
-    width: 22px;
-    height: 22px;
+
+    width: 14px;
+
+    height: 14px;
+
   }
 
-  .pulse {
-    width: 26px;
-    height: 26px;
-  }
-
-  .curve-path {
-    stroke-width: 0.5;
-    filter: 
-      drop-shadow(0 0 8px rgba(23, 71, 123, 0.5))
-      contrast(1.4);
-  }
 }
-
 
 @keyframes fadeLabel {
   0%, 40% {
