@@ -26,7 +26,7 @@ export const getServices = async () => {
 
 // ================= PROJECTS =================
 
-// كل المشاريع (لو احتجتيهم)
+
 export const getProjects = async () => {
   try {
     const res = await API.get("/projects");

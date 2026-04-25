@@ -1,6 +1,6 @@
 import React from "react";
 import "./RemoteConnectivity.css";
-import mapImage from "../assets/images/world-map-light.jpg";
+import mapImage from "../assets/images/world-map-light.png";
 import { useLanguage } from "../context/LanguageContext";
 
 export default function RemoteConnectivity() {

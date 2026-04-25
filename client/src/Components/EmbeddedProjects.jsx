@@ -39,7 +39,7 @@ export default function EmbeddedProjects() {
   }, []);
 
   useEffect(() => {
-    // إذا كان على شاشة جوال، أظهر البطاقات مباشرة
+
     if (window.innerWidth <= 600) {
       setShow(true);
       return;

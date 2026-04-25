@@ -749,13 +749,13 @@
   text-align: right;
 }
 
-/* CTA section (الجزء الأزرق تحت) */
+
 .aboutsd-page[dir="rtl"] .pre-footer-text h2,
 .aboutsd-page[dir="rtl"] .pre-footer-text p {
   text-align: right;
 }
 
-/* عناصر القائمة */
+
 .aboutsd-page[dir="rtl"] .choose-item {
   justify-content: flex-start;
 }

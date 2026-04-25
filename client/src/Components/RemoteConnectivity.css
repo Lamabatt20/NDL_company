@@ -29,49 +29,49 @@
   border-radius: 2px;
 }
 
-/* الخريطة */
+
 .map-wrapper {
   position: relative;
   max-width: 1150px;
   margin: 0 auto;
-  background: 
-    radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%),
-    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(0,0,0,0.03)"/><circle cx="75" cy="75" r="1" fill="rgba(0,0,0,0.03)"/><circle cx="50" cy="10" r="0.5" fill="rgba(0,0,0,0.02)"/><circle cx="10" cy="50" r="0.5" fill="rgba(0,0,0,0.02)"/><circle cx="90" cy="50" r="0.5" fill="rgba(0,0,0,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-  border-radius: 12px;
+  
   overflow: hidden;
-  box-shadow: 
-    0 8px 32px rgba(0,0,0,0.1),
-    inset 0 0 0 1px rgba(255,255,255,0.1);
+  
   transition: box-shadow 0.3s ease;
 }
 
-.map-wrapper:hover {
-  box-shadow: 
-    0 12px 48px rgba(0,0,0,0.15),
-    inset 0 0 0 1px rgba(255,255,255,0.15);
-}
+
 
 .world-map {
   width: 100%;
-  opacity: 0.85;
   display: block;
+
   filter: 
-    contrast(1.4) 
-    saturate(1.5) 
-    brightness(1.1)
-    drop-shadow(0 0 12px rgba(0,0,0,0.3))
-    sepia(0.1);
-  mix-blend-mode: multiply;
+    brightness(0) 
+    saturate(100%) 
+    invert(20%) 
+    sepia(60%) 
+    saturate(900%) 
+    hue-rotate(180deg) 
+    brightness(100%) 
+    contrast(100%)
+    drop-shadow(0 0 18px rgba(23, 71, 123, 0.4));
+
+  opacity: 0.95;
   transition: all 0.4s ease;
 }
-
 .world-map:hover {
   filter: 
-    contrast(1.5) 
-    saturate(1.6) 
-    brightness(1.15)
-    drop-shadow(0 0 16px rgba(0,0,0,0.4))
-    sepia(0.15);
+    brightness(0) 
+    saturate(100%) 
+    invert(20%) 
+    sepia(60%) 
+    saturate(900%) 
+    hue-rotate(180deg) 
+    brightness(100%) 
+    contrast(100%)
+    drop-shadow(0 0 18px rgba(23, 71, 123, 0.4)); 
+
   transform: scale(1.02);
 }
 
@@ -88,16 +88,15 @@
 
 .curve-path {
   fill: none;
-  stroke: #17477b;
-  stroke-width: 0.20;
+  stroke: #6FA3D6; 
+  stroke-width: 0.25;
   stroke-linecap: round;
   stroke-dasharray: 300;
   stroke-dashoffset: 300;
   animation: drawLine 6s ease-in-out infinite;
-  opacity: 0.7;
+  opacity: 0.9;
   filter: 
-    drop-shadow(0 0 6px rgba(23, 71, 123, 0.4))
-    contrast(1.3);
+    drop-shadow(0 0 8px rgba(111, 163, 214, 0.6));
 }
 
 @keyframes drawLine {
