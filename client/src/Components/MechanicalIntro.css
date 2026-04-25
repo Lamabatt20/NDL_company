@@ -90,6 +90,23 @@
   -webkit-mask: url("../assets/icons/IMG_4911.png") no-repeat center / contain;
 
 }
+.mechanical-page[dir="rtl"] .mechanical-features div {
+
+  padding-right: 32px;
+
+  padding-left: 0;
+
+  text-align: right;
+
+}
+
+.mechanical-page[dir="rtl"] .mechanical-features div::before {
+
+  right: 0;
+
+  left: auto;
+
+}
 
 /* image */
 .mechanical-image img {
