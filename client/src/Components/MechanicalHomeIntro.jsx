@@ -67,10 +67,10 @@ export default function MechanicalHomeIntro() {
             </p>
 
             <div className="mechanical-features">
-              <div>✔ {isAR ? "تصميم ثلاثي الأبعاد احترافي" : "Professional 3D Design"}</div>
-              <div>✔ {isAR ? "تحليل إجهادات واهتزازات متقدم" : "Advanced Stress & Vibration Analysis"}</div>
-              <div>✔ {isAR ? "إعداد رسومات تصنيع تفصيلية" : "Detailed Manufacturing Drawings"}</div>
-              <div>✔ {isAR ? "دعم فني أثناء التنفيذ والتصنيع" : "Technical Support During Production"}</div>
+              <div>{isAR ? "تصميم ثلاثي الأبعاد احترافي" : "Professional 3D Design"}</div>
+              <div>{isAR ? "تحليل إجهادات واهتزازات متقدم" : "Advanced Stress & Vibration Analysis"}</div>
+              <div>{isAR ? "إعداد رسومات تصنيع تفصيلية" : "Detailed Manufacturing Drawings"}</div>
+              <div>{isAR ? "دعم فني أثناء التنفيذ والتصنيع" : "Technical Support During Production"}</div>
             </div>
           </div>
 

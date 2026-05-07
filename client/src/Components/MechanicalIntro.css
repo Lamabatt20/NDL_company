@@ -59,8 +59,53 @@
 }
 
 .mechanical-features div {
+
+  position: relative;
+
+  padding-left: 32px;
+
   margin-bottom: 10px;
+
   font-weight: 500;
+
+}
+.mechanical-features div::before {
+
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  top: 0.5em;
+
+  width: 14px;
+
+  height: 14px;
+
+  background-color: #17477b;
+
+  mask: url("../assets/icons/IMG_4911.png") no-repeat center / contain;
+
+  -webkit-mask: url("../assets/icons/IMG_4911.png") no-repeat center / contain;
+
+}
+.mechanical-page[dir="rtl"] .mechanical-features div {
+
+  padding-right: 32px;
+
+  padding-left: 0;
+
+  text-align: right;
+
+}
+
+.mechanical-page[dir="rtl"] .mechanical-features div::before {
+
+  right: 0;
+
+  left: auto;
+
 }
 
 /* image */
@@ -119,4 +164,18 @@
   .section-heading h2 {
     font-size: 36px;
   }
+}
+
+@media (max-width: 900px) {
+
+  .mechanical-page {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+    transition: none;
+
+  }
+
 }
