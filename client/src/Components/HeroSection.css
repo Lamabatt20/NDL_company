@@ -157,25 +157,25 @@
 }
 @media (max-width: 900px) {
   .btn.secondary {
-    margin-top: -15px;
+    margin-top: -35px;
   }
 }
 
 @media (max-width: 768px) {
   .btn.secondary {
-    margin-top: -20px;
+    margin-top: -35px;
   }
 }
 
 @media (max-width: 600px) {
   .btn.secondary {
-    margin-top: -25px;
+    margin-top: -35px;
   }
 }
 
 @media (max-width: 500px) {
   .btn.secondary {
-    margin-top: -30px;
+    margin-top: -35px;
   }
 }
 
