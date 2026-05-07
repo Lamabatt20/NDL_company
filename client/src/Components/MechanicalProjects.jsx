@@ -15,6 +15,9 @@ export default function MechanicalProjects() {
   const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 6;
+
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -39,11 +42,11 @@ export default function MechanicalProjects() {
   }, []);
 
   useEffect(() => {
-    // إذا كان على شاشة جوال، أظهر البطاقات مباشرة
     if (window.innerWidth <= 600) {
       setShow(true);
       return;
     }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -58,7 +61,6 @@ export default function MechanicalProjects() {
     return () => observer.disconnect();
   }, []);
 
-  // 🔥 ترجمة المشاريع من DB
   const translatedProjects = useMemo(() => {
     return projects.map((project) =>
       getTranslatedProject(project, language)
@@ -142,6 +144,13 @@ export default function MechanicalProjects() {
     return items;
   }, [translatedProjects, isLoading, language]);
 
+  const totalPages = Math.ceil(displayItems.length / itemsPerPage);
+
+  const paginatedItems = useMemo(() => {
+    const start = currentPage * itemsPerPage;
+    return displayItems.slice(start, start + itemsPerPage);
+  }, [displayItems, currentPage]);
+
   return (
     <section
       ref={sectionRef}
@@ -159,9 +168,31 @@ export default function MechanicalProjects() {
             : "Innovative Mechanical systems designed for real-world applications."}
         </p>
 
+        <div className="Embeddedprojects-navigation">
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.max(prev - 1, 0))
+            }
+            disabled={currentPage === 0}
+          >
+            ←
+          </button>
+
+          <button
+            onClick={() =>
+              setCurrentPage((prev) =>
+                Math.min(prev + 1, totalPages - 1)
+              )
+            }
+            disabled={currentPage === totalPages - 1}
+          >
+            →
+          </button>
+        </div>
+
         <div className="Mechanicalprojects-grid">
           {!isLoading &&
-            displayItems.map((project, index) =>
+            paginatedItems.map((project, index) =>
               project.isPlaceholder ? (
                 <div
                   key={`${project.id}-${index}`}

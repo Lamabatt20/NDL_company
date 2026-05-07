@@ -16,6 +16,9 @@ export default function ProjectsSection() {
   const [titleVisible, setTitleVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 6;
+
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -66,7 +69,9 @@ export default function ProjectsSection() {
   };
 
   const translatedProjects = useMemo(() => {
-    return projects.map((project) => getTranslatedProject(project, language));
+    return projects.map((project) =>
+      getTranslatedProject(project, language)
+    );
   }, [projects, language]);
 
   const displayItems = useMemo(() => {
@@ -119,9 +124,17 @@ export default function ProjectsSection() {
     return items;
   }, [translatedProjects, isLoading, language]);
 
+  const totalPages = Math.ceil(displayItems.length / itemsPerPage);
+
+  const paginatedItems = useMemo(() => {
+    const start = currentPage * itemsPerPage;
+    return displayItems.slice(start, start + itemsPerPage);
+  }, [displayItems, currentPage]);
+
   return (
     <section className="projects" ref={sectionRef} id="projects">
       <div className="site-container">
+
         <h2 className={`projects-title ${titleVisible ? "show" : ""}`}>
           {language === "ar" ? "منتجاتنا" : "Our Products"}
         </h2>
@@ -132,9 +145,31 @@ export default function ProjectsSection() {
             : "Real-world engineering solutions delivered with precision and innovation."}
         </p>
 
+        <div className="Embeddedprojects-navigation">
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.max(prev - 1, 0))
+            }
+            disabled={currentPage === 0}
+          >
+            ←
+          </button>
+
+          <button
+            onClick={() =>
+              setCurrentPage((prev) =>
+                Math.min(prev + 1, totalPages - 1)
+              )
+            }
+            disabled={currentPage === totalPages - 1}
+          >
+            →
+          </button>
+        </div>
+
         <div className="projects-grid">
           {!isLoading &&
-            displayItems.map((item, index) =>
+            paginatedItems.map((item, index) =>
               item.isPlaceholder ? (
                 <div
                   key={`${item.id}-${index}`}
@@ -152,7 +187,9 @@ export default function ProjectsSection() {
               ) : (
                 <div
                   key={item.id}
-                  className={`project-card ${animateCards ? "animate" : ""}`}
+                  className={`project-card ${
+                    animateCards ? "animate" : ""
+                  }`}
                   style={{ transitionDelay: `${index * 0.15}s` }}
                   onClick={() => setSelectedProject(item)}
                 >

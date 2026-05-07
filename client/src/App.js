@@ -1,8 +1,8 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
-
 import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Mechanical from "./Pages/Mechanical";
@@ -13,34 +13,40 @@ import GetQuote from "./Pages/GetQuote";
 import AddProject from "./Pages/AddProject";
 import OurServices from "./Components/OurServices";
 import WhyChooseNDL from "./Components/WhyChooseNDL";
+import SplashScreen from "./Components/SplashScreen";
+
 
 function App() {
+  const [showSplash, setShowSplash] = useState(true);
+
+  const handleSplashFinish = () => setShowSplash(false);
+
   return (
-    <Router>
-      <div className="site-container">
-        <Navbar />
-      </div>
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/add-project" element={<AddProject />} />
-
-        <Route path="/mechanical" element={<Mechanical />} />
-        <Route path="/mechanical/:service" element={<Mechanical />} />
-
-        <Route path="/embedded" element={<Embedded />} />
-        <Route path="/embedded/:service" element={<Embedded />} />
-
-        <Route path="/careers" element={<Careers />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/get-a-quote" element={<GetQuote />} />
-        <Route path="/services" element={<OurServices />} />
-        <Route path="/why-choose-ndl" element={<WhyChooseNDL />} />
-      </Routes>
-
-      <Footer />
-    </Router>
+    <>
+      {showSplash && <SplashScreen onFinish={handleSplashFinish} />}
+      {!showSplash && (
+        <Router>
+          <div className="site-container">
+            <Navbar />
+          </div>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/add-project" element={<AddProject />} />
+            <Route path="/mechanical" element={<Mechanical />} />
+            <Route path="/mechanical/:service" element={<Mechanical />} />
+            <Route path="/embedded" element={<Embedded />} />
+            <Route path="/embedded/:service" element={<Embedded />} />
+            <Route path="/careers" element={<Careers />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/get-a-quote" element={<GetQuote />} />
+            <Route path="/services" element={<OurServices />} />
+            <Route path="/why-choose-ndl" element={<WhyChooseNDL />} />
+          </Routes>
+          <Footer />
+        </Router>
+      )}
+    </>
   );
 }
 

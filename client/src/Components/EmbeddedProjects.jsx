@@ -15,6 +15,10 @@ export default function EmbeddedProjects() {
   const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
+  // ✅ pagination states
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 6;
+
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -39,11 +43,11 @@ export default function EmbeddedProjects() {
   }, []);
 
   useEffect(() => {
-
     if (window.innerWidth <= 600) {
       setShow(true);
       return;
     }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -62,7 +66,9 @@ export default function EmbeddedProjects() {
   }, []);
 
   const translatedProjects = useMemo(() => {
-    return projects.map((project) => getTranslatedProject(project, language));
+    return projects.map((project) =>
+      getTranslatedProject(project, language)
+    );
   }, [projects, language]);
 
   const displayItems = useMemo(() => {
@@ -142,6 +148,14 @@ export default function EmbeddedProjects() {
     return items;
   }, [translatedProjects, isLoading, language]);
 
+  // ✅ pagination logic
+  const totalPages = Math.ceil(displayItems.length / itemsPerPage);
+
+  const paginatedItems = useMemo(() => {
+    const start = currentPage * itemsPerPage;
+    return displayItems.slice(start, start + itemsPerPage);
+  }, [displayItems, currentPage]);
+
   return (
     <section
       ref={sectionRef}
@@ -158,9 +172,32 @@ export default function EmbeddedProjects() {
             : "Innovative embedded systems designed for real-world applications."}
         </p>
 
+        {/* ✅ navigation arrows */}
+        <div className="Embeddedprojects-navigation">
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.max(prev - 1, 0))
+            }
+            disabled={currentPage === 0}
+          >
+            ←
+          </button>
+
+          <button
+            onClick={() =>
+              setCurrentPage((prev) =>
+                Math.min(prev + 1, totalPages - 1)
+              )
+            }
+            disabled={currentPage === totalPages - 1}
+          >
+            →
+          </button>
+        </div>
+
         <div className="Embeddedprojects-grid">
           {!isLoading &&
-            displayItems.map((project, index) =>
+            paginatedItems.map((project, index) =>
               project.isPlaceholder ? (
                 <div
                   key={`${project.id}-${index}`}
@@ -178,7 +215,9 @@ export default function EmbeddedProjects() {
               ) : (
                 <div
                   key={project.id}
-                  className={`Embeddedproject-card ${show ? "animate" : ""}`}
+                  className={`Embeddedproject-card ${
+                    show ? "animate" : ""
+                  }`}
                   style={{ transitionDelay: `${index * 0.12}s` }}
                   onClick={() => setSelectedProject(project)}
                 >
