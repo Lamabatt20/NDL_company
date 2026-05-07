@@ -116,7 +116,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  bottom: -240px;
+  bottom: -260px;
   width: 200%;
   height: 520px;
   background-color: #e6e6e6;
@@ -141,7 +141,7 @@
 
   .hero::after {
     height: 420px;
-    bottom: -210px;
+    bottom: -190px;
   }
 
   .hero-slogan {
